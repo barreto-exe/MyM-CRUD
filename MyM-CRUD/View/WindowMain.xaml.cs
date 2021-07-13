@@ -39,11 +39,15 @@ namespace MyM_CRUD.View
             {
                 DrawerCol.Width = 200;
                 textOnItems = Visibility.Visible;
+                TxtBranch.Visibility = Visibility.Collapsed;
+                TxtManager.Visibility = Visibility.Collapsed;
             }
             else
             {
                 DrawerCol.Width = 70;
                 textOnItems = Visibility.Hidden;
+                TxtBranch.Visibility = Visibility.Visible;
+                TxtManager.Visibility = Visibility.Visible;
             }
 
             //Setting visibility just for icons (collapsed drawer)

@@ -15,23 +15,18 @@ namespace MyM_CRUD
     /// </summary>
     public partial class App : Application
     {
-        #region Eventos
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             //ReconnectServers();
         }
+
         private void Application_Exit(object sender, ExitEventArgs e)
         {
             //Cerrar todas las conexiones abiertas
-            if (MysqlOp.ConexionGlobal != null)
-                MysqlOp.ConexionGlobal.CloseAsync();
-
             if (PostgreOp.ConexionGlobal != null)
                 PostgreOp.ConexionGlobal.CloseAsync();
-
-            if (MssqlOp.ConexionGlobal != null)
-                MssqlOp.ConexionGlobal.CloseAsync();
         }
+
         private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             e.Handled = true;
@@ -46,13 +41,10 @@ namespace MyM_CRUD
             MessageBox.Show(message, "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Error);
             Log.Add("Error no controlado: " + error);
         }
-        #endregion
 
         #region Métodos
         public static void ReconnectServers()
         {
-            MssqlOp.ConexionGlobal = new MssqlOp().NuevaConexion();
-            MysqlOp.ConexionGlobal = new MysqlOp().NuevaConexion();
             PostgreOp.ConexionGlobal = new PostgreOp().NuevaConexion();
         }
         #endregion

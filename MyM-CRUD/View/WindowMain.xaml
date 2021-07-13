@@ -86,6 +86,29 @@
                 Grid.Column="0"
                 Width="200"
                 Orientation="Vertical">
+                <StackPanel Margin="16,16,0,16" Orientation="Vertical">
+                    <Image
+                        Width="152"
+                        HorizontalAlignment="Left"
+                        Source="/Resources/Img/logo.png" />
+                    <TextBlock
+                        x:Name="TxtBranch"
+                        Margin="0,16,16,0"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                        Text="Los Olivos MM, C.A."
+                        TextTrimming="CharacterEllipsis" />
+                    <TextBlock
+                        x:Name="TxtManager"
+                        FontSize="14"
+                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                        Text="Luis Barreto"
+                        TextTrimming="CharacterEllipsis" />
+                </StackPanel>
+
+                <!--  Divider  -->
+                <Rectangle Height="2" Fill="LightGray" />
+
                 <StackPanel Orientation="Horizontal">
                     <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <ListBox
