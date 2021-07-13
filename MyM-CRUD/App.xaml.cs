@@ -1,4 +1,5 @@
 ﻿using MyM_CRUD.DataBase;
+using MyM_CRUD.Model;
 using MyM_CRUD.Tools;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,13 @@ namespace MyM_CRUD
     /// </summary>
     public partial class App : Application
     {
+        public static Session Session { get; set; }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            //ReconnectServers();
+            ReconnectServers();
+
+            Session = new Session();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e)
@@ -38,7 +43,7 @@ namespace MyM_CRUD
                 $"{e.Exception.Message} \n" +
                 $"HRESULT: {e.Exception.HResult} \n";
 
-            MessageBox.Show(message, "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //MessageBox.Show(message, "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Error);
             Log.Add("Error no controlado: " + error);
         }
 

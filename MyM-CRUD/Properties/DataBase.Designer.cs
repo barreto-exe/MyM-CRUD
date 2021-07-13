@@ -25,55 +25,7 @@ namespace MyM_CRUD.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ServidorMsSql {
-            get {
-                return ((string)(this["ServidorMsSql"]));
-            }
-            set {
-                this["ServidorMsSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BaseDatosMsSql {
-            get {
-                return ((string)(this["BaseDatosMsSql"]));
-            }
-            set {
-                this["BaseDatosMsSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UsuarioMsSql {
-            get {
-                return ((string)(this["UsuarioMsSql"]));
-            }
-            set {
-                this["UsuarioMsSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PassMsSql {
-            get {
-                return ((string)(this["PassMsSql"]));
-            }
-            set {
-                this["PassMsSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("localhost")]
         public string ServidorPgSql {
             get {
                 return ((string)(this["ServidorPgSql"]));
@@ -85,7 +37,7 @@ namespace MyM_CRUD.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("postgres")]
         public string BaseDatosPgSql {
             get {
                 return ((string)(this["BaseDatosPgSql"]));
@@ -97,7 +49,7 @@ namespace MyM_CRUD.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("postgres")]
         public string UsuarioPgSql {
             get {
                 return ((string)(this["UsuarioPgSql"]));
@@ -109,61 +61,13 @@ namespace MyM_CRUD.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1234")]
         public string PassPgSql {
             get {
                 return ((string)(this["PassPgSql"]));
             }
             set {
                 this["PassPgSql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ServidorMySql {
-            get {
-                return ((string)(this["ServidorMySql"]));
-            }
-            set {
-                this["ServidorMySql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BaseDatosMySql {
-            get {
-                return ((string)(this["BaseDatosMySql"]));
-            }
-            set {
-                this["BaseDatosMySql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string UsuarioMySql {
-            get {
-                return ((string)(this["UsuarioMySql"]));
-            }
-            set {
-                this["UsuarioMySql"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string PassMySql {
-            get {
-                return ((string)(this["PassMySql"]));
-            }
-            set {
-                this["PassMySql"] = value;
             }
         }
     }

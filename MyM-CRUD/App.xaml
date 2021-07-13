@@ -7,20 +7,21 @@
     DispatcherUnhandledException="Application_DispatcherUnhandledException"
     Exit="Application_Exit"
     Startup="Application_Startup"
-    StartupUri="View/WindowMain.xaml">
+    StartupUri="View/WindowLogin.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="/Resources/VectorsDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <!--  primary  -->
-            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#43A047" />
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#76D275" />
             <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White" />
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00701A" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#43A047" />
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White" />
-            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#76D275" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#00701A" />
             <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White" />
 
             <!--  accent  -->
