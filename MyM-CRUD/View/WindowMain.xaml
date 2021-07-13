@@ -1,0 +1,162 @@
+﻿<Window
+    x:Class="MyM_CRUD.View.WindowMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyM_CRUD"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    Title="MainWindow"
+    MinWidth="800"
+    MinHeight="650"
+    WindowState="Maximized"
+    mc:Ignorable="d">
+    <Grid>
+        <!--  Top bar  -->
+        <md:ColorZone
+            Padding="16"
+            Panel.ZIndex="1"
+            Mode="PrimaryDark">
+            <md:ColorZone.Effect>
+                <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
+            </md:ColorZone.Effect>
+            <DockPanel>
+                <!--<md:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges">
+                    <ListBox>
+                        <ListBoxItem Content="Hello World" />
+                        <ListBoxItem Content="Nice Popup" />
+                        <ListBoxItem Content="Goodbye" />
+                    </ListBox>
+                </md:PopupBox>-->
+                <StackPanel Orientation="Horizontal">
+                    <ToggleButton
+                        x:Name="HamburguerButton"
+                        Click="HamburguerButton_Click"
+                        Style="{DynamicResource MaterialDesignHamburgerToggleButton}">
+                        <ToggleButton.Triggers>
+                            <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="HideDrawer">
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="DrawerCol"
+                                            Storyboard.TargetProperty="Width"
+                                            From="200"
+                                            To="70"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                <BeginStoryboard>
+                                    <Storyboard x:Name="ShowDrawer">
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="DrawerCol"
+                                            Storyboard.TargetProperty="Width"
+                                            From="70"
+                                            To="200"
+                                            Duration="0:0:0.2" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ToggleButton.Triggers>
+                    </ToggleButton>
+                    <TextBlock
+                        Margin="16,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="16"
+                        Text="Main Window" />
+                </StackPanel>
+            </DockPanel>
+        </md:ColorZone>
+
+        <!--  Bottom region  -->
+        <Grid Margin="0,68,0,0" HorizontalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--  Nav drawer  -->
+            <StackPanel
+                x:Name="DrawerCol"
+                Grid.Column="0"
+                Width="200"
+                Orientation="Vertical">
+                <StackPanel Orientation="Horizontal">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <ListBox
+                            x:Name="DrawerList"
+                            Width="200"
+                            SelectionChanged="DrawerList_SelectionChanged">
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    Opacity="0.6"
+                                    Source="{StaticResource vector_clients}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Clientes" />
+                            </StackPanel>
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    Opacity="0.6"
+                                    Source="{StaticResource vector_invoices}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Facturas" />
+                            </StackPanel>
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    Opacity="0.6"
+                                    Source="{StaticResource vector_articles}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Artículos" />
+                            </StackPanel>
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    Opacity="0.6"
+                                    Source="{StaticResource vector_lines}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Líneas" />
+                            </StackPanel>
+                        </ListBox>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+
+            <!--  Divider  -->
+            <Rectangle
+                Grid.Column="1"
+                Width="2"
+                HorizontalAlignment="Right"
+                Fill="LightGray" />
+
+            <!--  Main Frame  -->
+            <Grid
+                Grid.Column="2"
+                Margin="8"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+                <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
