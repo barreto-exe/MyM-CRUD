@@ -18,7 +18,7 @@ namespace MyM_CRUD
         #region Eventos
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            ReconnectServers();
+            //ReconnectServers();
         }
         private void Application_Exit(object sender, ExitEventArgs e)
         {

@@ -11,5 +11,17 @@
     mc:Ignorable="d">
     <Grid Background="White">
         <TextBlock Text="Hello world" />
+        <StackPanel
+            Width="auto"
+            Height="auto"
+            Margin="0,0,32,32"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+            <Button x:Name="BtnAdd" Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                <Button.Content>
+                    <Image Height="24" Source="{StaticResource vector_add}" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

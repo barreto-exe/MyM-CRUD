@@ -16,7 +16,7 @@
         <md:ColorZone
             Padding="16"
             Panel.ZIndex="1"
-            Mode="PrimaryDark">
+            Background="{StaticResource PrimaryHueLightBrush}">
             <md:ColorZone.Effect>
                 <DropShadowEffect BlurRadius="10" ShadowDepth="1" />
             </md:ColorZone.Effect>
@@ -32,6 +32,7 @@
                     <ToggleButton
                         x:Name="HamburguerButton"
                         Click="HamburguerButton_Click"
+                        Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
                         Style="{DynamicResource MaterialDesignHamburgerToggleButton}">
                         <ToggleButton.Triggers>
                             <EventTrigger RoutedEvent="ToggleButton.Unchecked">
@@ -63,7 +64,9 @@
                     <TextBlock
                         Margin="16,0,0,0"
                         VerticalAlignment="Center"
-                        FontSize="16"
+                        FontWeight="Normal"
+                        Foreground="{StaticResource PrimaryHueLightForegroundBrush}"
+                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                         Text="Main Window" />
                 </StackPanel>
             </DockPanel>
@@ -99,43 +102,7 @@
                                 <TextBlock
                                     VerticalAlignment="Center"
                                     Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                    Text="Clientes" />
-                            </StackPanel>
-                            <StackPanel Height="30" Orientation="Horizontal">
-                                <Image
-                                    Width="24"
-                                    Height="24"
-                                    Margin="14,0,14,0"
-                                    Opacity="0.6"
-                                    Source="{StaticResource vector_invoices}" />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                    Text="Facturas" />
-                            </StackPanel>
-                            <StackPanel Height="30" Orientation="Horizontal">
-                                <Image
-                                    Width="24"
-                                    Height="24"
-                                    Margin="14,0,14,0"
-                                    Opacity="0.6"
-                                    Source="{StaticResource vector_articles}" />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                    Text="Artículos" />
-                            </StackPanel>
-                            <StackPanel Height="30" Orientation="Horizontal">
-                                <Image
-                                    Width="24"
-                                    Height="24"
-                                    Margin="14,0,14,0"
-                                    Opacity="0.6"
-                                    Source="{StaticResource vector_lines}" />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                    Text="Líneas" />
+                                    Text="Page" />
                             </StackPanel>
                         </ListBox>
                     </Grid>

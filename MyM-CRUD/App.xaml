@@ -11,13 +11,21 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <materialDesign:BundledTheme
-                    BaseTheme="Light"
-                    PrimaryColor="Blue"
-                    SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="/Resources/VectorsDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!--  primary  -->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#43A047" />
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#00701A" />
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#76D275" />
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="White" />
+
+            <!--  accent  -->
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#FDD835" />
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#211C08" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>
