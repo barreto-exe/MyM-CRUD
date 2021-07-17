@@ -115,6 +115,8 @@
                             x:Name="DrawerList"
                             Width="200"
                             SelectionChanged="DrawerList_SelectionChanged">
+
+                            <!--  Page  -->
                             <StackPanel Height="30" Orientation="Horizontal">
                                 <Image
                                     Width="24"
@@ -127,6 +129,23 @@
                                     Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                     Text="Page" />
                             </StackPanel>
+
+
+                            <!--  Estadísticas  -->
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <Image
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    Opacity="0.6"
+                                    Source="{StaticResource vector_clients}" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Estadísticas" />
+                            </StackPanel>
+
+
                         </ListBox>
                     </Grid>
                 </StackPanel>

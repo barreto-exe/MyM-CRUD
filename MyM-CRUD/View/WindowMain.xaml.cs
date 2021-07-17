@@ -21,12 +21,14 @@ namespace MyM_CRUD.View
     public partial class WindowMain : Window
     {
         private PageExample page;
+        private PageEstadisticas pageE;
 
         public WindowMain()
         {
             InitializeComponent();
 
             page = new PageExample();
+            pageE = new PageEstadisticas();
 
             DrawerList.SelectedIndex = 0;
             HamburguerButton.IsChecked = true;
@@ -69,7 +71,7 @@ namespace MyM_CRUD.View
                     }
                 case 1:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageE;
                         break;
                     }
                 case 2:
