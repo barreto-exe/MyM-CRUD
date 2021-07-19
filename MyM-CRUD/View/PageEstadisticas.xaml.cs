@@ -20,21 +20,28 @@ namespace MyM_CRUD.View
     /// </summary>
     public partial class PageEstadisticas : Page
     {
-        SeriesCollection SeriesCollection = new SeriesCollection
-        {
-            new LineSeries
-            {
-                Values = new ChartValues<double> { 3, 5, 7, 4 }
-            },
-            new ColumnSeries
-            {
-                Values = new ChartValues<decimal> { 5, 6, 2, 7 }
-            }
-        };
 
         public PageEstadisticas()
         {
             InitializeComponent();
+
+            cartesianChart1.Series = new SeriesCollection()
+            {
+                new LineSeries()
+                {
+                    Values = new ChartValues<decimal> { 5, 6, 2, 7 }
+                },
+                new LineSeries()
+                {
+                    Values = new ChartValues<double> { 3, 5, 7, 4 }
+                }
+                
+            };
+        }
+
+        private void cartesianChart1_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
