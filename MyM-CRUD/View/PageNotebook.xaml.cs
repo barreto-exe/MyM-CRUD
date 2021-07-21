@@ -16,9 +16,9 @@ namespace MyM_CRUD.View
     /// <summary>
     /// Lógica de interacción para PageExample.xaml
     /// </summary>
-    public partial class PageExample : Page
+    public partial class PageNotebook : Page
     {
-        public PageExample()
+        public PageNotebook()
         {
             InitializeComponent();
         }

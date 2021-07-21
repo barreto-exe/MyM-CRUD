@@ -26,7 +26,7 @@ namespace MyM_CRUD.Model
             message = "";
 
             string query =
-                "SELECT 1 FROM users WHERE username = @user AND pass = @pass";
+                "SELECT 1 FROM FRANQUICIAS WHERE rif_franquicia = @user AND clave = @pass";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("user", User);
             op.PasarParametros("pass", PassMd5);
@@ -40,6 +40,7 @@ namespace MyM_CRUD.Model
                 }
                 else
                 {
+                    message = "Credenciales incorrectas.";
                     verified = VerifyUserEnum.WrongCredentials;
                 }
                 dr.Close();

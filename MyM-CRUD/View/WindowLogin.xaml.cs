@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyM_CRUD.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,13 @@ namespace MyM_CRUD.View
         public WindowLogin()
         {
             InitializeComponent();
+
+#if DEBUG
+            App.Session.User = "J1234";
+            App.Session.PassMd5 = "1234";
+
+            Login();
+#endif
         }
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
@@ -28,13 +36,27 @@ namespace MyM_CRUD.View
             App.Session.User = TxtUser.Text.Trim();
             App.Session.PassMd5 = TxtPass.Password.Trim();
 
-            VerifyUserEnum v = App.Session.VerifyUser(out string message);
-            if(v == VerifyUserEnum.Success)
-            {
-                var main = new WindowMain();
-                main.ShowDialog();
+            Login();
+        }
 
+        private void Login()
+        {
+            VerifyUserEnum v = App.Session.VerifyUser(out string message);
+            if (v == VerifyUserEnum.Success)
+            {
+                //Cargar ventana principal
+                var main = new WindowMain();
+                main.Branch = Branch.GetBranch(App.Session.User);
+
+                //Cerrar login
                 Close();
+
+                //Mostrar ventana principal
+                main.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show(message);
             }
         }
     }

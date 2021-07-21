@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyM_CRUD.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,35 @@ namespace MyM_CRUD.View
     /// </summary>
     public partial class WindowMain : Window
     {
-        private PageExample page;
+        public Branch Branch
+        {
+            get => branch;
+            set
+            {
+                branch = value;
+
+                if (TxtManager != null)
+                {
+                    TxtManager.Text = branch.BranchManagerName;
+                }
+                if (TxtBranch != null)
+                {
+                    TxtBranch.Text = branch.BranchName;
+                    Title = branch.BranchName;
+                    TitleTopBar.Text = branch.BranchName;
+                }
+            }
+        }
+        private Branch branch;
+
+        private PageNotebook page;
         private PageEstadisticas pageE;
 
         public WindowMain()
         {
             InitializeComponent();
 
-            page = new PageExample();
+            page = new PageNotebook();
             pageE = new PageEstadisticas();
 
             DrawerList.SelectedIndex = 0;
