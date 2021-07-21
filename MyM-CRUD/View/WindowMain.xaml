@@ -157,7 +157,7 @@
             <!--  Divider  -->
             <Rectangle
                 Grid.Column="1"
-                Width="2"
+                Width="1"
                 HorizontalAlignment="Right"
                 Fill="LightGray" />
 
