@@ -30,13 +30,13 @@ namespace MyM_CRUD.View
 
                 if (TxtManager != null)
                 {
-                    TxtManager.Text = branch.BranchManagerName;
+                    TxtManager.Text = branch.ManagerName;
                 }
                 if (TxtBranch != null)
                 {
-                    TxtBranch.Text = branch.BranchName;
-                    Title = branch.BranchName;
-                    TitleTopBar.Text = branch.BranchName;
+                    TxtBranch.Text = branch.Name;
+                    Title = branch.Name;
+                    TitleTopBar.Text = branch.Name;
                 }
             }
         }
