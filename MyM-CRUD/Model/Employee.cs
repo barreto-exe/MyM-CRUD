@@ -2,6 +2,7 @@
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace MyM_CRUD.Model
@@ -14,6 +15,20 @@ namespace MyM_CRUD.Model
         public decimal Salary { get; set; }
         public string Address { get; set; }
         public bool IsManager { get; set; }
+
+        public static DataTable SearchEmployees(string search)
+        {
+            string query = 
+                "SELECT * " +
+                "FROM empleados e, personas p " +
+                "WHERE " +
+                "e.ced_empleado = p.cedula_p AND " +
+                "(e.ced_empleado LIKE @Search OR p.nombre_p LIKE @Search);";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("Search", $"%{search}%");
+            
+            return QueryFromDataBase(op);
+        }
 
         public override string InsertTupleDatabase()
         {
@@ -32,7 +47,7 @@ namespace MyM_CRUD.Model
             Address = dr["direccion_e"].ToString();
             IsManager = dr["es_encargado"].ToString() == "t";
         }
-        protected override PostgreOp GetObjectOp(Dictionary<string, object> keys)
+        protected override PostgreOp GetObjectOp(object[] keys)
         {
             string query =
                 "SELECT * " +
@@ -41,7 +56,7 @@ namespace MyM_CRUD.Model
                 "e.ced_empleado = p.cedula_p AND" +
                 "e.ced_empleado = @Id";
             PostgreOp op = new PostgreOp(query);
-            op.PasarParametros("Id", keys["Id"]);
+            op.PasarParametros("Id", keys[0]);
 
             return op;
         }

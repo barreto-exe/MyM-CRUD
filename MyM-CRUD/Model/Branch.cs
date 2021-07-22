@@ -32,7 +32,7 @@ namespace MyM_CRUD.Model
             ManagerName = dr["nombre_p"].ToString();
             City = dr["nom_ciudad"].ToString();
         }
-        protected override PostgreOp GetObjectOp(Dictionary<string, object> keys)
+        protected override PostgreOp GetObjectOp(object[] keys)
         {
             string query =
                 "SELECT * " +
@@ -41,7 +41,7 @@ namespace MyM_CRUD.Model
                 "f.ced_encargado = p.cedula_p AND " +
                 "f.rif_franquicia = @Rif ";
             PostgreOp op = new PostgreOp(query);
-            op.PasarParametros("Rif", keys["Rif"]);
+            op.PasarParametros("Rif", keys[0]);
             
             return op;
         }

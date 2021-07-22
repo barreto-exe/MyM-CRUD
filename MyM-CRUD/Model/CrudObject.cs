@@ -28,10 +28,10 @@ namespace MyM_CRUD.Model
         /// </summary>
         /// <param name="key">Parámetro de búsqueda.</param>
         /// <returns></returns>
-        public void SelectFromDatabase(Dictionary<string,object> keys)
+        public void SelectFromDatabase(object[] keys)
         {
             //Verificar que no haya claves vacías
-            if(keys != null && keys.Count > 0)
+            if(keys != null && keys.Length > 0)
             {
                 //Construir consulta a la bd
                 PostgreOp op = GetObjectOp(keys);
@@ -55,15 +55,13 @@ namespace MyM_CRUD.Model
                 }
             }
         }
-        protected abstract PostgreOp GetObjectOp(Dictionary<string, object> keys);
+        protected abstract PostgreOp GetObjectOp(object[] keys);
         protected abstract void BuildCrudObject(NpgsqlDataReader dr);
 
 
-        protected static DataTable QueryFromDataBase(string queryString)
+        protected static DataTable QueryFromDataBase(PostgreOp op)
         {
             DataSet set = new DataSet();
-
-            PostgreOp op = new PostgreOp(queryString);
             try
             {
                 DataAdapter da = op.ObtenerAdapter();

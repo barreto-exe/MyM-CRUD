@@ -46,7 +46,13 @@ namespace MyM_CRUD.View
             {
                 //Cargar ventana principal
                 var main = new WindowMain();
-                main.Branch = Branch.GetBranch(App.Session.User);
+
+                //Buscar franquicia
+                var branch = new Branch();
+                branch.SelectFromDatabase(new[] { App.Session.User });
+
+                //Asignar franquicia
+                main.Branch = branch;
 
                 //Cerrar login
                 Close();
