@@ -53,20 +53,38 @@ namespace MyM_CRUD.View
 
         private void BtnEditSave_Click(object sender, RoutedEventArgs e)
         {
-            //Click en guardar
-            if (CurrentState == State.Updating ||
-                    CurrentState == State.Creating)
+            switch(CurrentState)
             {
-                SaveContent();
-            }
-            //Click en editar
-            else
-            {
-                StartUpdating();
+                //Click en editar
+                case State.Reading:
+                    {
+                        BeginUpdating();
+                        break;
+                    }
+
+                //Click en guardar
+                case State.Creating:
+                case State.Updating:
+                    {
+                        SetReading();
+                        try
+                        {
+                            Employee employee = GetEmployeeFromFields();
+                            if(CurrentState == State.Creating)
+                            {
+                                //employee.InsertTupleDatabase();
+                            }
+                            if(CurrentState == State.Updating)
+                            {
+                                //employee.UpdateTupleDataBase();
+                            }
+                        }
+                        catch (Exception) { }
+                        break;
+                    }
             }
 
-
-            void StartUpdating()
+            void BeginUpdating()
             {
                 Employee selectedE = (Employee)DgEmployees.SelectedItem;
 
@@ -74,12 +92,6 @@ namespace MyM_CRUD.View
 
                 LoadFields(selectedE);
                 SetUpdating();
-            }
-            void SaveContent()
-            {
-                //Proceso de guardado
-
-                SetReading();
             }
         }
 
@@ -111,6 +123,15 @@ namespace MyM_CRUD.View
             TxtAddress.Text = selectedE.Address;
             CbTypeEmployee.SelectedIndex = selectedE.IsManager ? 1 : 0;
         }
+        private Employee GetEmployeeFromFields() => new Employee
+        {
+            Id = TxtId.Text,
+            Name = TxtName.Text,
+            Phone = TxtPhone.Text,
+            Salary = Convert.ToDecimal(TxtSalary.Text),
+            Address = TxtAddress.Text,
+            IsManager = CbTypeEmployee.SelectedIndex == 1,
+        };
 
         public void SetCreating()
         {
