@@ -35,19 +35,22 @@
                     md:TextFieldAssist.HasLeadingIcon="True"
                     md:TextFieldAssist.LeadingIcon="Search"
                     Cursor="IBeam"
-                    TextChanged="TxtSearch_TextChanged"
                     FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextChanged="TxtSearch_TextChanged" />
 
                 <DataGrid
                     x:Name="DgEmployees"
-                    Margin="8,0"
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding}">
+                    ItemsSource="{Binding ElementName=employees}"
+                    SelectionChanged="DgEmployees_SelectionChanged">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding ced_empleado}" Header="Cédula" />
-                        <DataGridTextColumn Binding="{Binding nombre_p}" Header="Nombre" />
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Cédula" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Name}"
+                            Header="Nombre" />
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>
@@ -62,7 +65,69 @@
         </Grid>
 
         <!--  Rigth panel  -->
-        <StackPanel Grid.Column="1" />
+        <ScrollViewer Grid.Column="1">
+            <StackPanel MaxWidth="512">
+
+                <TextBox
+                    x:Name="TxtId"
+                    Margin="16"
+                    md:HintAssist.Hint="Cédula"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="IdCard"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <TextBox
+                    x:Name="TxtName"
+                    Margin="16"
+                    md:HintAssist.Hint="Nombre"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="Tag"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <TextBox
+                    x:Name="TxtPhone"
+                    Margin="16"
+                    md:HintAssist.Hint="Teléfono"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="Phone"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <TextBox
+                    x:Name="TxtSalary"
+                    Margin="16"
+                    md:HintAssist.Hint="Salario"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="Dollar"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <TextBox
+                    x:Name="TxtAddress"
+                    Margin="16"
+                    md:HintAssist.Hint="Dirección"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="AddressMarker"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <ComboBox
+                    x:Name="CbTypeEmployee"
+                    Margin="16"
+                    md:ComboBoxAssist.ShowSelectedItem="True"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    <ComboBoxItem Content="Empleado" DataContext="1" />
+                    <ComboBoxItem Content="Encargado" DataContext="2" />
+                </ComboBox>
+            </StackPanel>
+        </ScrollViewer>
 
         <!--  Floatingbutton panel  -->
         <StackPanel
@@ -72,8 +137,24 @@
             Margin="0,0,32,32"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom">
+
+            <Button
+                x:Name="BtnEditSave"
+                Margin="8"
+                Click="BtnEditSave_Click"
+                Cursor="Hand"
+                Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                <Button.Content>
+                    <md:PackIcon
+                        x:Name="IconEdit"
+                        Width="16"
+                        Height="16"
+                        Kind="Edit" />
+                </Button.Content>
+            </Button>
             <Button
                 x:Name="BtnAdd"
+                Click="BtnAdd_Click"
                 Cursor="Hand"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
                 <Button.Content>
