@@ -1,6 +1,8 @@
 ---------------------- Dominios ----------------------
 CREATE DOMAIN dom_codigo AS VARCHAR(15);    --- dom para todos los códigos ---
 
+CREATE DOMAIN dom_numero AS VARCHAR(20);    --- dom para todos los números ---
+
 CREATE DOMAIN dom_nombre AS VARCHAR(15);    --- dom para todos los nombres ---
 
 CREATE DOMAIN dom_rif AS VARCHAR(10);       --- dom para todos los rifs ---
@@ -34,7 +36,7 @@ CREATE TABLE servicios(
 );
 
 CREATE TABLE reservas(
-	num_reserva      		dom_codigo  	NOT NULL,
+	num_reserva      		dom_numero  	NOT NULL,
  	fecha_emision  			dom_fecha  		NOT NULL,
 	abono					dom_monto		NOT NULL,
 	ced_cliente				dom_cedula		NOT NULL,
@@ -42,7 +44,7 @@ CREATE TABLE reservas(
 );
 
 CREATE TABLE registros(
-	num_ficha      		dom_codigo  	NOT NULL,
+	num_ficha      		dom_numero  	NOT NULL,
  	fecha_ent  			dom_fecha	  	NOT NULL,
 	fecha_sal_est		dom_fecha		NOT NULL,
 	fecha_sal_real		dom_fecha		NOT NULL,
@@ -50,7 +52,7 @@ CREATE TABLE registros(
 	ced_autorizado		dom_cedula		NOT NULL,		
 	placa_vehiculo		dom_codigo		NOT NULL,
 	rif_franquicia		dom_rif			NOT NULL,
-	num_reserva			dom_codigo,
+	num_reserva			dom_numero,
  	PRIMARY KEY (num_ficha)
 );
 
@@ -154,6 +156,181 @@ CREATE TABLE proveedores(
  	nom_contacto			dom_nombre  	NOT NULL,
  	PRIMARY KEY (rif_proveedor)
 );
+
+CREATE TABLE ordenes_compra(
+	cod_orden_c  				dom_codigo 		NOT NULL,
+ 	fecha  	    			dom_fecha		NOT NULL,
+	rif_franquicia			dom_rif			NOT NULL,
+ 	rif_proveedor  			dom_rif			NOT NULL,
+ 	PRIMARY KEY (cod_orden)
+);
+
+CREATE TABLE facturas_proveedores(
+	num_factura  			dom_numero 		NOT NULL,
+ 	fecha_pago  	    	dom_fecha		NOT NULL,
+	monto					dom_monto		NOT NULL,
+ 	cod_orden_compra  		dom_codigo		NOT NULL,
+ 	PRIMARY KEY (num_factura)
+);
+
+CREATE TABLE productos(
+	cod_producto  		dom_codigo 			NOT NULL,
+ 	precio_p  	    	dom_monto			NOT NULL,
+	nombre_p			dom_nombre			NOT NULL,
+ 	descripcion_p  		dom_descripcion		NOT NULL,
+	tipo_p				CHAR(1)				NOT NULL,
+	cod_fabricante		dom_codigo			NOT NULL,
+ 	PRIMARY KEY (cod_producto)
+);
+
+CREATE TABLE tienda_productos(
+	cod_producto  		dom_codigo 			NOT NULL,
+ 	PRIMARY KEY (cod_producto)
+);
+
+CREATE TABLE eco_productos(
+	cod_producto  		dom_codigo 			NOT NULL,
+	es_ecologico  		BOOLEAN 			NOT NULL,
+	cod_linea	  		dom_codigo 			NOT NULL,
+ 	PRIMARY KEY (cod_producto)
+);
+
+CREATE TABLE facturas(
+	num_factura  		dom_numero 			NOT NULL,
+	fecha_emision  		dom_fecha 			NOT NULL,
+	descuento_f	  		dom_monto 			NOT NULL,
+	tipo_fact			CHAR(1)				NOT NULL,
+	ced_cliente			dom_cedula			NOT NULL,
+ 	PRIMARY KEY (num_factura)
+);
+
+CREATE TABLE facturas_servicio(
+	num_factura  		dom_numero 			NOT NULL,
+	num_ficha			dom_numero			NOT NULL,
+ 	PRIMARY KEY (num_factura)
+);
+
+CREATE TABLE facturas_tienda(
+	num_factura  		dom_numero 			NOT NULL,
+	modalidad_p			dom_descripcion		NOT NULL,
+ 	PRIMARY KEY (num_factura)
+);
+
+CREATE TABLE actividades(
+	cod_servicio  		dom_codigo 			NOT NULL,
+	num_actividad		dom_numero			NOT NULL,
+	monto				dom_monto			NOT NULL,
+	descripcion_a		dom_descripcion		NOT NULL,
+ 	PRIMARY KEY (cod_servicio, num_actividad)
+);
+
+CREATE TABLE ordenes_servicio(
+	num_ficha  			dom_numero 			NOT NULL,
+	num_orden_s			dom_numero			NOT NULL,
+	cant_producto		dom_cantidad		NOT NULL,
+	precio_prod			dom_monto			NOT NULL,
+	precio_mano_obra	dom_monto			NOT NULL,
+	cod_servicio		dom_codigo			NOT NULL,
+	num_actividad		dom_numero			NOT NULL,
+	cod_producto		dom_codigo			NOT NULL,
+	ced_empleado		dom_cedula			NOT NULL,
+ 	PRIMARY KEY (num_ficha, num_orden_s)
+);
+
+CREATE TABLE mantenimientos(
+	nom_modelo  		dom_nombre 			NOT NULL,
+	nom_mantenimiento	dom_nombre			NOT NULL,
+	tiempo_uso			dom_cantidad		NOT NULL,
+	kilometraje			dom_monto			NOT NULL,
+ 	PRIMARY KEY (nom_modelo, nom_mantenimiento)
+);
+
+CREATE TABLE pagos(
+	num_factura  		dom_numero 			NOT NULL,
+	num_pago			dom_numero			NOT NULL,
+	monto				dom_cantidad		NOT NULL,
+	fecha_pago			dom_monto			NOT NULL,
+	modalidad_p			dom_codigo			NOT NULL,
+	cod_banco			dom_codigo,
+	num_tarjeta			dom_numero,
+ 	PRIMARY KEY (num_factura, num_pago)
+);
+
+CREATE TABLE inventarios(
+	rif_franquicia  		dom_rif 			NOT NULL,
+	num_inventario			dom_numero			NOT NULL,
+	cod_producto			dom_codigo			NOT NULL,
+	cant_min				dom_cantidad		NOT NULL,
+	cant_max				dom_cantidad		NOT NULL,
+	cant_teorica			dom_cantidad		NOT NULL,
+	cant_fisica				dom_cantidad		NOT NULL,
+	fecha_fisi				dom_fecha			NOT NULL,
+ 	PRIMARY KEY (rif_franquicia, num_inventario)
+);
+
+CREATE TABLE ajustes(
+	rif_franquicia			dom_rif				NOT NULL,
+	num_inventario			dom_numero			NOT NULL,
+	fecha					dom_fecha			NOT NULL,
+	cantidad				dom_cantidad		NOT NULL,
+	tipo_ajuste				CHAR(1)				NOT NULL,							
+	PRIMARY KEY (rif_franquicia, num_inventario, fecha)
+);
+
+CREATE TABLE apartan(
+	cod_servicio			dom_codigo			NOT NULL,
+	num_actividad			dom_numero			NOT NULL,
+	num_reserva				dom_numero			NOT NULL,
+	fecha					dom_fecha			NOT NULL,						
+	PRIMARY KEY (rif_franquicia, num_inventario, fecha)
+);
+
+CREATE TABLE ofrecen(
+	rif_franquicia			dom_rif				NOT NULL,
+	cod_servicio			dom_codigo			NOT NULL,
+	capacidad				dom_cantidad		NOT NULL,					
+	PRIMARY KEY (rif_franquicia, cod_servicio)
+);
+
+CREATE TABLE reciben(
+	rif_franquicia			dom_rif				NOT NULL,
+	nom_modelo				dom_nombre			NOT NULL,				
+	PRIMARY KEY (rif_franquicia, nom_modelo)
+);
+
+CREATE TABLE utilizan(
+	nom_modelo				dom_nombre			NOT NULL,
+	cod_linea				dom_codigo			NOT NULL,	
+	cant_estimada			dom_cantidad		NOT NULL,			
+	PRIMARY KEY (nom_modelo, cod_linea)
+);
+
+CREATE TABLE registran(
+	num_fact_tienda			dom_numero			NOT NULL,
+	cod_tienda_prod			dom_codigo			NOT NULL,	
+	cant_comprada			dom_cantidad		NOT NULL,			
+	PRIMARY KEY (num_fact_tienda, cod_tienda_prod)
+);
+
+CREATE TABLE solicitan(
+	cod_orden_compra		dom_codigo			NOT NULL,
+	cod_producto			dom_codigo			NOT NULL,	
+	cantidad				dom_cantidad		NOT NULL,			
+	PRIMARY KEY (cod_orden_compra, cod_producto)
+);
+
+CREATE TABLE distribuyen(
+	rif_proveedor			dom_rif				NOT NULL,
+	cod_producto			dom_codigo			NOT NULL,			
+	PRIMARY KEY (rif_proveedor, cod_producto)
+);
+
+CREATE TABLE mantenimientos_v(
+	cod_vehiculo			dom_codigo			NOT NULL,
+	fecha					dom_fecha			NOT NULL,	
+	desc_mantenimiento		dom_descripcion		NOT NULL,			
+	PRIMARY KEY (cod_vehiculo, fecha, desc_mantenimiento)
+);
 ---------------------- Claves Foráneas ----------------------
 ALTER TABLE reservas 
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
@@ -196,4 +373,5 @@ ALTER TABLE modelos
   ADD FOREIGN KEY (cod_tipo_vehiculo) REFERENCES tipos_vehiculo (cod_tipo_vehiculo) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
+
 ---------------------- Índices ----------------------
