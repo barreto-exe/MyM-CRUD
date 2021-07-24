@@ -155,6 +155,22 @@ CREATE TABLE proveedores(
  	PRIMARY KEY (rif_proveedor)
 );
 ---------------------- Claves Foráneas ----------------------
+ALTER TABLE reservas 
+  ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE registros
+  ADD FOREIGN KEY (placa_vehiculo) REFERENCES vehiculos (placa) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (num_reserva) REFERENCES reservas (num_reserva) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
 ALTER TABLE franquicias 
   ADD FOREIGN KEY (supervisor) REFERENCES empleados (cedula_e) 
 	ON DELETE RESTRICT 
@@ -165,4 +181,19 @@ ALTER TABLE empleados
 	ON DELETE CASCADE 
 	ON UPDATE CASCADE;
 
+ALTER TABLE vehiculos
+  ADD FOREIGN KEY (ced_dueno) REFERENCES clientes (cedula_c) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (nom_modelo) REFERENCES modelos (nom_modelo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE modelos
+  ADD FOREIGN KEY (cod_marca) REFERENCES marcas (cod_marca) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_tipo_vehiculo) REFERENCES tipos_vehiculo (cod_tipo_vehiculo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
 ---------------------- Índices ----------------------
