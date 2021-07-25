@@ -12,7 +12,7 @@ namespace MyM_CRUD.Model
     /// </summary>
     public class Session
     {
-        public string User { get; set; }
+        public string Branch { get; set; }
         public string PassMd5 { get; set; }
 
         /// <summary>
@@ -26,9 +26,9 @@ namespace MyM_CRUD.Model
             message = "";
 
             string query =
-                "SELECT 1 FROM FRANQUICIAS WHERE rif_franquicia = @user AND clave = @pass";
+                "SELECT 1 FROM franquicias WHERE rif_franquicia = @user AND clave = @pass";
             PostgreOp op = new PostgreOp(query);
-            op.PasarParametros("user", User);
+            op.PasarParametros("user", Branch);
             op.PasarParametros("pass", PassMd5);
 
             try

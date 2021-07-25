@@ -20,29 +20,33 @@ namespace MyM_CRUD.Model
         public static IEnumerable<Employee> SearchEmployees(string search)
         {
             //Traer datos de la BD
-            string query = 
-                "SELECT * " +
-                "FROM empleados e, personas p " +
+            string query =
+                "SELECT *, (SELECT 1 FROM franquicias WHERE cedula_e = supervisor) es_encargado " +
+                "FROM empleados e " +
                 "WHERE " +
-                "e.ced_empleado = p.cedula_p AND " +
-                "(e.ced_empleado LIKE @Search OR p.nombre_p LIKE @Search);";
+                "(e.cedula_e LIKE @Search " +
+                "OR e.nombre_e LIKE @Search " +
+                "OR e.telefono_e LIKE @Search " +
+                "OR e.direccion_e LIKE @Search) " +
+                "AND e.rif_franquicia = @Rif";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("Search", $"%{search}%");
+            op.PasarParametros("Rif", App.Session.Branch);
             
             //Colocar resultados en memoria
             DataTable result = QueryFromDataBase(op);
 
             //Pasar datos a una lista
-            IEnumerable<Employee> employees = 
+            IEnumerable<Employee> employees =
                 from DataRow dr in result.Rows
                 select new Employee()
                 {
-                    Id = dr["ced_empleado"].ToString(),
-                    Name = dr["nombre_p"].ToString(),
-                    Phone = dr["telefono_p"].ToString(),
+                    Id = dr["cedula_e"].ToString(),
+                    Name = dr["nombre_e"].ToString(),
+                    Phone = dr["telefono_e"].ToString(),
                     Salary = Tools.Tools.Object2Decimal(dr["sueldo"]),
                     Address = dr["direccion_e"].ToString(),
-                    IsManager = (bool)dr["es_encargado"],
+                    IsManager = dr["es_encargado"] is DBNull ? false : true,
                 };
 
             return employees;
@@ -58,21 +62,20 @@ namespace MyM_CRUD.Model
         }
         protected override void BuildCrudObject(NpgsqlDataReader dr)
         {
-            Id = dr["ced_empleado"].ToString();
-            Name = dr["nombre_p"].ToString();
-            Phone = dr["telefono_ps"].ToString();
+            Id = dr["cedula_e"].ToString();
+            Name = dr["nombre_e"].ToString();
+            Phone = dr["telefono_e"].ToString();
             Salary = Tools.Tools.Object2Decimal(dr["sueldo"]);
             Address = dr["direccion_e"].ToString();
-            IsManager = (bool)dr["es_encargado"];
+            IsManager = dr["es_encargado"] is DBNull ? false : true;
         }
         protected override PostgreOp GetObjectOp(object[] keys)
         {
             string query =
                 "SELECT * " +
-                "FROM empleados e, personas p " +
+                "FROM empleados e " +
                 "WHERE " +
-                "e.ced_empleado = p.cedula_p AND" +
-                "e.ced_empleado = @Id";
+                "e.cedula_e = @Id";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("Id", keys[0]);
 

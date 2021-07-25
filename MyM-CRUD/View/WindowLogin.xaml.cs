@@ -24,7 +24,7 @@ namespace MyM_CRUD.View
             InitializeComponent();
 
 #if DEBUG
-            App.Session.User = "J1234";
+            App.Session.Branch = "J1234";
             App.Session.PassMd5 = "1234";
 
             Login();
@@ -33,7 +33,7 @@ namespace MyM_CRUD.View
 
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            App.Session.User = TxtUser.Text.Trim();
+            App.Session.Branch = TxtUser.Text.Trim();
             App.Session.PassMd5 = TxtPass.Password.Trim();
 
             Login();
@@ -49,7 +49,7 @@ namespace MyM_CRUD.View
 
                 //Buscar franquicia
                 var branch = new Branch();
-                branch.SelectFromDatabase(new[] { App.Session.User });
+                branch.SelectFromDatabase(new[] { App.Session.Branch });
 
                 //Asignar franquicia
                 main.Branch = branch;

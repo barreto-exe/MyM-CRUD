@@ -11,7 +11,7 @@ namespace MyM_CRUD.Model
         public string Rif { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
-        public string ManagerName { get; set; }
+        public Employee Manager { get; set; }
         public string City { get; set; }
 
         public override string InsertTupleDatabase()
@@ -29,16 +29,19 @@ namespace MyM_CRUD.Model
             Rif = dr["rif_franquicia"].ToString();
             Name = dr["nombre_f"].ToString();
             Address = dr["direccion_f"].ToString();
-            ManagerName = dr["nombre_p"].ToString();
-            City = dr["nom_ciudad"].ToString();
+            City = dr["ciudad"].ToString();
+
+            Manager = new Employee();
+            Manager.Name = dr["nombre_e"].ToString();
+            Manager.Id = dr["cedula_e"].ToString();
         }
         protected override PostgreOp GetObjectOp(object[] keys)
         {
             string query =
                 "SELECT * " +
-                "FROM franquicias f, personas p " +
+                "FROM franquicias f, empleados e " +
                 "WHERE " +
-                "f.ced_encargado = p.cedula_p AND " +
+                "f.supervisor = e.cedula_e AND " +
                 "f.rif_franquicia = @Rif ";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("Rif", keys[0]);

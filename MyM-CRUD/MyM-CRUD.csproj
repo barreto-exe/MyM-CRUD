@@ -44,7 +44,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataBase.settings</DependentUpon>
     </Compile>
-    <Compile Update="View\PageEstadisticas.xaml.cs">
+    <Compile Update="View\Stadistics\PageEstadisticas.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -61,7 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="View\PageEstadisticas.xaml">
+    <Page Update="View\Stadistics\PageEstadisticas.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>

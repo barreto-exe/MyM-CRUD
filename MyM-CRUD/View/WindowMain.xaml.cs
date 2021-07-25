@@ -30,7 +30,7 @@ namespace MyM_CRUD.View
 
                 if (TxtManager != null)
                 {
-                    TxtManager.Text = branch.ManagerName;
+                    TxtManager.Text = branch.Manager.Name;
                 }
                 if (TxtBranch != null)
                 {
