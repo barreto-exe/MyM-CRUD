@@ -73,7 +73,7 @@ CREATE TABLE empleados(
  	telefono_e  		dom_telefono	NOT NULL,
  	sueldo  	    	dom_monto		NOT NULL,
  	direccion_e     	dom_direccion 	NOT NULL,
- 	rif_franquicia 	    dom_rif			NOT NULL,
+ 	rif_franquicia 	    dom_rif			,
  	PRIMARY KEY (cedula_e)
 );
 
