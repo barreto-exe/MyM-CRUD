@@ -326,10 +326,10 @@ CREATE TABLE distribuyen(
 );
 
 CREATE TABLE mantenimientos_v(
-	cod_vehiculo			dom_codigo			NOT NULL,
+	placa					dom_codigo			NOT NULL,
 	fecha					dom_fecha			NOT NULL,	
 	desc_mantenimiento		dom_descripcion		NOT NULL,			
-	PRIMARY KEY (cod_vehiculo, fecha, desc_mantenimiento)
+	PRIMARY KEY (placa, fecha, desc_mantenimiento)
 );
 ---------------------- Claves Foráneas ----------------------
 ALTER TABLE reservas 
@@ -531,7 +531,7 @@ ALTER TABLE distribuyen
 	ON UPDATE CASCADE;
 
 ALTER TABLE mantenimientos_v
-  ADD FOREIGN KEY (cod_vehiculo) REFERENCES vehiculos (cod_vehiculo) 
+  ADD FOREIGN KEY (placa) REFERENCES vehiculos (placa) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 ---------------------- Índices ----------------------
