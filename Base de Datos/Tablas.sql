@@ -374,4 +374,164 @@ ALTER TABLE modelos
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
+ALTER TABLE ordenes_compra
+  ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (rif_proveedor) REFERENCES proveedores (rif_proveedor) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE facturas_proveedores
+  ADD FOREIGN KEY (cod_orden_compra) REFERENCES ordenes_compra (cod_orden_c) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE productos
+  ADD FOREIGN KEY (cod_fabricante) REFERENCES fabricantes (cod_fabricante) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE tienda_productos
+  ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE eco_productos
+  ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_linea) REFERENCES lineas_suministro (cod_linea) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE facturas
+  ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE facturas_servicio
+  ADD FOREIGN KEY (num_factura) REFERENCES facturas (num_factura) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (num_ficha) REFERENCES registros (num_ficha) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE facturas_tienda
+  ADD FOREIGN KEY (num_factura) REFERENCES facturas (num_factura) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (modalidad_p) REFERENCES modalidades_pago (descripcion_m) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE actividades
+  ADD FOREIGN KEY (cod_servicio) REFERENCES servicios (cod_servicio) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE ordenes_servicio
+  ADD FOREIGN KEY (num_ficha) REFERENCES registros (num_ficha) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_servicio, num_actividad) REFERENCES actividades (cod_servicio, num_actividad) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_producto) REFERENCES eco_productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (ced_empleado) REFERENCES empleados (cedula_e) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE mantenimientos
+  ADD FOREIGN KEY (nom_modelo) REFERENCES modelos (nom_modelo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE pagos
+  ADD FOREIGN KEY (num_factura) REFERENCES facturas_servicio (num_factura) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (modalidad_p) REFERENCES modalidades_pago (descripcion_m) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_banco) REFERENCES bancos (cod_banco) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE inventarios
+  ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE ajustes
+  ADD FOREIGN KEY (rif_franquicia, num_inventario) REFERENCES inventarios (rif_franquicia, num_inventario) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE apartan
+  ADD FOREIGN KEY (cod_servicio, num_actividad) REFERENCES actividades (cod_servicio, num_actividad) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (num_reserva) REFERENCES reservas (num_reserva) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE ofrecen
+  ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_servicio) REFERENCES servicios (cod_servicio) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE reciben
+  ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (nom_modelo) REFERENCES modelos (nom_modelo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE utilizan
+  ADD FOREIGN KEY (nom_modelo) REFERENCES modelos (nom_modelo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_linea) REFERENCES lineas_suministro (cod_linea) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE registran
+  ADD FOREIGN KEY (num_fact_tienda) REFERENCES facturas_tienda (num_factura) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_producto) REFERENCES tienda_productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE solicitan
+  ADD FOREIGN KEY (cod_orden_compra) REFERENCES ordenes_compra (cod_orden_c) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE distribuyen
+  ADD FOREIGN KEY (rif_proveedor) REFERENCES proveedores (rif_proveedor) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
+
+ALTER TABLE mantenimientos_v
+  ADD FOREIGN KEY (cod_vehiculo) REFERENCES vehiculos (cod_vehiculo) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE;
 ---------------------- Índices ----------------------
