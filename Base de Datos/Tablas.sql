@@ -282,7 +282,7 @@ CREATE TABLE apartan(
 	num_actividad			dom_numero			NOT NULL,
 	num_reserva				dom_numero			NOT NULL,
 	fecha					dom_fecha			NOT NULL,						
-	PRIMARY KEY (rif_franquicia, num_inventario, fecha)
+	PRIMARY KEY (cod_servicio, num_actividad, num_reserva)
 );
 
 CREATE TABLE ofrecen(
