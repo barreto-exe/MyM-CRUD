@@ -17,7 +17,7 @@ namespace MyM_CRUD.Model
         public string Address { get; set; }
         public bool IsManager { get; set; }
 
-        public static IEnumerable<Employee> SearchEmployees(string search)
+        public static List<Employee> SearchEmployees(string search)
         {
             //Traer datos de la BD
             string query =
@@ -49,16 +49,42 @@ namespace MyM_CRUD.Model
                     IsManager = dr["es_encargado"] is DBNull ? false : true,
                 };
 
-            return employees;
+            return employees.ToList();
         }
 
-        public override string InsertTupleDatabase()
+        public override void InsertTupleDatabase()
         {
-            throw new NotImplementedException();
+            string query =
+                "INSERT INTO " +
+                "empleados (cedula_e, nombre_e, telefono_e, sueldo, direccion_e, rif_franquicia) " +
+                "VALUES (@cedula_e, @nombre_e, @telefono_e, @sueldo, @direccion_e, @rif_franquicia)";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("cedula_e", Id);
+            op.PasarParametros("nombre_e", Name);
+            op.PasarParametros("telefono_e", Phone);
+            op.PasarParametros("sueldo", Salary);
+            op.PasarParametros("direccion_e", Address);
+            op.PasarParametros("rif_franquicia", App.Session.Branch);
+            op.EjecutarComando();
         }
-        public override string UpdateTupleDataBase()
+        public override void UpdateTupleDataBase()
         {
-            throw new NotImplementedException();
+            string query =
+                "UPDATE empleados " +
+                "SET nombre_e = @nombre_e, " +
+                "telefono_e = @telefono_e, " +
+                "sueldo = @sueldo, " +
+                "direccion_e = @direccion_e, " +
+                "rif_franquicia = @rif_franquicia " +
+                "WHERE cedula_e = @cedula_e";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("cedula_e", Id);
+            op.PasarParametros("nombre_e", Name);
+            op.PasarParametros("telefono_e", Phone);
+            op.PasarParametros("sueldo", Salary);
+            op.PasarParametros("direccion_e", Address);
+            op.PasarParametros("rif_franquicia", App.Session.Branch);
+            op.EjecutarComando();
         }
         protected override void BuildCrudObject(NpgsqlDataReader dr)
         {

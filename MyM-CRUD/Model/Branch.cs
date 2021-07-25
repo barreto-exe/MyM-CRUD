@@ -14,12 +14,12 @@ namespace MyM_CRUD.Model
         public Employee Manager { get; set; }
         public string City { get; set; }
 
-        public override string InsertTupleDatabase()
+        public override void InsertTupleDatabase()
         {
             throw new NotImplementedException();
         }
 
-        public override string UpdateTupleDataBase()
+        public override void UpdateTupleDataBase()
         {
             throw new NotImplementedException();
         }
@@ -41,8 +41,8 @@ namespace MyM_CRUD.Model
                 "SELECT * " +
                 "FROM franquicias f, empleados e " +
                 "WHERE " +
-                "f.supervisor = e.cedula_e AND " +
-                "f.rif_franquicia = @Rif ";
+                "f.supervisor = e.cedula_e " +
+                "AND f.rif_franquicia = @Rif ";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("Rif", keys[0]);
             

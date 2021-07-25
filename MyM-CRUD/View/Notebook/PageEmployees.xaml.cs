@@ -22,7 +22,7 @@ namespace MyM_CRUD.View
     /// </summary>
     public partial class PageEmployees : Page, ICrudPage
     {
-        private IEnumerable<Employee> employees;
+        private List<Employee> employees;
 
         public State CurrentState { get; set; }
 
@@ -66,20 +66,22 @@ namespace MyM_CRUD.View
                 case State.Creating:
                 case State.Updating:
                     {
-                        SetReading();
                         try
                         {
                             Employee employee = GetEmployeeFromFields();
                             if(CurrentState == State.Creating)
                             {
-                                //employee.InsertTupleDatabase();
+                                employee.InsertTupleDatabase();
                             }
-                            if(CurrentState == State.Updating)
+                            if (CurrentState == State.Updating)
                             {
-                                //employee.UpdateTupleDataBase();
+                                employee.UpdateTupleDataBase();
                             }
                         }
-                        catch (Exception) { }
+                        catch (Exception ex) { }
+
+                        SetReading();
+                        TxtSearch_TextChanged(null, null);
                         break;
                     }
             }

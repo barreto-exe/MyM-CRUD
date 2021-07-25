@@ -43,6 +43,11 @@
                         <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Clientes" />
                     </StackPanel>
                 </TabItem.Header>
+                <Frame>
+                    <Frame.Content>
+                        <local:PageClients />
+                    </Frame.Content>
+                </Frame>
             </TabItem>
 
             <!--  Vehículos  -->
@@ -57,6 +62,11 @@
                         <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Vehículos" />
                     </StackPanel>
                 </TabItem.Header>
+                <Frame>
+                    <Frame.Content>
+                        <local:PageVehicles />
+                    </Frame.Content>
+                </Frame>
             </TabItem>
         </TabControl>
     </Grid>

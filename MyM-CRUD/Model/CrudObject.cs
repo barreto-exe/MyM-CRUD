@@ -15,13 +15,13 @@ namespace MyM_CRUD.Model
         /// Actualiza el registro en la base de datos (usa el código cómo referencia).
         /// </summary>
         /// <returns>Mensaje de error si la operación falla. Vacío si la operación es exitosa.</returns>
-        public abstract string UpdateTupleDataBase();
+        public abstract void UpdateTupleDataBase();
 
         /// <summary>
         /// Registra la tupla en la base de datos.
         /// </summary>
         /// <returns>Mensaje de error si la operación falla. Vacío si la operación es exitosa.</returns>
-        public abstract string InsertTupleDatabase();
+        public abstract void InsertTupleDatabase();
 
         /// <summary>
         /// Infla el objeto con la tupla encontrada en la base de datos.
