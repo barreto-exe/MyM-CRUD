@@ -162,7 +162,7 @@ CREATE TABLE ordenes_compra(
  	fecha  	    			dom_fecha		NOT NULL,
 	rif_franquicia			dom_rif			NOT NULL,
  	rif_proveedor  			dom_rif			NOT NULL,
- 	PRIMARY KEY (cod_orden)
+ 	PRIMARY KEY (cod_orden_c)
 );
 
 CREATE TABLE facturas_proveedores(
@@ -510,7 +510,7 @@ ALTER TABLE registran
   ADD FOREIGN KEY (num_fact_tienda) REFERENCES facturas_tienda (num_factura) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
-  ADD FOREIGN KEY (cod_producto) REFERENCES tienda_productos (cod_producto) 
+  ADD FOREIGN KEY (cod_tienda_prod) REFERENCES tienda_productos (cod_producto) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
