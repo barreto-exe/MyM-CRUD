@@ -23,7 +23,7 @@ namespace MyM_CRUD.Model
             //Traer datos de la BD
             string query =
                 "SELECT * " +
-                "FROM vehicles  " +
+                "FROM vehiculos  " +
                 "WHERE " +
                 "placa LIKE @Search ";
             PostgreOp op = new PostgreOp(query);
@@ -75,7 +75,7 @@ namespace MyM_CRUD.Model
                 "nom_mecanico = @nom_mecanico," +
                 "tlf_mecanico = @tlf_mecanico," +
                 "ced_dueno = @ced_dueno, " +
-                "nom_modelo =  @nom_modelo" +
+                "nom_modelo =  @nom_modelo " +
                 "WHERE placa = @placa";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("placa", Id);

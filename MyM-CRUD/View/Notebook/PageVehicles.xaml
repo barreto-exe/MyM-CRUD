@@ -47,7 +47,7 @@
                         <DataGridTextColumn Binding="{Binding Id}" Header="Placa" />
                         <DataGridTextColumn
                             Width="*"
-                            Binding="{Binding Model}"
+                            Binding="{Binding ModelName}"
                             Header="Modelo" />
                     </DataGrid.Columns>
                 </DataGrid>
