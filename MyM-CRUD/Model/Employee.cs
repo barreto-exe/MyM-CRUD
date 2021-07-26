@@ -24,7 +24,7 @@ namespace MyM_CRUD.Model
                 "SELECT *, (SELECT 1 FROM franquicias WHERE cedula_e = supervisor) es_encargado " +
                 "FROM empleados e " +
                 "WHERE " +
-                "(e.cedula_e LIKE @Search " +
+                "(e.cedula_e = @Search " +
                 "OR e.nombre_e LIKE @Search " +
                 "OR e.telefono_e LIKE @Search " +
                 "OR e.direccion_e LIKE @Search) " +
@@ -85,6 +85,18 @@ namespace MyM_CRUD.Model
             op.PasarParametros("direccion_e", Address);
             op.PasarParametros("rif_franquicia", App.Session.Branch);
             op.EjecutarComando();
+
+            if(IsManager)
+            {
+                query =
+                    "UPDATE franquicias " +
+                    "SET supervisor = @cedula_e " +
+                    "WHERE rif_franquicia = @rif_franquicia ";
+                op = new PostgreOp(query);
+                op.PasarParametros("cedula_e", Id);
+                op.PasarParametros("rif_franquicia", App.Session.Branch);
+                op.EjecutarComando();
+            }
         }
         protected override void BuildCrudObject(NpgsqlDataReader dr)
         {

@@ -9,26 +9,22 @@
     Title="PageClients"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Initialized="Page_Initialized"
     mc:Ignorable="d">
-    <!--<Grid Background="White">
+
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="360" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-    -->
-    <!--  Left panel  -->
-    <!--
+        <!--  Left panel  -->
         <Grid Grid.Column="0" Background="{DynamicResource MaterialDesignToolBarBackground}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-    -->
-    <!--  Search and rows  -->
-    <!--
+            <!--  Search and rows  -->
             <StackPanel Grid.Column="0">
 
                 <TextBox
@@ -40,15 +36,13 @@
                     md:TextFieldAssist.LeadingIcon="Search"
                     Cursor="IBeam"
                     FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    TextChanged="TxtSearch_TextChanged" />
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                 <DataGrid
-                    x:Name="DgEmployees"
+                    x:Name="Datagrid"
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
-                    ItemsSource="{Binding ElementName=employees}"
-                    SelectionChanged="DgEmployees_SelectionChanged">
+                    ItemsSource="{Binding}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Id}" Header="Cédula" />
                         <DataGridTextColumn
@@ -60,9 +54,7 @@
             </StackPanel>
 
 
-    -->
-    <!--  Divider  -->
-    <!--
+            <!--  Divider  -->
             <Rectangle
                 Grid.Column="1"
                 Width="1"
@@ -70,9 +62,7 @@
                 Fill="LightGray" />
         </Grid>
 
-    -->
-    <!--  Rigth panel  -->
-    <!--
+        <!--  Rigth panel  -->
         <ScrollViewer Grid.Column="1">
             <StackPanel MaxWidth="512">
 
@@ -107,39 +97,28 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                 <TextBox
-                    x:Name="TxtSalary"
+                    x:Name="TxtPhoneAlt"
                     Margin="16"
-                    md:HintAssist.Hint="Salario"
+                    md:HintAssist.Hint="Teléfono Alternativo"
                     md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Dollar"
+                    md:TextFieldAssist.LeadingIcon="PhoneClassic"
                     Cursor="IBeam"
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                 <TextBox
-                    x:Name="TxtAddress"
+                    x:Name="TxtEmail"
                     Margin="16"
-                    md:HintAssist.Hint="Dirección"
+                    md:HintAssist.Hint="Correo electrónico"
                     md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="AddressMarker"
+                    md:TextFieldAssist.LeadingIcon="Email"
                     Cursor="IBeam"
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <ComboBox
-                    x:Name="CbTypeEmployee"
-                    Margin="16"
-                    md:ComboBoxAssist.ShowSelectedItem="True"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBoxItem Content="Empleado" DataContext="1" />
-                    <ComboBoxItem Content="Encargado" DataContext="2" />
-                </ComboBox>
             </StackPanel>
         </ScrollViewer>
 
-    -->
-    <!--  Floatingbutton panel  -->
-    <!--
+        <!--  Floatingbutton panel  -->
         <StackPanel
             Grid.Column="1"
             Width="auto"
@@ -151,7 +130,6 @@
             <Button
                 x:Name="BtnEditSave"
                 Margin="8"
-                Click="BtnEditSave_Click"
                 Cursor="Hand"
                 Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
                 <Button.Content>
@@ -164,7 +142,6 @@
             </Button>
             <Button
                 x:Name="BtnAdd"
-                Click="BtnAdd_Click"
                 Cursor="Hand"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
                 <Button.Content>
@@ -175,5 +152,5 @@
                 </Button.Content>
             </Button>
         </StackPanel>
-    </Grid>-->
+    </Grid>
 </Page>

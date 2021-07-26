@@ -28,9 +28,7 @@
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf.NetCore3" Version="0.9.7" />
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
-    <PackageReference Include="MySql.Data" Version="8.0.25" />
     <PackageReference Include="Npgsql" Version="5.0.7" />
-    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>

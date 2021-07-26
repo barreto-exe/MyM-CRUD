@@ -13,98 +13,55 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using static MyM_CRUD.View.ICrudPage;
+using static MyM_CRUD.View.ICrudPage<MyM_CRUD.Model.Employee>;
 
 namespace MyM_CRUD.View
 {
     /// <summary>
     /// Lógica de interacción para PageWorkers.xaml
     /// </summary>
-    public partial class PageEmployees : Page, ICrudPage
+    public partial class PageEmployees : Page, ICrudPage<Employee>
     {
         private List<Employee> employees;
-
         public State CurrentState { get; set; }
 
         public PageEmployees()
         {
             InitializeComponent();
             SetReading();
-        }
 
-        private void Page_Initialized(object sender, EventArgs e)
-        {
+            //Eventos
+            ICrudPage<Employee> page = this;
+            TxtSearch.TextChanged += page.TxtSearch_TextChanged;
+            BtnEditSave.Click +=  page.BtnEditSave_Click;
+            Datagrid.SelectionChanged += page.Datagrid_SelectionChanged;
+            BtnAdd.Click += page.BtnAdd_Click;
+
+            //Inicializar datagrid
             employees = Employee.SearchEmployees("");
-            DgEmployees.ItemsSource = employees;
+            Datagrid.ItemsSource = employees;
         }
 
-        private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        public void TxtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             employees = Employee.SearchEmployees(TxtSearch.Text);
-            DgEmployees.ItemsSource = employees;
+            Datagrid.ItemsSource = employees;
         }
-
-        private void DgEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Employee selectedE = (Employee)DgEmployees.SelectedItem;
+            Employee selectedE = (Employee)Datagrid.SelectedItem;
             LoadFields(selectedE);
             SetReading();
         }
-
-        private void BtnEditSave_Click(object sender, RoutedEventArgs e)
-        {
-            switch(CurrentState)
-            {
-                //Click en editar
-                case State.Reading:
-                    {
-                        BeginUpdating();
-                        break;
-                    }
-
-                //Click en guardar
-                case State.Creating:
-                case State.Updating:
-                    {
-                        try
-                        {
-                            Employee employee = GetEmployeeFromFields();
-                            if(CurrentState == State.Creating)
-                            {
-                                employee.InsertTupleDatabase();
-                            }
-                            if (CurrentState == State.Updating)
-                            {
-                                employee.UpdateTupleDataBase();
-                            }
-                        }
-                        catch (Exception ex) { }
-
-                        SetReading();
-                        TxtSearch_TextChanged(null, null);
-                        break;
-                    }
-            }
-
-            void BeginUpdating()
-            {
-                Employee selectedE = (Employee)DgEmployees.SelectedItem;
-
-                if (selectedE == null) return;
-
-                LoadFields(selectedE);
-                SetUpdating();
-            }
-        }
-
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        public void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             LoadFields(null);
             SetCreating();
             TxtId.Focus();
         }
 
-        private void LoadFields(Employee selectedE)
+
+        public void LoadFields(Employee selectedE)
         {
             if (selectedE == null)
             {
@@ -125,7 +82,7 @@ namespace MyM_CRUD.View
             TxtAddress.Text = selectedE.Address;
             CbTypeEmployee.SelectedIndex = selectedE.IsManager ? 1 : 0;
         }
-        private Employee GetEmployeeFromFields() => new Employee
+        public Employee GetObjectsFromFields() => new Employee
         {
             Id = TxtId.Text,
             Name = TxtName.Text,
@@ -134,6 +91,7 @@ namespace MyM_CRUD.View
             Address = TxtAddress.Text,
             IsManager = CbTypeEmployee.SelectedIndex == 1,
         };
+
 
         public void SetCreating()
         {
@@ -176,6 +134,15 @@ namespace MyM_CRUD.View
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
+        }
+        public void BeginUpdating()
+        {
+            Employee selectedE = (Employee)Datagrid.SelectedItem;
+
+            if (selectedE == null) return;
+
+            LoadFields(selectedE);
+            SetUpdating();
         }
     }
 }
