@@ -535,3 +535,53 @@ ALTER TABLE mantenimientos_v
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 ---------------------- Índices ----------------------
+CREATE UNIQUE INDEX idx_nombreS_servicios
+    ON servicios (nombre_s);
+
+CREATE INDEX idx_cliente_reservas
+    ON reservas (ced_cliente);
+
+CREATE UNIQUE INDEX idx_nombre_f_franquicia
+    ON franquicias (nombre_f);
+
+CREATE INDEX idx_nombre_e_empleados
+    ON empleados (nombre_e);
+
+CREATE INDEX idx_nombre_c_clientes
+    ON clientes (nombre_c);
+
+CREATE INDEX idx_ced_dueno_vehiculos
+    ON vehiculos (ced_dueno);
+
+CREATE INDEX idx_nom_modelo_modelos
+    ON modelos (nom_modelo);
+
+CREATE INDEX idx_nom_marca_marcas
+    ON marcas (nom_marca);
+
+CREATE INDEX idx_descripcion_tipos_vehiculo
+    ON tipos_vehiculo (descripcion_v);
+
+CREATE INDEX idx_nombre_b_bancos
+    ON bancos (nombre_b);
+
+CREATE INDEX idx_nombre_l_lineas_suministro
+    ON lineas_suministro (nombre_l);
+
+CREATE INDEX idx_nombre_f_fabricante
+    ON fabricantes (nombre_f);
+
+CREATE INDEX idx_razon_social_proveedores
+    ON proveedores (razon_social);
+
+CREATE INDEX idx_nombre_p_producto
+    ON productos (nombre_p);
+
+CREATE INDEX idx_ced_cliente_facturas
+    ON facturas (ced_cliente);
+
+CREATE INDEX idx_descripcion_a_actividades
+    ON actividades (descripcion_a);
+
+
+
