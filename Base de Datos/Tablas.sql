@@ -331,6 +331,13 @@ CREATE TABLE mantenimientos_v(
 	desc_mantenimiento		dom_descripcion		NOT NULL,			
 	PRIMARY KEY (placa, fecha, desc_mantenimiento)
 );
+
+CREATE TABLE eco_mensajes(
+	cod_msj					SERIAL				NOT NULL,
+	msj						dom_descripcion		NOT NULL	UNIQUE,		
+	autor					dom_nombre			NOT NULL,			
+	PRIMARY KEY (cod_msj)
+);
 ---------------------- Claves Foráneas ----------------------
 ALTER TABLE reservas 
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
