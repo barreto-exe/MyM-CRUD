@@ -44,6 +44,7 @@ namespace MyM_CRUD.View
 
         private PageNotebook page;
         private PageEstadisticas pageE;
+        private PageInventory pageI;
 
         public WindowMain()
         {
@@ -51,6 +52,7 @@ namespace MyM_CRUD.View
 
             page = new PageNotebook();
             pageE = new PageEstadisticas();
+            pageI = new PageInventory();
 
             DrawerList.SelectedIndex = 0;
             HamburguerButton.IsChecked = true;
@@ -98,10 +100,35 @@ namespace MyM_CRUD.View
                     }
                 case 2:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageI;
                         break;
                     }
                 case 3:
+                    {
+                        MainFrame.Content = page;
+                        break;
+                    }
+                case 4:
+                    {
+                        MainFrame.Content = page;
+                        break;
+                    }
+                case 5:
+                    {
+                        MainFrame.Content = page;
+                        break;
+                    }
+                case 6:
+                    {
+                        MainFrame.Content = page;
+                        break;
+                    }
+                case 7:
+                    {
+                        MainFrame.Content = page;
+                        break;
+                    }
+                case 8:
                     {
                         MainFrame.Content = page;
                         break;

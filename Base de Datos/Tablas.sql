@@ -189,7 +189,6 @@ CREATE TABLE tienda_productos(
 
 CREATE TABLE eco_productos(
 	cod_producto  		dom_codigo 			NOT NULL,
-	es_ecologico  		BOOLEAN 			NOT NULL,
 	cod_linea	  		dom_codigo 			NOT NULL,
  	PRIMARY KEY (cod_producto)
 );
