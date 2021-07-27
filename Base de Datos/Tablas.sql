@@ -88,7 +88,7 @@ CREATE TABLE clientes(
 
 CREATE TABLE vehiculos(
 	placa				dom_codigo		NOT NULL,
-	cod_vehiculo   		dom_codigo  	NOT NULL,
+	cod_vehiculo   		dom_codigo  	NOT NULL		UNIQUE,
  	tipo_aceite			dom_nombre  	NOT NULL,
 	fecha_adq			dom_fecha		NOT NULL,
 	nom_mecanico		dom_nombre		NOT NULL,
