@@ -248,8 +248,8 @@ CREATE TABLE mantenimientos(
 CREATE TABLE pagos(
 	num_factura  		dom_numero 			NOT NULL,
 	num_pago			dom_numero			NOT NULL,
-	monto				dom_cantidad		NOT NULL,
-	fecha_pago			dom_monto			NOT NULL,
+	monto				dom_monto			NOT NULL,
+	fecha_pago			dom_fecha			NOT NULL,
 	modalidad_p			dom_codigo			NOT NULL,
 	cod_banco			dom_codigo,
 	num_tarjeta			dom_numero,
