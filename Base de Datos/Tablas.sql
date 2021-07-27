@@ -188,7 +188,7 @@ CREATE TABLE tienda_productos(
  	PRIMARY KEY (cod_producto)
 );
 
-CREATE TABLE eco_productos(
+CREATE TABLE servicio_productos(
 	cod_producto  		dom_codigo 			NOT NULL,
 	es_ecologico  		BOOLEAN 			NOT NULL,
 	cod_linea	  		dom_codigo 			NOT NULL,
@@ -404,7 +404,7 @@ ALTER TABLE tienda_productos
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
-ALTER TABLE eco_productos
+ALTER TABLE servicio_productos
   ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
@@ -445,7 +445,7 @@ ALTER TABLE ordenes_servicio
   ADD FOREIGN KEY (cod_servicio, num_actividad) REFERENCES actividades (cod_servicio, num_actividad) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
-  ADD FOREIGN KEY (cod_producto) REFERENCES eco_productos (cod_producto) 
+  ADD FOREIGN KEY (cod_producto) REFERENCES servicio_productos (cod_producto) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (ced_empleado) REFERENCES empleados (cedula_e) 
