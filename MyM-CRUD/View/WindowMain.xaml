@@ -117,6 +117,21 @@
                             Width="200"
                             SelectionChanged="DrawerList_SelectionChanged">
 
+                            <!--  Estadísticas  -->
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <md:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    VerticalAlignment="Center"
+                                    Kind="Home"
+                                    Opacity="0.6" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Inicio" />
+                            </StackPanel>
+
                             <!--  Libreta  -->
                             <StackPanel Height="30" Orientation="Horizontal">
                                 <md:PackIcon
@@ -131,22 +146,6 @@
                                     Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
                                     Text="Libreta" />
                             </StackPanel>
-
-                            <!--  Estadísticas  -->
-                            <StackPanel Height="30" Orientation="Horizontal">
-                                <md:PackIcon
-                                    Width="24"
-                                    Height="24"
-                                    Margin="14,0,14,0"
-                                    VerticalAlignment="Center"
-                                    Kind="ChartTimelineVariant"
-                                    Opacity="0.6" />
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                    Text="Estadísticas" />
-                            </StackPanel>
-
 
                             <!--  Inventario  -->
                             <StackPanel Height="30" Orientation="Horizontal">

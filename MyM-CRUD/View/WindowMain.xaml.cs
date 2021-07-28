@@ -42,16 +42,16 @@ namespace MyM_CRUD.View
         }
         private Branch branch;
 
-        private PageNotebook page;
         private PageEstadisticas pageE;
+        private PageNotebook pageN;
         private PageInventory pageI;
 
         public WindowMain()
         {
             InitializeComponent();
 
-            page = new PageNotebook();
             pageE = new PageEstadisticas();
+            pageN = new PageNotebook();
             pageI = new PageInventory();
 
             DrawerList.SelectedIndex = 0;
@@ -90,12 +90,12 @@ namespace MyM_CRUD.View
             {
                 case 0:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageE;
                         break;
                     }
                 case 1:
                     {
-                        MainFrame.Content = pageE;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 2:
@@ -105,32 +105,32 @@ namespace MyM_CRUD.View
                     }
                 case 3:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 4:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 5:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 6:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 7:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
                 case 8:
                     {
-                        MainFrame.Content = page;
+                        MainFrame.Content = pageN;
                         break;
                     }
             }
