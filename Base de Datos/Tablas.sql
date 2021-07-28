@@ -288,7 +288,8 @@ CREATE TABLE apartan(
 CREATE TABLE ofrecen(
 	rif_franquicia			dom_rif				NOT NULL,
 	cod_servicio			dom_codigo			NOT NULL,
-	capacidad				dom_cantidad		NOT NULL,					
+	capacidad				dom_cantidad		NOT NULL,	
+	ced_coordinador			dom_cedula			NOT NULL,				
 	PRIMARY KEY (rif_franquicia, cod_servicio)
 );
 
@@ -494,6 +495,9 @@ ALTER TABLE ofrecen
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (cod_servicio) REFERENCES servicios (cod_servicio) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (ced_coordinador) REFERENCES empleados (cedula_e) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
