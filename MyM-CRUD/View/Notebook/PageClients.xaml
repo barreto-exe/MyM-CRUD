@@ -46,6 +46,7 @@
                     x:Name="Datagrid"
                     Grid.Row="1"
                     AllowDraggingColumns="True"
+                    CurrentCellBorderBrush="Transparent"
                     AllowResizingColumns="True"
                     SelectionMode="Single"
                     AllowResizingHiddenColumns="True"

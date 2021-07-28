@@ -33,7 +33,7 @@
 
                 <TextBox
                     x:Name="TxtSearch"
-                    Margin="16"
+                    Margin="16,24,16,16"
                     md:HintAssist.Hint="Buscar"
                     md:TextFieldAssist.HasClearButton="True"
                     md:TextFieldAssist.HasLeadingIcon="True"
@@ -59,6 +59,7 @@
                     AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
                     ColumnSizer="Star"
+                    CurrentCellBorderBrush="Transparent"
                     IsReadOnly="True"
                     Language="es-ES"
                     RowHeight="28"
@@ -111,7 +112,7 @@
 
                 <TextBox
                     x:Name="TxtCode"
-                    Margin="16"
+                    Margin="16,24,16,16"
                     md:HintAssist.Hint="Código"
                     md:TextFieldAssist.HasLeadingIcon="True"
                     md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
@@ -165,6 +166,13 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
 
+                <!--  Divider  -->
+                <Rectangle
+                    Height="1"
+                    Margin="16"
+                    HorizontalAlignment="Stretch"
+                    Fill="LightGray" />
+
                 <ComboBox
                     x:Name="CbTypeProduct"
                     Margin="16"
@@ -176,7 +184,7 @@
                 </ComboBox>
 
                 <StackPanel Name="StackEcologic" Orientation="Vertical">
-                    <StackPanel Margin="16,16,16,0" Orientation="Horizontal">
+                    <StackPanel Margin="32,0,0,0" Orientation="Horizontal">
                         <TextBlock
                             VerticalAlignment="Center"
                             Style="{StaticResource MaterialDesignBody1TextBlock}"

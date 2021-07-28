@@ -53,6 +53,7 @@
                     AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
                     ColumnSizer="Star"
+                    CurrentCellBorderBrush="Transparent"
                     IsReadOnly="True"
                     Language="es-ES"
                     RowHeight="28"

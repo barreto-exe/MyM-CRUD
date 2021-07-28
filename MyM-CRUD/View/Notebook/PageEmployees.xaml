@@ -44,6 +44,7 @@
 
                 <sf:SfDataGrid
                     x:Name="Datagrid"
+                    CurrentCellBorderBrush="Transparent"
                     Grid.Row="1"
                     AllowDraggingColumns="True"
                     AllowResizingColumns="True"
