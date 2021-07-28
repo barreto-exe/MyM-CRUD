@@ -17,13 +17,15 @@ namespace MyM_CRUD.Model
         public string MechanicPhone { get; set; }
         public string ModelName { get; set; }
         public string OwnerId { get; set; }
+        public string OwnerName { get; set;  }
 
         public static List<Vehicle> SearchVehicles(string search)
         {
             //Traer datos de la BD
             string query =
-                "SELECT * " +
-                "FROM vehiculos  " +
+                "SELECT v.*, c.nombre_c " +
+                "FROM vehiculos v " +
+                "INNER JOIN clientes c ON (v.ced_dueno = c.cedula_c) " +
                 "WHERE " +
                 "placa LIKE @Search ";
             PostgreOp op = new PostgreOp(query);
@@ -43,6 +45,7 @@ namespace MyM_CRUD.Model
                     MechanicName = dr["nom_mecanico"].ToString(),
                     MechanicPhone = dr["tlf_mecanico"].ToString(),
                     OwnerId = dr["ced_dueno"].ToString(),
+                    OwnerName = dr["nombre_c"].ToString(),
                     ModelName = dr["nom_modelo"].ToString(),
                 };
 

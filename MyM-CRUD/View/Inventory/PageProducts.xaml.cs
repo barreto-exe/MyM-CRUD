@@ -36,7 +36,7 @@ namespace MyM_CRUD.View
             ICrudPage<Product> page = this;
             TxtSearch.TextChanged += page.TxtSearch_TextChanged;
             BtnEditSave.Click += page.BtnEditSave_Click;
-            Datagrid.SelectionChanged += page.Datagrid_SelectionChanged;
+            Datagrid.SelectionChanged += Datagrid_SelectionChanged;
             BtnAdd.Click += page.BtnAdd_Click;
 
             //Inicializar datagrid
@@ -49,7 +49,7 @@ namespace MyM_CRUD.View
             products = Product.SearchProducts(TxtSearch.Text);
             Datagrid.ItemsSource = products;
         }
-        public void Datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             Product product = (Product)Datagrid.SelectedItem;
             LoadFields(product);

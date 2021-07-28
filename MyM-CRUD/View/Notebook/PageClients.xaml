@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:MyM_CRUD.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sf="http://schemas.syncfusion.com/wpf"
     Title="PageClients"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -25,8 +26,11 @@
             </Grid.ColumnDefinitions>
 
             <!--  Search and rows  -->
-            <StackPanel Grid.Column="0">
-
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
                 <TextBox
                     x:Name="TxtSearch"
                     Margin="16"
@@ -38,20 +42,46 @@
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <DataGrid
+                <sf:SfDataGrid
                     x:Name="Datagrid"
+                    Grid.Row="1"
+                    AllowDraggingColumns="True"
+                    AllowResizingColumns="True"
+                    SelectionMode="Single"
+                    AllowResizingHiddenColumns="True"
+                    AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
+                    ColumnSizer="Star"
                     IsReadOnly="True"
-                    ItemsSource="{Binding}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Id}" Header="Cédula" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding Name}"
-                            Header="Nombre" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </StackPanel>
+                    Language="es-ES"
+                    RowHeight="28">
+                    <sf:SfDataGrid.TableSummaryRows>
+                        <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                            <sf:GridTableSummaryRow.SummaryColumns>
+                                <sf:GridSummaryColumn
+                                    Name="Total"
+                                    Format="'Total: {Count:d}'"
+                                    MappingName="Id"
+                                    SummaryType="CountAggregate" />
+                            </sf:GridTableSummaryRow.SummaryColumns>
+                        </sf:GridTableSummaryRow>
+                    </sf:SfDataGrid.TableSummaryRows>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Cédula"
+                            MappingName="Id" />
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Nombre"
+                            MappingName="Name" />
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Correo"
+                            MappingName="Email" />
+                    </sf:SfDataGrid.Columns>
+                </sf:SfDataGrid>
+            </Grid>
 
 
             <!--  Divider  -->

@@ -47,7 +47,7 @@ namespace MyM_CRUD.View
             employees = Employee.SearchEmployees(TxtSearch.Text);
             Datagrid.ItemsSource = employees;
         }
-        public void Datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             Employee selectedE = (Employee)Datagrid.SelectedItem;
             LoadFields(selectedE);

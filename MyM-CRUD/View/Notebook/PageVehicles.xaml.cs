@@ -50,7 +50,7 @@ namespace MyM_CRUD.View
             vehicles = Vehicle.SearchVehicles(TxtSearch.Text);
             Datagrid.ItemsSource = vehicles;
         }
-        public void Datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             Vehicle vehicle = (Vehicle)Datagrid.SelectedItem;
             LoadFields(vehicle);

@@ -1,16 +1,16 @@
 ﻿<Page
-    x:Class="MyM_CRUD.View.PageEmployees"
+    x:Class="MyM_CRUD.View.PageServices"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:MyM_CRUD.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
-    xmlns:sf="http://schemas.syncfusion.com/wpf"
-    Title="PageWorkers"
+    Title="PageServices"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
+
     <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="360" />
@@ -25,11 +25,7 @@
             </Grid.ColumnDefinitions>
 
             <!--  Search and rows  -->
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0">
 
                 <TextBox
                     x:Name="TxtSearch"
@@ -42,52 +38,29 @@
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <sf:SfDataGrid
+                <ListBox
+                    Margin="16,6"
+                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBox}"
+                    Visibility="Collapsed">
+                    <ListBoxItem Content="Para venta" />
+                    <ListBoxItem Content="Para servicios" IsSelected="True" />
+                </ListBox>
+
+                <DataGrid
                     x:Name="Datagrid"
-                    Grid.Row="1"
-                    AllowDraggingColumns="True"
-                    AllowResizingColumns="True"
-                    AllowResizingHiddenColumns="True"
-                    AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
-                    ColumnSizer="Star"
                     IsReadOnly="True"
-                    Language="es-ES"
-                    SelectionMode="Single"
-                    RowHeight="28">
-                    <sf:SfDataGrid.TableSummaryRows>
-                        <sf:GridTableSummaryRow ShowSummaryInRow="False">
-                            <sf:GridTableSummaryRow.SummaryColumns>
-                                <sf:GridSummaryColumn
-                                    Name="Total"
-                                    Format="'Total: {Count:d}'"
-                                    MappingName="Id"
-                                    SummaryType="CountAggregate" />
-                            </sf:GridTableSummaryRow.SummaryColumns>
-                        </sf:GridTableSummaryRow>
-                    </sf:SfDataGrid.TableSummaryRows>
-                    <sf:SfDataGrid.Columns>
-                        <sf:GridTextColumn
-                            AllowFiltering="True"
-                            HeaderText="Cédula"
-                            MappingName="Id" />
-                        <sf:GridTextColumn
-                            AllowFiltering="True"
-                            HeaderText="Nombre"
-                            MappingName="Name" />
-                        <sf:GridCurrencyColumn
-                            AllowFiltering="True"
-                            AllowGrouping="True"
-                            CurrencyDecimalDigits="2"
-                            CurrencyDecimalSeparator=","
-                            CurrencyGroupSeparator="."
-                            CurrencyGroupSizes="3"
-                            CurrencySymbol="$"
-                            HeaderText="Salario"
-                            MappingName="Salary" />
-                    </sf:SfDataGrid.Columns>
-                </sf:SfDataGrid>
-            </Grid>
+                    ItemsSource="{Binding}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Code}" Header="Código" />
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Nombre" />
+                        <DataGridTextColumn
+                            Width="*"
+                            Binding="{Binding Price}"
+                            Header="Precio" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
 
 
             <!--  Divider  -->
@@ -103,11 +76,13 @@
             <StackPanel MaxWidth="512">
 
                 <TextBox
-                    x:Name="TxtId"
+                    x:Name="TxtCode"
                     Margin="16"
-                    md:HintAssist.Hint="Cédula"
+                    md:HintAssist.Hint="Código"
                     md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="IdCard"
+                    md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
+                    md:TextFieldAssist.LeadingIcon="BarcodeScan"
+                    md:TextFieldAssist.TrailingIcon="Recycle"
                     Cursor="IBeam"
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
@@ -123,19 +98,22 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                 <TextBox
-                    x:Name="TxtPhone"
+                    x:Name="TxtDescription"
+                    Height="100"
                     Margin="16"
-                    md:HintAssist.Hint="Teléfono"
+                    md:HintAssist.Hint="Descripción"
                     md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Phone"
+                    md:TextFieldAssist.LeadingIcon="TagAdd"
                     Cursor="IBeam"
                     FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap" />
+
 
                 <TextBox
-                    x:Name="TxtSalary"
+                    x:Name="TxtPrice"
                     Margin="16"
-                    md:HintAssist.Hint="Salario"
+                    md:HintAssist.Hint="Precio"
                     md:TextFieldAssist.HasLeadingIcon="True"
                     md:TextFieldAssist.LeadingIcon="Dollar"
                     Cursor="IBeam"
@@ -143,23 +121,54 @@
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                 <TextBox
-                    x:Name="TxtAddress"
+                    x:Name="TxtManufacturerCode"
                     Margin="16"
-                    md:HintAssist.Hint="Dirección"
+                    md:HintAssist.Hint="Código del Fabricante"
                     md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="AddressMarker"
+                    md:TextFieldAssist.LeadingIcon="Industrial"
                     Cursor="IBeam"
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
+
                 <ComboBox
-                    x:Name="CbTypeEmployee"
+                    x:Name="CbTypeProduct"
                     Margin="16"
                     md:ComboBoxAssist.ShowSelectedItem="True"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBoxItem Content="Empleado" DataContext="1" />
-                    <ComboBoxItem Content="Encargado" DataContext="2" />
+                    <ComboBoxItem Content="Servicio" DataContext="1" />
+                    <ComboBoxItem Content="Tienda" DataContext="2" />
                 </ComboBox>
+
+                <StackPanel Name="StackEcologic" Orientation="Vertical">
+                    <StackPanel Margin="16,16,16,0" Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignBody1TextBlock}"
+                            Text="Es ecológico: " />
+                        <ToggleButton
+                            x:Name="CheckIsEcologic"
+                            Width="48"
+                            Height="48"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                            <md:PackIcon Kind="Cancel" />
+                            <md:ToggleButtonAssist.OnContent>
+                                <md:PackIcon Kind="Recycle" />
+                            </md:ToggleButtonAssist.OnContent>
+                        </ToggleButton>
+                    </StackPanel>
+
+                    <TextBox
+                        x:Name="TxtLineCode"
+                        Margin="16"
+                        md:HintAssist.Hint="Código de Línea"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Industrial"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
 

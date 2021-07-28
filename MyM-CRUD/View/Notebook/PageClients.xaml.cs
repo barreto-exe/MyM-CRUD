@@ -46,7 +46,7 @@ namespace MyM_CRUD.View
             clients = Client.SearchClients(TxtSearch.Text);
             Datagrid.ItemsSource = clients;
         }
-        public void Datagrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             Client client = (Client)Datagrid.SelectedItem;
             LoadFields(client);

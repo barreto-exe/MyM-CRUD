@@ -162,6 +162,20 @@
                                     Text="Inventario" />
                             </StackPanel>
 
+                            <!--  Servicios  -->
+                            <StackPanel Height="30" Orientation="Horizontal">
+                                <md:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Margin="14,0,14,0"
+                                    VerticalAlignment="Center"
+                                    Kind="AutoFix"
+                                    Opacity="0.6" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Servicios" />
+                            </StackPanel>
                         </ListBox>
                     </Grid>
                 </StackPanel>
