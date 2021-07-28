@@ -28,7 +28,7 @@
 
                 <TextBox
                     x:Name="TxtSearch"
-                    Margin="16,16,16,0"
+                    Margin="16"
                     md:HintAssist.Hint="Buscar"
                     md:TextFieldAssist.HasClearButton="True"
                     md:TextFieldAssist.HasLeadingIcon="True"
@@ -37,7 +37,10 @@
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <ListBox Margin="16,6" Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBox}">
+                <ListBox
+                    Margin="16,6"
+                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBox}"
+                    Visibility="Collapsed">
                     <ListBoxItem Content="Para venta" />
                     <ListBoxItem Content="Para servicios" IsSelected="True" />
                 </ListBox>
@@ -70,23 +73,6 @@
         <!--  Rigth panel  -->
         <ScrollViewer Grid.Column="1">
             <StackPanel MaxWidth="512">
-                <StackPanel Margin="16,16,16,0" Orientation="Horizontal">
-                    <TextBlock
-                        VerticalAlignment="Center"
-                        Style="{StaticResource MaterialDesignBody1TextBlock}"
-                        Text="Es ecológico: " />
-                    <ToggleButton
-                        x:Name="CheckIsEcologic"
-                        Width="48"
-                        Height="48"
-                        Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                        ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
-                        <md:PackIcon Kind="Cancel" />
-                        <md:ToggleButtonAssist.OnContent>
-                            <md:PackIcon Kind="Recycle" />
-                        </md:ToggleButtonAssist.OnContent>
-                    </ToggleButton>
-                </StackPanel>
 
                 <TextBox
                     x:Name="TxtCode"
@@ -112,7 +98,7 @@
 
                 <TextBox
                     x:Name="TxtDescription"
-                    Height="128"
+                    Height="100"
                     Margin="16"
                     md:HintAssist.Hint="Descripción"
                     md:TextFieldAssist.HasLeadingIcon="True"
@@ -142,6 +128,47 @@
                     Cursor="IBeam"
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+
+                <ComboBox
+                    x:Name="CbTypeProduct"
+                    Margin="16"
+                    md:ComboBoxAssist.ShowSelectedItem="True"
+                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                    <ComboBoxItem Content="Servicio" DataContext="1" />
+                    <ComboBoxItem Content="Tienda" DataContext="2" />
+                </ComboBox>
+
+                <StackPanel Name="StackEcologic" Orientation="Vertical">
+                    <StackPanel Margin="16,16,16,0" Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            Style="{StaticResource MaterialDesignBody1TextBlock}"
+                            Text="Es ecológico: " />
+                        <ToggleButton
+                            x:Name="CheckIsEcologic"
+                            Width="48"
+                            Height="48"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
+                            <md:PackIcon Kind="Cancel" />
+                            <md:ToggleButtonAssist.OnContent>
+                                <md:PackIcon Kind="Recycle" />
+                            </md:ToggleButtonAssist.OnContent>
+                        </ToggleButton>
+                    </StackPanel>
+
+                    <TextBox
+                        x:Name="TxtLineCode"
+                        Margin="16"
+                        md:HintAssist.Hint="Código de Línea"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Industrial"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+
             </StackPanel>
         </ScrollViewer>
 
