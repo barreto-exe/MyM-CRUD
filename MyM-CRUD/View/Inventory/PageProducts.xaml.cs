@@ -71,7 +71,7 @@ namespace MyM_CRUD.View
             Price = Convert.ToDecimal(TxtPrice.Text),
             Description = TxtDescription.Text,
             ManufacturerCode = TxtManufacturerCode.Text,
-            Type = CbTypeProduct.SelectedIndex == 1 ? ProductType.ForService : ProductType.ForSell,
+            Type = CbTypeProduct.SelectedIndex == 0 ? ProductType.ForService : ProductType.ForSell,
             IsEcologic = (bool)CheckIsEcologic.IsChecked,
             LineCode = TxtLineCode.Text,
         };
@@ -102,14 +102,11 @@ namespace MyM_CRUD.View
                 case ProductType.ForSell:
                     {
                         CbTypeProduct.SelectedIndex = 1;
-                        StackEcologic.Visibility = Visibility.Collapsed;
                         break;
                     }
                 case ProductType.ForService:
                     {
                         CbTypeProduct.SelectedIndex = 0;
-                        StackEcologic.Visibility = Visibility.Visible;
-
                         CheckIsEcologic.IsChecked = selected.IsEcologic;
                         TxtLineCode.Text = selected.LineCode;
                         break;
@@ -124,6 +121,7 @@ namespace MyM_CRUD.View
                     StackEcologic.Visibility = Visibility.Visible;
                     break;
                 case 1:
+                    CheckIsEcologic.IsChecked = false;
                     StackEcologic.Visibility = Visibility.Collapsed;
                     break;
             }
@@ -141,8 +139,6 @@ namespace MyM_CRUD.View
             CheckIsEcologic.IsEnabled = true;
             CbTypeProduct.IsEnabled = true;
             TxtLineCode.IsEnabled = true;
-
-            StackEcologic.Visibility = Visibility.Visible;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;

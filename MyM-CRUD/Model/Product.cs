@@ -95,7 +95,43 @@ namespace MyM_CRUD.Model
         }
         public override void UpdateTupleDataBase()
         {
-            throw new NotImplementedException();
+            string query =
+                "UPDATE productos " +
+                "SET precio_p = @precio_p, " +
+                "nombre_p = @nombre_p, "  +
+                "descripcion_p = @descripcion_p, " +
+                "tipo_p = @tipo_p, " +
+                "cod_fabricante = @cod_fabricante " +
+                "WHERE cod_producto = @cod_producto; ";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("cod_producto", Code);
+            op.PasarParametros("precio_p", Price);
+            op.PasarParametros("nombre_p", Name);
+            op.PasarParametros("descripcion_p", Description);
+            op.PasarParametros("tipo_p", (char)Type);
+            op.PasarParametros("cod_fabricante", ManufacturerCode);
+
+
+            op.Query +=
+                "DELETE FROM tienda_productos WHERE cod_producto = @cod_producto;" +
+                "DELETE FROM servicio_productos WHERE cod_producto = @cod_producto;";
+
+            if (Type == ProductType.ForSell)
+            {
+                op.Query +=
+                    "INSERT INTO tienda_productos " +
+                    "VALUES (@cod_producto); ";
+            }
+            if (Type == ProductType.ForService)
+            {
+                op.Query +=
+                    "INSERT INTO servicio_productos(cod_producto, es_ecologico, cod_linea) " +
+                    "VALUES (@cod_producto, @es_ecologico, @cod_linea); ";
+                op.PasarParametros("es_ecologico", IsEcologic);
+                op.PasarParametros("cod_linea", LineCode);
+            }
+
+            op.EjecutarComando();
         }
         protected override void BuildCrudObject(NpgsqlDataReader dr) => BuildProductFromDr(dr);
 
