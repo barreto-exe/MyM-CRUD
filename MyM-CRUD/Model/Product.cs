@@ -133,7 +133,10 @@ namespace MyM_CRUD.Model
 
             op.EjecutarComando();
         }
-        protected override void BuildCrudObject(NpgsqlDataReader dr) => BuildProductFromDr(dr);
+        protected override void BuildCrudObject(NpgsqlDataReader dr)
+        { 
+            throw new NotImplementedException();
+        }
 
         protected override PostgreOp GetObjectOp(object[] keys)
         {

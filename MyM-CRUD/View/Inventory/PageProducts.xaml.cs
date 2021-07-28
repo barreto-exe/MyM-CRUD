@@ -184,6 +184,5 @@ namespace MyM_CRUD.View
             LoadFields(selected);
             SetUpdating();
         }
-
     }
 }
