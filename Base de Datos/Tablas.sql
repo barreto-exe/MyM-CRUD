@@ -88,6 +88,7 @@ CREATE TABLE clientes(
 
 CREATE TABLE vehiculos(
 	placa				dom_codigo		NOT NULL,
+	cod_vehiculo   		dom_codigo  	NOT NULL		UNIQUE,
  	tipo_aceite			dom_nombre  	NOT NULL,
 	fecha_adq			dom_fecha		NOT NULL,
 	nom_mecanico		dom_nombre		NOT NULL,
@@ -187,7 +188,7 @@ CREATE TABLE tienda_productos(
  	PRIMARY KEY (cod_producto)
 );
 
-CREATE TABLE eco_productos(
+CREATE TABLE servicio_productos(
 	cod_producto  		dom_codigo 			NOT NULL,
 	cod_linea	  		dom_codigo 			NOT NULL,
  	PRIMARY KEY (cod_producto)
@@ -246,8 +247,8 @@ CREATE TABLE mantenimientos(
 CREATE TABLE pagos(
 	num_factura  		dom_numero 			NOT NULL,
 	num_pago			dom_numero			NOT NULL,
-	monto				dom_cantidad		NOT NULL,
-	fecha_pago			dom_monto			NOT NULL,
+	monto				dom_monto			NOT NULL,
+	fecha_pago			dom_fecha			NOT NULL,
 	modalidad_p			dom_codigo			NOT NULL,
 	cod_banco			dom_codigo,
 	num_tarjeta			dom_numero,
@@ -286,7 +287,8 @@ CREATE TABLE apartan(
 CREATE TABLE ofrecen(
 	rif_franquicia			dom_rif				NOT NULL,
 	cod_servicio			dom_codigo			NOT NULL,
-	capacidad				dom_cantidad		NOT NULL,					
+	capacidad				dom_cantidad		NOT NULL,	
+	ced_coordinador			dom_cedula			NOT NULL,				
 	PRIMARY KEY (rif_franquicia, cod_servicio)
 );
 
@@ -328,6 +330,13 @@ CREATE TABLE mantenimientos_v(
 	fecha					dom_fecha			NOT NULL,	
 	desc_mantenimiento		dom_descripcion		NOT NULL,			
 	PRIMARY KEY (placa, fecha, desc_mantenimiento)
+);
+
+CREATE TABLE eco_mensajes(
+	cod_msj					SERIAL				NOT NULL,
+	msj						dom_descripcion		NOT NULL	UNIQUE,		
+	autor					dom_nombre			NOT NULL,			
+	PRIMARY KEY (cod_msj)
 );
 ---------------------- Claves Foráneas ----------------------
 ALTER TABLE reservas 
@@ -395,7 +404,7 @@ ALTER TABLE tienda_productos
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
-ALTER TABLE eco_productos
+ALTER TABLE servicio_productos
   ADD FOREIGN KEY (cod_producto) REFERENCES productos (cod_producto) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
@@ -436,7 +445,7 @@ ALTER TABLE ordenes_servicio
   ADD FOREIGN KEY (cod_servicio, num_actividad) REFERENCES actividades (cod_servicio, num_actividad) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
-  ADD FOREIGN KEY (cod_producto) REFERENCES eco_productos (cod_producto) 
+  ADD FOREIGN KEY (cod_producto) REFERENCES servicio_productos (cod_producto) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (ced_empleado) REFERENCES empleados (cedula_e) 
@@ -486,6 +495,9 @@ ALTER TABLE ofrecen
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (cod_servicio) REFERENCES servicios (cod_servicio) 
 	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (ced_coordinador) REFERENCES empleados (cedula_e) 
+	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
 ALTER TABLE reciben
@@ -533,3 +545,53 @@ ALTER TABLE mantenimientos_v
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 ---------------------- Índices ----------------------
+CREATE UNIQUE INDEX idx_nombreS_servicios
+    ON servicios (nombre_s);
+
+CREATE INDEX idx_cliente_reservas
+    ON reservas (ced_cliente);
+
+CREATE UNIQUE INDEX idx_nombre_f_franquicia
+    ON franquicias (nombre_f);
+
+CREATE INDEX idx_nombre_e_empleados
+    ON empleados (nombre_e);
+
+CREATE INDEX idx_nombre_c_clientes
+    ON clientes (nombre_c);
+
+CREATE INDEX idx_ced_dueno_vehiculos
+    ON vehiculos (ced_dueno);
+
+CREATE INDEX idx_nom_modelo_modelos
+    ON modelos (nom_modelo);
+
+CREATE INDEX idx_nom_marca_marcas
+    ON marcas (nom_marca);
+
+CREATE INDEX idx_descripcion_tipos_vehiculo
+    ON tipos_vehiculo (descripcion_v);
+
+CREATE INDEX idx_nombre_b_bancos
+    ON bancos (nombre_b);
+
+CREATE INDEX idx_nombre_l_lineas_suministro
+    ON lineas_suministro (nombre_l);
+
+CREATE INDEX idx_nombre_f_fabricante
+    ON fabricantes (nombre_f);
+
+CREATE INDEX idx_razon_social_proveedores
+    ON proveedores (razon_social);
+
+CREATE INDEX idx_nombre_p_producto
+    ON productos (nombre_p);
+
+CREATE INDEX idx_ced_cliente_facturas
+    ON facturas (ced_cliente);
+
+CREATE INDEX idx_descripcion_a_actividades
+    ON actividades (descripcion_a);
+
+
+

@@ -1,0 +1,10 @@
+INSERT INTO eco_mensajes (msj, autor) VALUES ('El uso apropiado de la ciencia no es conquistar la naturaleza, sino vivir en ella', 'Barry Commoner');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('Si la civilización quiere sobrevivir, debe vivir del interés de la naturaleza, no del dinero', 'Ronald Wright');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('La conservación es un estado de armonía entre hombre y Tierra', 'Aldo Leopold');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('El poder para salvar el planeta descansa en el consumidor individual', 'Denis Hayes');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('La suprema realidad de nuestro tiempo es la vulnerabilidad de nuestro planeta', 'John F. Kennedy');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('La Tierra ama nuestros pies, pero teme nuestras manos', 'Joaquín Araujo');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('Mientras más contaminamos la Tierra, menos merecemos vivir en ella', 'Mehmet Murat Ildan');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('El mundo no va a sobrevivir mucho más tiempo como cautivo de la humanidad', 'Daniel Quinn');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('El progreso se mide por la velocidad con la que destruimos las condiciones que sustentan la vida', 'George Monbiot');
+INSERT INTO eco_mensajes (msj, autor) VALUES ('Nunca sabremos el valor del agua hasta que el pozo esté seco', 'Thomas Fuller');
