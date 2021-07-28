@@ -72,7 +72,7 @@ namespace MyM_CRUD.View
             Description = TxtDescription.Text,
             ManufacturerCode = TxtManufacturerCode.Text,
             Type = CbTypeProduct.SelectedIndex == 1 ? ProductType.ForService : ProductType.ForSell,
-            IsEcologic = CheckIsEcologic.IsChecked,
+            IsEcologic = (bool)CheckIsEcologic.IsChecked,
             LineCode = TxtLineCode.Text,
         };
 
@@ -88,6 +88,8 @@ namespace MyM_CRUD.View
                 CbTypeProduct.SelectedIndex = -1;
                 CheckIsEcologic.IsChecked = false;
                 TxtLineCode.Text = "";
+
+                return;
             }
 
             TxtCode.Text = selected.Code;
@@ -99,11 +101,13 @@ namespace MyM_CRUD.View
             {
                 case ProductType.ForSell:
                     {
+                        CbTypeProduct.SelectedIndex = 1;
                         StackEcologic.Visibility = Visibility.Collapsed;
                         break;
                     }
                 case ProductType.ForService:
                     {
+                        CbTypeProduct.SelectedIndex = 0;
                         StackEcologic.Visibility = Visibility.Visible;
 
                         CheckIsEcologic.IsChecked = selected.IsEcologic;
@@ -112,7 +116,18 @@ namespace MyM_CRUD.View
                     }
             }
         }
-
+        private void CbTypeProduct_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch(CbTypeProduct.SelectedIndex)
+            {
+                case 0:
+                    StackEcologic.Visibility = Visibility.Visible;
+                    break;
+                case 1:
+                    StackEcologic.Visibility = Visibility.Collapsed;
+                    break;
+            }
+        }
 
         public void SetCreating()
         {
@@ -125,6 +140,9 @@ namespace MyM_CRUD.View
             TxtManufacturerCode.IsEnabled = true;
             CheckIsEcologic.IsEnabled = true;
             CbTypeProduct.IsEnabled = true;
+            TxtLineCode.IsEnabled = true;
+
+            StackEcologic.Visibility = Visibility.Visible;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -133,13 +151,14 @@ namespace MyM_CRUD.View
         {
             CurrentState = State.Reading;
 
-            TxtCode.IsEnabled = true;
-            TxtName.IsEnabled = true;
-            TxtPrice.IsEnabled = true;
-            TxtDescription.IsEnabled = true;
-            TxtManufacturerCode.IsEnabled = true;
-            CheckIsEcologic.IsEnabled = true;
-            CbTypeProduct.IsEnabled = true;
+            TxtCode.IsEnabled = false;
+            TxtName.IsEnabled = false;
+            TxtPrice.IsEnabled = false;
+            TxtDescription.IsEnabled = false;
+            TxtManufacturerCode.IsEnabled = false;
+            CheckIsEcologic.IsEnabled = false;
+            CbTypeProduct.IsEnabled = false;
+            TxtLineCode.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.Edit;
@@ -155,6 +174,7 @@ namespace MyM_CRUD.View
             TxtManufacturerCode.IsEnabled = true;
             CheckIsEcologic.IsEnabled = true;
             CbTypeProduct.IsEnabled = true;
+            TxtLineCode.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -168,5 +188,6 @@ namespace MyM_CRUD.View
             LoadFields(selected);
             SetUpdating();
         }
+
     }
 }

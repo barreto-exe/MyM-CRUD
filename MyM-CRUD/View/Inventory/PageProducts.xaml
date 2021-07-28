@@ -134,6 +134,7 @@
                     x:Name="CbTypeProduct"
                     Margin="16"
                     md:ComboBoxAssist.ShowSelectedItem="True"
+                    SelectionChanged="CbTypeProduct_SelectionChanged"
                     Style="{StaticResource MaterialDesignOutlinedComboBox}">
                     <ComboBoxItem Content="Servicio" DataContext="1" />
                     <ComboBoxItem Content="Tienda" DataContext="2" />
@@ -149,8 +150,7 @@
                             x:Name="CheckIsEcologic"
                             Width="48"
                             Height="48"
-                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="MaterialDesignSwitchToggleButton with Content and ToggleButtonAssist.OnContent">
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}">
                             <md:PackIcon Kind="Cancel" />
                             <md:ToggleButtonAssist.OnContent>
                                 <md:PackIcon Kind="Recycle" />

@@ -16,7 +16,7 @@ namespace MyM_CRUD.Model
         public string Description { get; set; }
         public string ManufacturerCode { get; set; }
         public ProductType Type { get; set; }
-        public bool? IsEcologic { get; set; }
+        public bool IsEcologic { get; set; }
         public string? LineCode { get; set; }
 
         public static List<Product> SearchProducts(string search)
