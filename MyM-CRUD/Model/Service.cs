@@ -13,8 +13,21 @@ namespace MyM_CRUD.Model
         public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public bool UnderReserve { get; set; }
         public int ReserveTime { get; set; }
+        public bool UnderReserve
+        {
+            get => underReserve;
+            set 
+            { 
+                underReserve = value; 
+                if(!underReserve)
+                {
+                    ReserveTime = 0;
+                }
+            }
+        }
+        private bool underReserve;
+
 
         public static List<Service> SearchServices(string search)
         {
@@ -42,8 +55,8 @@ namespace MyM_CRUD.Model
             Code = dr["cod_servicio"].ToString(),
             Name = dr["nombre_s"].ToString(),
             Description = dr["descripcion_s"].ToString(),
-            UnderReserve = (bool)dr["tiene_reserva"],
             ReserveTime = (int)dr["tiempo_r"],
+            UnderReserve = (bool)dr["tiene_reserva"],
         };
 
         public override void InsertTupleDatabase()

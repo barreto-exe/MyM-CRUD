@@ -144,6 +144,7 @@
                             Width="48"
                             Height="48"
                             Checked="CheckUnderReserve_Checked"
+                            IsChecked="true"
                             Style="{StaticResource MaterialDesignSwitchToggleButton}"
                             Unchecked="CheckUnderReserve_Checked">
                             <md:PackIcon Kind="Cancel" />
