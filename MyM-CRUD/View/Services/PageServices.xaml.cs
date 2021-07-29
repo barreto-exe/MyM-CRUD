@@ -24,6 +24,7 @@ namespace MyM_CRUD.View
     public partial class PageServices : Page, ICrudPage<Service>
     {
         private List<Service> services;
+        private List<ServiceActivity> activities;
         public State CurrentState { get; set; }
 
         public PageServices()
@@ -37,6 +38,7 @@ namespace MyM_CRUD.View
             BtnEditSave.Click += page.BtnEditSave_Click;
             Datagrid.SelectionChanged += Datagrid_SelectionChanged;
             BtnAdd.Click += page.BtnAdd_Click;
+            BtnEditSave.Click += BtnEditSavePlus_Click;
 
             //Inicializar datagrid
             services = Service.SearchServices("");
@@ -50,16 +52,49 @@ namespace MyM_CRUD.View
         }
         public void Datagrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
         {
+            if (Datagrid.SelectedItem == null) return; 
+
             Service service = (Service)Datagrid.SelectedItem;
             LoadFields(service);
             SetReading();
+
+            activities = ServiceActivity.SearchActivities(service.Code);
+            DgActivities.ItemsSource = activities;
         }
         public void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             LoadFields(null);
             SetCreating();
             TxtCode.Focus();
+
+            activities = new List<ServiceActivity>();
+            DgActivities.ItemsSource = activities;
         }
+        public void BtnEditSavePlus_Click(object sender, RoutedEventArgs e)
+        {
+            if(CurrentState == State.Reading)
+            {
+                string code = TxtCode.Text;
+                ServiceActivity.ClearTuplesFromDB(code);
+
+                foreach (var activity in activities)
+                {
+                    activity.ServiceCode = code;
+                    activity.InsertTupleDatabase();
+                }
+            }
+        }
+        private void DgActividades_AddNewRowInitiating(object sender, AddNewRowInitiatingEventArgs e)
+        {
+            var item = e.NewObject as ServiceActivity;
+            item.Number = activities.Count + 1;
+        }
+        private void DgActividades_CurrentCellEndEdit(object sender, CurrentCellEndEditEventArgs e)
+        {
+            //var item = e. as ServiceActivity;
+            //var currentActivies = ServiceActivity.SearchActivities()
+        }
+
 
         public Service GetObjectsFromFields()
         {
@@ -74,7 +109,6 @@ namespace MyM_CRUD.View
                 UnderReserve = (bool)CheckUnderReserve.IsChecked,
             };
         }
-            
             
 
         public void LoadFields(Service selected)
@@ -98,6 +132,8 @@ namespace MyM_CRUD.View
         }
         private void CheckUnderReserve_Checked(object sender, RoutedEventArgs e)
         {
+            if (TxtReserveTime == null) return;
+
             if(CheckUnderReserve.IsChecked == true)
             {
                 TxtReserveTime.Visibility = Visibility.Visible;
@@ -109,6 +145,7 @@ namespace MyM_CRUD.View
             }
         }
 
+
         public void SetCreating()
         {
             CurrentState = State.Creating;
@@ -118,6 +155,7 @@ namespace MyM_CRUD.View
             TxtDescription.IsEnabled = true;
             CheckUnderReserve.IsEnabled = true;
             TxtReserveTime.IsEnabled = true;
+            DgActivities.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -131,6 +169,7 @@ namespace MyM_CRUD.View
             TxtDescription.IsEnabled = false;
             CheckUnderReserve.IsEnabled = false;
             TxtReserveTime.IsEnabled = false;
+            DgActivities.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.Edit;
@@ -144,6 +183,7 @@ namespace MyM_CRUD.View
             TxtDescription.IsEnabled = true;
             CheckUnderReserve.IsEnabled = true;
             TxtReserveTime.IsEnabled = true;
+            DgActivities.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -156,6 +196,22 @@ namespace MyM_CRUD.View
 
             LoadFields(selected);
             SetUpdating();
+        }
+
+
+        private void DgActivities_RowValidating(object sender, RowValidatingEventArgs e)
+        {
+            if (DgActivities.IsAddNewIndex(e.RowIndex))
+            {
+                var data = e.RowData as ServiceActivity;
+                int mustBe = activities.Count + 1;
+
+                if (data.Number != mustBe)
+                {
+                    e.IsValid = false;
+                    e.ErrorMessages.Add("Número", "Número debe ser: " + mustBe);
+                }
+            }
         }
     }
 }

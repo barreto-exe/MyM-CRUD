@@ -51,6 +51,7 @@ namespace MyM_CRUD.View
         }
         public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
+            if (Datagrid.SelectedItem == null) return;
             Product product = (Product)Datagrid.SelectedItem;
             LoadFields(product);
             SetReading();

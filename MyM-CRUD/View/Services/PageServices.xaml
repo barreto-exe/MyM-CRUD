@@ -33,7 +33,7 @@
 
                 <TextBox
                     x:Name="TxtSearch"
-                    Margin="16"
+                    Margin="16,24,16,16"
                     md:HintAssist.Hint="Buscar"
                     md:TextFieldAssist.HasClearButton="True"
                     md:TextFieldAssist.HasLeadingIcon="True"
@@ -59,6 +59,7 @@
                     AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
                     ColumnSizer="Star"
+                    CurrentCellBorderBrush="Transparent"
                     IsReadOnly="True"
                     Language="es-ES"
                     RowHeight="28"
@@ -101,7 +102,7 @@
 
                 <TextBox
                     x:Name="TxtCode"
-                    Margin="16"
+                    Margin="16,24,16,16"
                     md:HintAssist.Hint="Código"
                     md:TextFieldAssist.HasLeadingIcon="True"
                     md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
@@ -134,7 +135,7 @@
                     TextWrapping="Wrap" />
 
                 <StackPanel Name="StackEcologic" Orientation="Vertical">
-                    <StackPanel Margin="16,16,16,0" Orientation="Horizontal">
+                    <StackPanel Margin="36,0" Orientation="Horizontal">
                         <TextBlock
                             VerticalAlignment="Center"
                             Style="{StaticResource MaterialDesignBody1TextBlock}"
@@ -156,7 +157,7 @@
 
                     <TextBox
                         x:Name="TxtReserveTime"
-                        Margin="16"
+                        Margin="16,0,16,16"
                         md:HintAssist.Hint="Tiempo de Reserva"
                         md:TextFieldAssist.HasLeadingIcon="True"
                         md:TextFieldAssist.LeadingIcon="Clock"
@@ -165,6 +166,76 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                 </StackPanel>
 
+                <!--  Divider  -->
+                <Rectangle
+                    Height="1"
+                    Margin="16"
+                    HorizontalAlignment="Stretch"
+                    Fill="LightGray" />
+
+                <TextBlock
+                    Margin="36,0"
+                    VerticalAlignment="Center"
+                    Style="{StaticResource MaterialDesignBody1TextBlock}"
+                    Text="Actividades del servicio: " />
+                <sf:SfDataGrid
+                    x:Name="DgActivities"
+                    Margin="16,8,16,16"
+                    AddNewRowInitiating="DgActividades_AddNewRowInitiating"
+                    AddNewRowPosition="Bottom"
+                    AddNewRowText="Click para añadir nueva actividad."
+                    AllowDraggingColumns="True"
+                    AllowResizingColumns="True"
+                    AllowResizingHiddenColumns="True"
+                    AllowRowHoverHighlighting="True"
+                    AutoGenerateColumns="False"
+                    ColumnSizer="Star"
+                    CurrentCellBorderBrush="Green"
+                    CurrentCellBorderThickness="0.5"
+                    Language="es-ES"
+                    RowHeight="28"
+                    RowValidating="DgActivities_RowValidating"
+                    SelectionMode="Single">
+                    <sf:SfDataGrid.TableSummaryRows>
+                        <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                            <sf:GridTableSummaryRow.SummaryColumns>
+                                <sf:GridSummaryColumn
+                                    Name="Total"
+                                    Format="'Total: {Count:d}'"
+                                    MappingName="Number"
+                                    SummaryType="CountAggregate" />
+                                <sf:GridSummaryColumn
+                                    Name="Total2"
+                                    Format="'Suma: ${Sum}'"
+                                    MappingName="Cost"
+                                    SummaryType="DoubleAggregate" />
+                            </sf:GridTableSummaryRow.SummaryColumns>
+                        </sf:GridTableSummaryRow>
+                    </sf:SfDataGrid.TableSummaryRows>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn
+                            AllowEditing="False"
+                            AllowFiltering="True"
+                            HeaderText="Número"
+                            MappingName="Number" />
+                        <sf:GridTextColumn
+                            AllowEditing="True"
+                            AllowFiltering="True"
+                            HeaderText="Descripción"
+                            MappingName="Description" />
+                        <sf:GridCurrencyColumn
+                            AllowEditing="True"
+                            AllowFiltering="True"
+                            AllowGrouping="True"
+                            CurrencyDecimalDigits="2"
+                            CurrencyDecimalSeparator=","
+                            CurrencyGroupSeparator="."
+                            CurrencyGroupSizes="3"
+                            CurrencySymbol="$"
+                            HeaderText="Costo"
+                            MappingName="Cost" />
+                    </sf:SfDataGrid.Columns>
+                </sf:SfDataGrid>
             </StackPanel>
         </ScrollViewer>
 

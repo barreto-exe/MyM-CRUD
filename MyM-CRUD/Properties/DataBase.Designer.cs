@@ -37,7 +37,7 @@ namespace MyM_CRUD.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("postgres")]
+        [global::System.Configuration.DefaultSettingValueAttribute("mym")]
         public string BaseDatosPgSql {
             get {
                 return ((string)(this["BaseDatosPgSql"]));

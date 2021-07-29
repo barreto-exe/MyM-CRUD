@@ -52,6 +52,7 @@ namespace MyM_CRUD.View
         }
         public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
+            if (Datagrid.SelectedItem == null) return;
             Vehicle vehicle = (Vehicle)Datagrid.SelectedItem;
             LoadFields(vehicle);
             SetReading();

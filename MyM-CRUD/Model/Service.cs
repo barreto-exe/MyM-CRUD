@@ -28,7 +28,20 @@ namespace MyM_CRUD.Model
         }
         private bool underReserve;
 
-
+        public static Service GetService(string code)
+        {
+            string query =
+                "SELECT * " +
+                "FROM servicios " +
+                "WHERE cod_servicio = @cod_servicio";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("cod_servicio", code);
+            NpgsqlDataReader dr = op.EjecutarReader();
+            dr.Read();
+            Service s = BuildServiceFromDr(dr);
+            dr.Close();
+            return s;
+        }
         public static List<Service> SearchServices(string search)
         {
             //Traer datos de la BD

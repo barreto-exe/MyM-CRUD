@@ -6,7 +6,7 @@
       <Value Profile="(Default)">localhost</Value>
     </Setting>
     <Setting Name="BaseDatosPgSql" Type="System.String" Scope="User">
-      <Value Profile="(Default)">postgres</Value>
+      <Value Profile="(Default)">mym</Value>
     </Setting>
     <Setting Name="UsuarioPgSql" Type="System.String" Scope="User">
       <Value Profile="(Default)">postgres</Value>
