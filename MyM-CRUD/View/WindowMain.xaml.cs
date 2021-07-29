@@ -45,7 +45,7 @@ namespace MyM_CRUD.View
         private PageEstadisticas pageE;
         private PageNotebook pageN;
         private PageInventory pageI;
-        private PageServices pageS;
+        private PageServicesTab pageS;
 
         public WindowMain()
         {
@@ -54,7 +54,7 @@ namespace MyM_CRUD.View
             pageE = new PageEstadisticas();
             pageN = new PageNotebook();
             pageI = new PageInventory();
-            pageS =  new PageServices();
+            pageS = new PageServicesTab();
 
             DrawerList.SelectedIndex = 0;
             HamburguerButton.IsChecked = true;

@@ -24,6 +24,11 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
 
             <!--  Search and rows  -->
             <Grid Grid.Column="0">
@@ -97,80 +102,88 @@
 
         <!--  Rigth panel  -->
         <ScrollViewer Grid.Column="1">
-            <StackPanel MaxWidth="512">
+            <Grid>
+                <!--  Divider  -->
+                <Rectangle
+                    Height="1"
+                    VerticalAlignment="Top"
+                    Fill="LightGray" />
+                <StackPanel MaxWidth="512">
 
-                <TextBox
-                    x:Name="TxtId"
-                    Margin="16"
-                    md:HintAssist.Hint="Placa"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="IdCard"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <TextBox
+                        x:Name="TxtId"
+                        Margin="16"
+                        md:HintAssist.Hint="Placa"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="IdCard"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtOilType"
-                    Margin="16"
-                    md:HintAssist.Hint="Tipo Aceite"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Oil"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-
-                <DatePicker
-                    x:Name="TxtDateAcquired"
-                    Margin="16"
-                    md:HintAssist.Hint="Fecha de Adquisición"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="DateRange"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
-
-                <TextBox
-                    x:Name="TxtMechanicName"
-                    Margin="16"
-                    md:HintAssist.Hint="Nombre del Mecánico"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Worker"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <TextBox
-                    x:Name="TxtMechanicPhone"
-                    Margin="16"
-                    md:HintAssist.Hint="Teléfono del Mecánico"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Phone"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <TextBox
+                        x:Name="TxtOilType"
+                        Margin="16"
+                        md:HintAssist.Hint="Tipo Aceite"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Oil"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
 
-                <TextBox
-                    x:Name="TxtOwnerId"
-                    Margin="16"
-                    md:HintAssist.Hint="Cédula del Dueño"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="IdCardOutline"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <DatePicker
+                        x:Name="TxtDateAcquired"
+                        Margin="16"
+                        md:HintAssist.Hint="Fecha de Adquisición"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="DateRange"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
 
-                <TextBox
-                    x:Name="TxtModelName"
-                    Margin="16"
-                    md:HintAssist.Hint="Modelo"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Car2Plus"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-            </StackPanel>
+                    <TextBox
+                        x:Name="TxtMechanicName"
+                        Margin="16"
+                        md:HintAssist.Hint="Nombre del Mecánico"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Worker"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtMechanicPhone"
+                        Margin="16"
+                        md:HintAssist.Hint="Teléfono del Mecánico"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Phone"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+
+                    <TextBox
+                        x:Name="TxtOwnerId"
+                        Margin="16"
+                        md:HintAssist.Hint="Cédula del Dueño"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="IdCardOutline"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtModelName"
+                        Margin="16"
+                        md:HintAssist.Hint="Modelo"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Car2Plus"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+            </Grid>
+
         </ScrollViewer>
 
         <!--  Floatingbutton panel  -->

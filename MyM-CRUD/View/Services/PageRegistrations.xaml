@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MyM_CRUD.View.PageServices"
+    x:Class="MyM_CRUD.View.PageRegistrations"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:sf="http://schemas.syncfusion.com/wpf"
-    Title="PageServices"
+    Title="PageRegistrations"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -157,10 +157,8 @@
                                 x:Name="CheckUnderReserve"
                                 Width="48"
                                 Height="48"
-                                Checked="CheckUnderReserve_Checked"
                                 IsChecked="true"
-                                Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                                Unchecked="CheckUnderReserve_Checked">
+                                Style="{StaticResource MaterialDesignSwitchToggleButton}">
                                 <md:PackIcon Kind="Cancel" />
                                 <md:ToggleButtonAssist.OnContent>
                                     <md:PackIcon Kind="Check" />
@@ -194,7 +192,6 @@
                     <sf:SfDataGrid
                         x:Name="DgActivities"
                         Margin="16,8,16,16"
-                        AddNewRowInitiating="DgActividades_AddNewRowInitiating"
                         AddNewRowPosition="Bottom"
                         AddNewRowText="Click para añadir nueva actividad."
                         AllowDraggingColumns="True"
@@ -207,7 +204,6 @@
                         CurrentCellBorderThickness="0.5"
                         Language="es-ES"
                         RowHeight="28"
-                        RowValidating="DgActivities_RowValidating"
                         SelectionMode="Single">
                         <sf:SfDataGrid.TableSummaryRows>
                             <sf:GridTableSummaryRow ShowSummaryInRow="False">

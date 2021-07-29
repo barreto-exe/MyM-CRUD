@@ -25,6 +25,12 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
+
             <!--  Search and rows  -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -46,16 +52,16 @@
                     x:Name="Datagrid"
                     Grid.Row="1"
                     AllowDraggingColumns="True"
-                    CurrentCellBorderBrush="Transparent"
                     AllowResizingColumns="True"
-                    SelectionMode="Single"
                     AllowResizingHiddenColumns="True"
                     AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
                     ColumnSizer="Star"
+                    CurrentCellBorderBrush="Transparent"
                     IsReadOnly="True"
                     Language="es-ES"
-                    RowHeight="28">
+                    RowHeight="28"
+                    SelectionMode="Single">
                     <sf:SfDataGrid.TableSummaryRows>
                         <sf:GridTableSummaryRow ShowSummaryInRow="False">
                             <sf:GridTableSummaryRow.SummaryColumns>
@@ -95,58 +101,68 @@
 
         <!--  Rigth panel  -->
         <ScrollViewer Grid.Column="1">
-            <StackPanel MaxWidth="512">
+            <Grid>
+                <!--  Divider  -->
+                <Rectangle
+                    Height="1"
+                    VerticalAlignment="Top"
+                    Fill="LightGray" />
 
-                <TextBox
-                    x:Name="TxtId"
-                    Margin="16"
-                    md:HintAssist.Hint="Cédula"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="IdCard"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                <StackPanel MaxWidth="512">
+                    <TextBox
+                        x:Name="TxtId"
+                        Margin="16"
+                        md:HintAssist.Hint="Cédula"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="IdCard"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtName"
-                    Margin="16"
-                    md:HintAssist.Hint="Nombre"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Tag"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <TextBox
+                        x:Name="TxtName"
+                        Margin="16"
+                        md:HintAssist.Hint="Nombre"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Tag"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtPhone"
-                    Margin="16"
-                    md:HintAssist.Hint="Teléfono"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Phone"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <TextBox
+                        x:Name="TxtPhone"
+                        Margin="16"
+                        md:HintAssist.Hint="Teléfono"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Phone"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtPhoneAlt"
-                    Margin="16"
-                    md:HintAssist.Hint="Teléfono Alternativo"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="PhoneClassic"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <TextBox
+                        x:Name="TxtPhoneAlt"
+                        Margin="16"
+                        md:HintAssist.Hint="Teléfono Alternativo"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="PhoneClassic"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtEmail"
-                    Margin="16"
-                    md:HintAssist.Hint="Correo electrónico"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Email"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-            </StackPanel>
+                    <TextBox
+                        x:Name="TxtEmail"
+                        Margin="16"
+                        md:HintAssist.Hint="Correo electrónico"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Email"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                </StackPanel>
+
+
+            </Grid>
+
         </ScrollViewer>
 
         <!--  Floatingbutton panel  -->
