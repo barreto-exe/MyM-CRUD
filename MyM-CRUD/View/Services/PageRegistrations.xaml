@@ -10,6 +10,7 @@
     Title="PageRegistrations"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    MouseEnter="Page_MouseEnter"
     mc:Ignorable="d">
     <Grid Background="White">
         <Grid.ColumnDefinitions>
@@ -31,30 +32,6 @@
 
             <!--  Search and rows  -->
             <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-
-                <TextBox
-                    x:Name="TxtSearch"
-                    Margin="16"
-                    md:HintAssist.Hint="Buscar"
-                    md:TextFieldAssist.HasClearButton="True"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Search"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <ListBox
-                    Margin="16,6"
-                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBox}"
-                    Visibility="Collapsed">
-                    <ListBoxItem Content="Para venta" />
-                    <ListBoxItem Content="Para servicios" IsSelected="True" />
-                </ListBox>
-
                 <sf:SfDataGrid
                     x:Name="Datagrid"
                     Grid.Row="1"
@@ -83,12 +60,16 @@
                     <sf:SfDataGrid.Columns>
                         <sf:GridTextColumn
                             AllowFiltering="True"
-                            HeaderText="Código"
-                            MappingName="Code" />
+                            HeaderText="Número"
+                            MappingName="Number" />
                         <sf:GridTextColumn
                             AllowFiltering="True"
-                            HeaderText="Nombre"
-                            MappingName="Name" />
+                            HeaderText="Vehículo"
+                            MappingName="VehicleId" />
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Fecha Entrada"
+                            MappingName="In" />
                     </sf:SfDataGrid.Columns>
                 </sf:SfDataGrid>
             </Grid>
@@ -102,153 +83,123 @@
         </Grid>
 
         <!--  Rigth panel  -->
-        <ScrollViewer Grid.Column="1">
-            <Grid>
-                <!--  Divider  -->
-                <Rectangle
-                    Height="1"
-                    VerticalAlignment="Top"
-                    Fill="LightGray" />
+        <md:DrawerHost
+            x:Name="DrawerHost"
+            Grid.Column="1"
+            Background="LightGray">
+            <md:DrawerHost.BottomDrawerContent>
+                <StackPanel
+                    Margin="16"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
 
-                <StackPanel MaxWidth="512">
+                    <md:PackIcon
+                        Width="24"
+                        Height="24"
+                        Margin="8"
+                        VerticalAlignment="Center"
+                        Kind="Alert" />
 
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignBody1TextBlock}"
+                        Text="Por ahora no están disponibles los servicios con reserva." />
+                </StackPanel>
+            </md:DrawerHost.BottomDrawerContent>
+            <ScrollViewer>
+                <Grid>
+                    <!--  Divider  -->
+                    <Rectangle
+                        Height="1"
+                        VerticalAlignment="Top"
+                        Fill="LightGray" />
 
-                    <TextBox
-                        x:Name="TxtCode"
-                        Margin="16"
-                        md:HintAssist.Hint="Código"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
-                        md:TextFieldAssist.LeadingIcon="BarcodeScan"
-                        md:TextFieldAssist.TrailingIcon="Recycle"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <StackPanel MaxWidth="512">
+                        <TextBox
+                            x:Name="TxtNumber"
+                            Margin="16"
+                            md:HintAssist.Hint="Número"
+                            md:TextFieldAssist.HasLeadingIcon="True"
+                            md:TextFieldAssist.LeadingIcon="BarcodeScan"
+                            Cursor="IBeam"
+                            FontSize="16"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                    <TextBox
-                        x:Name="TxtName"
-                        Margin="16"
-                        md:HintAssist.Hint="Nombre"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="Tag"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <DatePicker
+                                x:Name="TxtDateIn"
+                                Margin="0,0,8,0"
+                                md:HintAssist.Hint="Fecha de Entrada"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="DateRange"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            <md:TimePicker
+                                x:Name="TxtHourIn"
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                md:HintAssist.Hint="Hora de Entrada"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="Clock"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTimePicker}" />
+                        </Grid>
 
-                    <TextBox
-                        x:Name="TxtDescription"
-                        Height="100"
-                        Margin="16"
-                        md:HintAssist.Hint="Descripción"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="TagAdd"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                        TextWrapping="Wrap" />
-
-                    <StackPanel Name="StackEcologic" Orientation="Vertical">
-                        <StackPanel Margin="36,0" Orientation="Horizontal">
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                Style="{StaticResource MaterialDesignBody1TextBlock}"
-                                Text="Por reserva: " />
-                            <ToggleButton
-                                x:Name="CheckUnderReserve"
-                                Width="48"
-                                Height="48"
-                                IsChecked="true"
-                                Style="{StaticResource MaterialDesignSwitchToggleButton}">
-                                <md:PackIcon Kind="Cancel" />
-                                <md:ToggleButtonAssist.OnContent>
-                                    <md:PackIcon Kind="Check" />
-                                </md:ToggleButtonAssist.OnContent>
-                            </ToggleButton>
-                        </StackPanel>
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <DatePicker
+                                x:Name="TxtDateOut"
+                                Margin="0,0,8,0"
+                                md:HintAssist.Hint="Fecha de Salida"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="DateRange"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" />
+                            <md:TimePicker
+                                x:Name="TxtHourOut"
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                md:HintAssist.Hint="Hora de Salida"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="Clock"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTimePicker}" />
+                        </Grid>
 
                         <TextBox
-                            x:Name="TxtReserveTime"
-                            Margin="16,0,16,16"
-                            md:HintAssist.Hint="Tiempo de Reserva"
+                            x:Name="TxtAuthPersonId"
+                            Margin="16"
+                            md:HintAssist.Hint="Cédula del Autorizado"
                             md:TextFieldAssist.HasLeadingIcon="True"
-                            md:TextFieldAssist.LeadingIcon="Clock"
+                            md:TextFieldAssist.LeadingIcon="Person"
+                            Cursor="IBeam"
+                            FontSize="16"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                        <TextBox
+                            x:Name="TxtVehicleId"
+                            Margin="16"
+                            md:HintAssist.Hint="Placa del Vehículo"
+                            md:TextFieldAssist.HasLeadingIcon="True"
+                            md:TextFieldAssist.LeadingIcon="IdCard"
                             Cursor="IBeam"
                             FontSize="16"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                     </StackPanel>
-
-                    <!--  Divider  -->
-                    <Rectangle
-                        Height="1"
-                        Margin="16"
-                        HorizontalAlignment="Stretch"
-                        Fill="LightGray" />
-
-                    <TextBlock
-                        Margin="36,0"
-                        VerticalAlignment="Center"
-                        Style="{StaticResource MaterialDesignBody1TextBlock}"
-                        Text="Actividades del servicio: " />
-                    <sf:SfDataGrid
-                        x:Name="DgActivities"
-                        Margin="16,8,16,16"
-                        AddNewRowPosition="Bottom"
-                        AddNewRowText="Click para añadir nueva actividad."
-                        AllowDraggingColumns="True"
-                        AllowResizingColumns="True"
-                        AllowResizingHiddenColumns="True"
-                        AllowRowHoverHighlighting="True"
-                        AutoGenerateColumns="False"
-                        ColumnSizer="Star"
-                        CurrentCellBorderBrush="Green"
-                        CurrentCellBorderThickness="0.5"
-                        Language="es-ES"
-                        RowHeight="28"
-                        SelectionMode="Single">
-                        <sf:SfDataGrid.TableSummaryRows>
-                            <sf:GridTableSummaryRow ShowSummaryInRow="False">
-                                <sf:GridTableSummaryRow.SummaryColumns>
-                                    <sf:GridSummaryColumn
-                                        Name="Total"
-                                        Format="'Total: {Count:d}'"
-                                        MappingName="Number"
-                                        SummaryType="CountAggregate" />
-                                    <sf:GridSummaryColumn
-                                        Name="Total2"
-                                        Format="'Suma: ${Sum}'"
-                                        MappingName="Cost"
-                                        SummaryType="DoubleAggregate" />
-                                </sf:GridTableSummaryRow.SummaryColumns>
-                            </sf:GridTableSummaryRow>
-                        </sf:SfDataGrid.TableSummaryRows>
-                        <sf:SfDataGrid.Columns>
-                            <sf:GridTextColumn
-                                AllowEditing="False"
-                                AllowFiltering="True"
-                                HeaderText="Número"
-                                MappingName="Number" />
-                            <sf:GridTextColumn
-                                AllowEditing="True"
-                                AllowFiltering="True"
-                                HeaderText="Descripción"
-                                MappingName="Description" />
-                            <sf:GridCurrencyColumn
-                                AllowEditing="True"
-                                AllowFiltering="True"
-                                AllowGrouping="True"
-                                CurrencyDecimalDigits="2"
-                                CurrencyDecimalSeparator=","
-                                CurrencyGroupSeparator="."
-                                CurrencyGroupSizes="3"
-                                CurrencySymbol="$"
-                                HeaderText="Costo"
-                                MappingName="Cost" />
-                        </sf:SfDataGrid.Columns>
-                    </sf:SfDataGrid>
-                </StackPanel>
-            </Grid>
-
-        </ScrollViewer>
+                </Grid>
+            </ScrollViewer>
+        </md:DrawerHost>
 
         <!--  Floatingbutton panel  -->
         <StackPanel

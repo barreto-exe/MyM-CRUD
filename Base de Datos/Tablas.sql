@@ -17,6 +17,8 @@ CREATE DOMAIN dom_telefono AS VARCHAR(12);   --- dom para los teléfonos ---
 
 CREATE DOMAIN dom_fecha AS DATE;             --- dom para todas las fechas ---
 
+CREATE DOMAIN dom_fechatiempo AS TIMESTAMP(0);           
+
 CREATE DOMAIN dom_monto AS REAL;             --- dom para todos los precios / sueldos / etc ---
 
 CREATE DOMAIN dom_email AS VARCHAR(50);             --- dom para todos los emails ---
@@ -45,10 +47,9 @@ CREATE TABLE reservas(
 
 CREATE TABLE registros(
 	num_ficha      		dom_numero  	NOT NULL,
- 	fecha_ent  			dom_fecha	  	NOT NULL,
-	fecha_sal_est		dom_fecha		NOT NULL,
-	fecha_sal_real		dom_fecha		,
-	nom_autorizado		dom_nombre		NOT NULL,
+ 	fecha_ent  			dom_fechatiempo	  	NOT NULL,
+	fecha_sal_est		dom_fechatiempo		NOT NULL,
+	fecha_sal_real		dom_fechatiempo		,
 	ced_autorizado		dom_cedula		NOT NULL,		
 	placa_vehiculo		dom_codigo		NOT NULL,
 	rif_franquicia		dom_rif			NOT NULL,
@@ -350,6 +351,9 @@ ALTER TABLE registros
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (rif_franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (ced_autorizado) REFERENCES clientes (cedula_c) 
 	ON DELETE RESTRICT 
 	ON UPDATE CASCADE,
   ADD FOREIGN KEY (num_reserva) REFERENCES reservas (num_reserva) 
