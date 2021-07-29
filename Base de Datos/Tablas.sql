@@ -47,7 +47,7 @@ CREATE TABLE registros(
 	num_ficha      		dom_numero  	NOT NULL,
  	fecha_ent  			dom_fecha	  	NOT NULL,
 	fecha_sal_est		dom_fecha		NOT NULL,
-	fecha_sal_real		dom_fecha		NOT NULL,
+	fecha_sal_real		dom_fecha		,
 	nom_autorizado		dom_nombre		NOT NULL,
 	ced_autorizado		dom_cedula		NOT NULL,		
 	placa_vehiculo		dom_codigo		NOT NULL,
