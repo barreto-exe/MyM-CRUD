@@ -51,6 +51,7 @@ namespace MyM_CRUD.Model
 
             return v.ToList();
         }
+        public static List<Vehicle> GetAllFromDB() => SearchVehicles("");
 
         public override void InsertTupleDatabase()
         {

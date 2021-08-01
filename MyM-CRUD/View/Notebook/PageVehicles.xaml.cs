@@ -159,5 +159,27 @@ namespace MyM_CRUD.View
             LoadFields(selected);
             SetUpdating();
         }
+
+        private void BtnFindOwner_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Client.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtOwnerId.Text = ((Client)objSel.Selected).Id;
+            }
+        }
+
+        private void BtnFindModel_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(VehicleModel.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtModelName.Text = ((VehicleModel)objSel.Selected).Name;
+            }
+        }
     }
 }
