@@ -42,16 +42,16 @@ namespace MyM_CRUD.View
             set 
             { 
                 productQuantity = value; 
-                TxtProductPrice.Text = $"{ProductQuantity} * ${ProductPrice}";
+                TxtProductPrice.Text = $"{productQuantity} * ${productPrice}";
             }
         }
         public decimal ProductPrice
         {
             get { return ProductPrice; }
             set 
-            { 
-                ProductPrice = value; 
-                TxtProductPrice.Text = $"{ProductQuantity} * ${ProductPrice}";
+            {
+                productPrice = value; 
+                TxtProductPrice.Text = $"{productQuantity} * ${productPrice}";
             }
         }
 

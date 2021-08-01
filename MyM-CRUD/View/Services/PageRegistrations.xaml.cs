@@ -271,5 +271,26 @@ namespace MyM_CRUD.View
             registrations = Registration.GetRegistrationsFromBD();
             Datagrid.ItemsSource = registrations;
         }
+
+        private void BtnFindPerson_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Client.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtAuthPersonId.Text = ((Client)objSel.Selected).Id;
+            }
+        }
+        private void BtnFindVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Vehicle.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtVehicleId.Text = ((Vehicle)objSel.Selected).Id;
+            }
+        }
     }
 }
