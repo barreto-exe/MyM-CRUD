@@ -26,7 +26,9 @@ namespace MyM_CRUD.View
         private decimal manPowerCost;
         private int productQuantity;
         private decimal productPrice;
-        
+        private string employeeName;
+        private string productName;
+
         public decimal ManPowerCost
         {
             get { return manPowerCost; }
@@ -77,6 +79,8 @@ namespace MyM_CRUD.View
             Order.ManPowerCost = manPowerCost;
             Order.ProductQuantity = productQuantity;
             Order.ProductPrice = ProductPrice;
+            Order.EmployeeName = employeeName;
+            Order.ProductName = productName;
         }
 
         private void BtnAccept_Click(object sender, RoutedEventArgs e)
@@ -97,7 +101,9 @@ namespace MyM_CRUD.View
 
             if (!objSel.Canceled)
             {
-                TxtEmployeeId.Text = ((Employee)objSel.Selected).Id;
+                var employee = (Employee)objSel.Selected;
+                TxtEmployeeId.Text = employee.Id;
+                employeeName = employee.Name;
             }
         }
         private void BtnFindProduct_Click(object sender, RoutedEventArgs e)
@@ -111,6 +117,7 @@ namespace MyM_CRUD.View
 
                 TxtProductCode.Text = product.Code;
                 ProductPrice = product.Price;
+                productName = product.Name;
 
                 //Preguntar por cantidad
                 TxtProductNameDialog.Text = product.Name;

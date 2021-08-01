@@ -10,8 +10,6 @@ namespace MyM_CRUD.Model
     {
         public ServiceActivity AsociatedActivity { get; set; }
         public string RegistrationNumber { get; set; }
-        public string ServiceCode { get => AsociatedActivity.ServiceCode; }
-        public int ActivityNumber { get => AsociatedActivity.Number; }
         public string OrderNumber
         {
             get => $"ORD{RegistrationNumber}{AsociatedActivity.ServiceCode}{AsociatedActivity.Number}";
@@ -21,6 +19,13 @@ namespace MyM_CRUD.Model
         public decimal ManPowerCost { get; set; }
         public int ProductQuantity { get; set; }
         public decimal ProductPrice { get; set; }
+
+        //Atributos para mostrar en facturas
+        public string ServiceName { get => AsociatedActivity.Servicio; }
+        public string ActivityName { get => AsociatedActivity.Description; }
+        public string EmployeeName { get; set; }
+        public string ProductName { get; set; }
+        public decimal Subtotal { get => ManPowerCost + ProductQuantity * ProductPrice; }
 
         public ServiceOrder(ServiceActivity asociatedActivity)
         {
@@ -40,10 +45,17 @@ namespace MyM_CRUD.Model
             op.PasarParametros("num_actividad", AsociatedActivity.Number);
             op.PasarParametros("num_orden_s", OrderNumber);
             op.PasarParametros("ced_empleado", EmployeeId);
-            op.PasarParametros("cod_producto", ProductId);
             op.PasarParametros("precio_mano_obra", ManPowerCost);
             op.PasarParametros("cant_producto", ProductQuantity);
             op.PasarParametros("precio_prod", ProductPrice);
+            if(ProductId == "")
+            {
+                op.PasarParametros("cod_producto", DBNull.Value);
+            }
+            else
+            {
+                op.PasarParametros("cod_producto", ProductId);
+            }
             op.EjecutarComando();
         }
         public override void UpdateTupleDataBase()

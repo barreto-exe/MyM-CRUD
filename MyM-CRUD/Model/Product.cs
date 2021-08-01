@@ -19,7 +19,6 @@ namespace MyM_CRUD.Model
         public bool IsEcologic { get; set; }
         public string? LineCode { get; set; }
 
-        public static List<Product> GetAllFromDB() => SearchProducts("");
         public static List<Product> SearchProducts(string search)
         {
             //Traer datos de la BD
@@ -31,6 +30,26 @@ namespace MyM_CRUD.Model
                 "OR p.cod_producto LIKE @Search";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("Search", $"%{search}%");
+
+            //Colocar resultados en memoria
+            DataTable result = QueryFromDataBase(op);
+
+            //Pasar datos a una lista
+            IEnumerable<Product> products =
+                from DataRow dr in result.Rows
+                select BuildProductFromDr(dr);
+
+            return products.ToList();
+        }
+        public static List<Product> GetAllFromDB()
+        {
+            //Traer datos de la BD
+            string query =
+                "SELECT p.*, s.es_ecologico, s.cod_linea " +
+                "FROM productos p " +
+                "LEFT JOIN servicio_productos s ON (p.cod_producto = s.cod_producto) " +
+                "WHERE tipo_p = 'S'";
+            PostgreOp op = new PostgreOp(query);
 
             //Colocar resultados en memoria
             DataTable result = QueryFromDataBase(op);

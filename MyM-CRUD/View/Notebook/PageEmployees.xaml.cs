@@ -34,7 +34,7 @@ namespace MyM_CRUD.View
             ICrudPage<Employee> page = this;
             TxtSearch.TextChanged += page.TxtSearch_TextChanged;
             BtnEditSave.Click +=  page.BtnEditSave_Click;
-            Datagrid.SelectionChanged += page.Datagrid_SelectionChanged;
+            Datagrid.SelectionChanged += page.Datagrid_SelectionChangedAsync;
             BtnAdd.Click += page.BtnAdd_Click;
 
             //Inicializar datagrid
@@ -47,7 +47,7 @@ namespace MyM_CRUD.View
             employees = Employee.SearchEmployees(TxtSearch.Text);
             Datagrid.ItemsSource = employees;
         }
-        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
+        public void Datagrid_SelectionChangedAsync(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e)
         {
             if (Datagrid.SelectedItem == null) return;
             Employee selectedE = (Employee)Datagrid.SelectedItem;

@@ -89,16 +89,6 @@ namespace MyM_CRUD.Model
 
             return s;
         }
-        public static void ClearTuplesFromDB(string serviceCode)
-        {
-            string query =
-                "DELETE FROM actividades " +
-                "WHERE cod_servicio = @cod_servicio";
-            PostgreOp op = new PostgreOp(query);
-            op.PasarParametros("cod_servicio", serviceCode);
-            op.EjecutarComando();
-        }
-
 
         public override void InsertTupleDatabase()
         {
@@ -122,10 +112,10 @@ namespace MyM_CRUD.Model
                 "WHERE cod_servicio = @cod_servicio " +
                 "AND num_actividad = @num_actividad";
             PostgreOp op = new PostgreOp(query);
-            op.PasarParametros("cod_servicio", ServiceCode);
-            op.PasarParametros("num_actividad", Number);
-            op.PasarParametros("monto", Cost);
             op.PasarParametros("descripcion_a", Description);
+            op.PasarParametros("monto", Cost);
+            op.PasarParametros("cod_servicio", ServiceCode);
+            op.PasarParametros("num_actividad", Number.ToString());
             op.EjecutarComando();
         }
 

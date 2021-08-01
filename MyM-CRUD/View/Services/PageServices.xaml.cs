@@ -4,6 +4,7 @@ using Syncfusion.UI.Xaml.Grid;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,7 +26,18 @@ namespace MyM_CRUD.View
     {
         private List<Service> services;
         private List<ServiceActivity> activities;
-        public State CurrentState { get; set; }
+
+        private State state;
+        private State pastState;
+        public State CurrentState
+        {
+            get => state;
+            set 
+            {
+                pastState = state;
+                state = value; 
+            }
+        }
 
         public PageServices()
         {
@@ -36,7 +48,7 @@ namespace MyM_CRUD.View
             ICrudPage<Service> page = this;
             TxtSearch.TextChanged += page.TxtSearch_TextChanged;
             BtnEditSave.Click += page.BtnEditSave_Click;
-            Datagrid.SelectionChanged += Datagrid_SelectionChanged;
+            Datagrid.SelectionChanged += Datagrid_SelectionChangedAsync;
             BtnAdd.Click += page.BtnAdd_Click;
             BtnEditSave.Click += BtnEditSavePlus_Click;
 
@@ -50,15 +62,19 @@ namespace MyM_CRUD.View
             services = Service.SearchServices(TxtSearch.Text);
             Datagrid.ItemsSource = services;
         }
-        public void Datagrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
+        public async void Datagrid_SelectionChangedAsync(object sender, GridSelectionChangedEventArgs e)
         {
-            if (Datagrid.SelectedItem == null) return; 
+            if (Datagrid.SelectedItem == null) return;
 
             Service service = (Service)Datagrid.SelectedItem;
             LoadFields(service);
             SetReading();
 
-            activities = ServiceActivity.SearchActivities(service.Code);
+            //Buscar actividades asíncronamente
+            await Task.Run(() => 
+            {
+                activities = ServiceActivity.SearchActivities(service.Code);
+            });
             DgActivities.ItemsSource = activities;
         }
         public void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -72,15 +88,27 @@ namespace MyM_CRUD.View
         }
         public void BtnEditSavePlus_Click(object sender, RoutedEventArgs e)
         {
-            if(CurrentState == State.Reading)
+            if(pastState == State.Creating)
             {
-                string code = TxtCode.Text;
-                ServiceActivity.ClearTuplesFromDB(code);
-
                 foreach (var activity in activities)
                 {
-                    activity.ServiceCode = code;
+                    activity.ServiceCode = TxtCode.Text;
                     activity.InsertTupleDatabase();
+                }
+            }
+            if (pastState == State.Updating)
+            {
+                foreach (var activity in activities)
+                {
+                    activity.ServiceCode = TxtCode.Text;
+                    try
+                    {
+                        activity.InsertTupleDatabase();
+                    }
+                    catch
+                    {
+                        activity.UpdateTupleDataBase();
+                    }
                 }
             }
         }

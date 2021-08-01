@@ -184,28 +184,6 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="auto" />
                             </Grid.ColumnDefinitions>
-
-                            <TextBox
-                                x:Name="TxtAuthPersonId"
-                                Margin="0,0,16,0"
-                                md:HintAssist.Hint="Cédula del Autorizado"
-                                md:TextFieldAssist.HasLeadingIcon="True"
-                                md:TextFieldAssist.LeadingIcon="Person"
-                                Cursor="IBeam"
-                                FontSize="16"
-                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                            <Button
-                                x:Name="BtnFindPerson"
-                                Grid.Column="1"
-                                Click="BtnFindPerson_Click"
-                                Content="..." />
-                        </Grid>
-
-                        <Grid Margin="16">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="auto" />
-                            </Grid.ColumnDefinitions>
                             <TextBox
                                 x:Name="TxtVehicleId"
                                 Margin="0,0,16,0"
@@ -219,6 +197,29 @@
                                 x:Name="BtnFindVehicle"
                                 Grid.Column="1"
                                 Click="BtnFindVehicle_Click"
+                                Content="..." />
+                        </Grid>
+
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox
+                                x:Name="TxtAuthPersonId"
+                                Margin="0,0,16,0"
+                                md:HintAssist.HelperText="Persona autorizada para retirar el vehículo."
+                                md:HintAssist.Hint="Cédula del Autorizado"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="Person"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <Button
+                                x:Name="BtnFindPerson"
+                                Grid.Column="1"
+                                Click="BtnFindPerson_Click"
                                 Content="..." />
                         </Grid>
                     </StackPanel>

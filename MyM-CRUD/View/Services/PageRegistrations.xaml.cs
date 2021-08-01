@@ -25,7 +25,6 @@ namespace MyM_CRUD.View
     {
         private List<Registration> registrations;
         private int timesMessageShowed;
-
         public State CurrentState { get; set; }
         public Window Owner { get; set; }
 
@@ -38,7 +37,7 @@ namespace MyM_CRUD.View
             //Eventos
             ICrudPage<Registration> page = this;
             BtnEditSave.Click += page.BtnEditSave_Click;
-            Datagrid.SelectionChanged += page.Datagrid_SelectionChanged;
+            Datagrid.SelectionChanged += page.Datagrid_SelectionChangedAsync;
             BtnAdd.Click += page.BtnAdd_Click;
 
             //Inicializar datagrid
@@ -49,7 +48,7 @@ namespace MyM_CRUD.View
         }
 
 
-        public void Datagrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
+        public void Datagrid_SelectionChangedAsync(object sender, GridSelectionChangedEventArgs e)
         {
             if (Datagrid.SelectedItem == null) return;
             Registration registration = (Registration)Datagrid.SelectedItem;
@@ -70,9 +69,11 @@ namespace MyM_CRUD.View
                 //Click en guardar
                 case State.Creating:
                     {
-                        if(FillRegister())
+                        var invoice = new Invoice();
+
+                        if(FillRegister(invoice))
                         {
-                            ShowInvoice();
+                            FillInvoice(invoice);
                             SetReading();
                             TxtSearch_TextChanged(null, null);
                         }
@@ -109,7 +110,7 @@ namespace MyM_CRUD.View
         }
 
 
-        private bool FillRegister()
+        private bool FillRegister(Invoice invoice)
         {
             var registration = GetObjectsFromFields();
 
@@ -138,7 +139,7 @@ namespace MyM_CRUD.View
                 };
                 o.ShowDialog();
 
-                
+
                 //Agregar a las órdenes
                 orders.Add(o.Order);
 
@@ -153,11 +154,14 @@ namespace MyM_CRUD.View
                 order.InsertTupleDatabase();
             }
 
+            invoice.Details = orders;
             return true;
         }
-        private void ShowInvoice()
+        private void FillInvoice(Invoice invoice)
         {
-
+            invoice.Payments = new List<Payment>();
+            var windowInvoice = new WdwInvoice(invoice);
+            windowInvoice.ShowDialog();
         }
 
 

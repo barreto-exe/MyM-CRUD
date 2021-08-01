@@ -19,7 +19,7 @@ namespace MyM_CRUD.View
         }
 
         public void TxtSearch_TextChanged(object sender, TextChangedEventArgs e);
-        public void Datagrid_SelectionChanged(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e);
+        public void Datagrid_SelectionChangedAsync(object sender, Syncfusion.UI.Xaml.Grid.GridSelectionChangedEventArgs e);
         public void BtnEditSave_Click(object sender, RoutedEventArgs e)
         {
             switch (CurrentState)
