@@ -227,14 +227,14 @@ CREATE TABLE actividades(
 
 CREATE TABLE ordenes_servicio(
 	num_ficha  			dom_numero 			NOT NULL,
-	num_orden_s			dom_numero			NOT NULL,
-	cant_producto		dom_cantidad		NOT NULL,
-	precio_prod			dom_monto			NOT NULL,
-	precio_mano_obra	dom_monto			NOT NULL,
 	cod_servicio		dom_codigo			NOT NULL,
 	num_actividad		dom_numero			NOT NULL,
-	cod_producto		dom_codigo			NOT NULL,
 	ced_empleado		dom_cedula			NOT NULL,
+	cod_producto		dom_codigo			,
+	num_orden_s			dom_codigo			NOT NULL,
+	precio_mano_obra	dom_monto			NOT NULL,
+	cant_producto		dom_cantidad		,
+	precio_prod			dom_monto			,
  	PRIMARY KEY (num_ficha, num_orden_s)
 );
 

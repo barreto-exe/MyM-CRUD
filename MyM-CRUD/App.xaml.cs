@@ -1,6 +1,8 @@
 ﻿using MyM_CRUD.DataBase;
 using MyM_CRUD.Model;
 using MyM_CRUD.Tools;
+using Syncfusion.SfSkinManager;
+using Syncfusion.Themes.MaterialLight.WPF;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,6 +10,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 
 namespace MyM_CRUD
 {
@@ -21,9 +24,11 @@ namespace MyM_CRUD
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             ReconnectServers();
+            SynfusionThemeSettings();
 
             Session = new Session();
         }
+
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
@@ -51,6 +56,14 @@ namespace MyM_CRUD
         public static void ReconnectServers()
         {
             PostgreOp.ConexionGlobal = new PostgreOp().NuevaConexion();
+        }
+        private static void SynfusionThemeSettings()
+        {
+            MaterialLightThemeSettings settings = new MaterialLightThemeSettings();
+            settings.PrimaryBackground = new SolidColorBrush(Color.FromRgb(54, 128, 57));
+            settings.BodyFontSize = 14;
+            settings.HeaderFontSize = 16;
+            SfSkinManager.RegisterThemeSettings("MaterialLight", settings);
         }
         #endregion
     }

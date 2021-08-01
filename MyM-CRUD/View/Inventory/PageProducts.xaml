@@ -53,6 +53,7 @@
                 <sf:SfDataGrid
                     x:Name="Datagrid"
                     Grid.Row="1"
+                    sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
                     AllowDraggingColumns="True"
                     AllowResizingColumns="True"
                     AllowResizingHiddenColumns="True"

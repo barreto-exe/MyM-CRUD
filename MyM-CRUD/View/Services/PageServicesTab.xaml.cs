@@ -18,6 +18,17 @@ namespace MyM_CRUD.View
     /// </summary>
     public partial class PageServicesTab : Page
     {
+        private Window owner;
+        public Window Owner
+        {
+            get => owner;
+            set 
+            { 
+                PageRegistrations.Owner = value;
+                owner = value; 
+            }
+        }
+
         public PageServicesTab()
         {
             InitializeComponent();

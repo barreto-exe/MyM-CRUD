@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Linq;
 using static MyM_CRUD.View.ICrudPage<MyM_CRUD.Model.Registration>;
 
 namespace MyM_CRUD.View
@@ -23,8 +24,11 @@ namespace MyM_CRUD.View
     public partial class PageRegistrations : Page, ICrudPage<Registration>
     {
         private List<Registration> registrations;
-        public State CurrentState { get; set; }
         private int timesMessageShowed;
+
+        public State CurrentState { get; set; }
+        public Window Owner { get; set; }
+
 
         public PageRegistrations()
         {
@@ -44,6 +48,7 @@ namespace MyM_CRUD.View
             timesMessageShowed = 0;
         }
 
+
         public void Datagrid_SelectionChanged(object sender, GridSelectionChangedEventArgs e)
         {
             if (Datagrid.SelectedItem == null) return;
@@ -51,19 +56,108 @@ namespace MyM_CRUD.View
             LoadFields(registration);
             SetReading();
         }
+        public void BtnEditSave_Click(object sender, RoutedEventArgs e)
+        {
+            switch (CurrentState)
+            {
+                //Click en editar
+                case State.Reading:
+                    {
+                        BeginUpdating();
+                        break;
+                    }
+
+                //Click en guardar
+                case State.Creating:
+                    {
+                        if(FillRegister())
+                        {
+                            ShowInvoice();
+                            SetReading();
+                            TxtSearch_TextChanged(null, null);
+                        }
+
+                        break;
+                    }
+            }
+        }
         public void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            LoadFields(null);
+            Registration reg = null;
+
+#if DEBUG
+            reg = new Registration()
+            {
+                In = DateTime.Now,
+                EstimatedOut = DateTime.Now.AddHours(1),
+                AuthPersonId = "27506801",
+                VehicleId = "AA386AK",
+            };
+#endif
+
+            LoadFields(reg);
             SetCreating();
             TxtNumber.Focus();
         }
         private void Page_MouseEnter(object sender, MouseEventArgs e)
         {
-            if (timesMessageShowed >= 2) return;
+            if (timesMessageShowed >= 1) return;
 
             DrawerHost.IsBottomDrawerOpen = true;
 
             timesMessageShowed++;
+        }
+
+
+        private bool FillRegister()
+        {
+            var registration = GetObjectsFromFields();
+
+            //Seleccionar actividades deseadas
+            var w = new WdwActivities
+            {
+                Owner = Owner,
+            };
+            w.ShowDialog();
+
+            //Salir si cancela
+            if (w.Canceled) return false;
+
+            //Llenando info de cada orden de servicio
+            var orders = new List<ServiceOrder>();
+            foreach (var act in w.SelectedActivities)
+            {
+                //Asociar id de ficha de registro a la orden
+                var order = new ServiceOrder(act);
+                order.RegistrationNumber = registration.Number;
+
+                //Obtener info de las órdenes
+                var o = new WdwOrders(order)
+                {
+                    Owner = Owner,
+                };
+                o.ShowDialog();
+
+                
+                //Agregar a las órdenes
+                orders.Add(o.Order);
+
+                //Salir si cancela
+                if (o.Canceled) return false;
+            }
+
+            //Insertar datos en BD
+            registration.InsertTupleDatabase();
+            foreach (var order in orders)
+            {
+                order.InsertTupleDatabase();
+            }
+
+            return true;
+        }
+        private void ShowInvoice()
+        {
+
         }
 
 
@@ -87,7 +181,7 @@ namespace MyM_CRUD.View
             TxtDateOut.SelectedDate = selected.EstimatedOut;
             TxtHourOut.SelectedTime = selected.EstimatedOut;
             TxtAuthPersonId.Text = selected.AuthPersonId;
-            TxtVehicleId.Text = selected.AuthPersonId;
+            TxtVehicleId.Text = selected.VehicleId;
         }
         public Registration GetObjectsFromFields() => new Registration
         {
@@ -137,7 +231,7 @@ namespace MyM_CRUD.View
             TxtAuthPersonId.IsEnabled = false;
             TxtVehicleId.IsEnabled = false;
 
-            BtnEditSave.Visibility = Visibility.Visible;
+            BtnEditSave.Visibility = Visibility.Collapsed;
             IconEdit.Kind = PackIconKind.Edit;
         }
         public void SetUpdating()

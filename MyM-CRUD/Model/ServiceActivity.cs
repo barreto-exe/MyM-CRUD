@@ -16,6 +16,17 @@ namespace MyM_CRUD.Model
         public string Description { get; set; }
         public decimal Cost { get; set; }
 
+        //Atributos para selección en UI
+        public string Servicio { get; set; }
+        public bool IsSelected { get; set; }
+
+
+        public ServiceActivity()
+        {
+            IsSelected = false;
+        }
+
+
         public static List<ServiceActivity> SearchActivities(string serviceCode)
         {
             //Traer datos de la BD
@@ -38,13 +49,46 @@ namespace MyM_CRUD.Model
 
             return services.ToList();
         }
-        private static ServiceActivity BuildServiceFromDr(dynamic dr) => new ServiceActivity()
+        public static List<ServiceActivity> ServiceActivities()
         {
-            ServiceCode = dr["cod_servicio"].ToString(),
-            Number = Convert.ToInt32(dr["num_actividad"]),
-            Description = dr["descripcion_a"].ToString(),
-            Cost = Tools.Tools.Object2Decimal(dr["monto"]),
-        };
+            //Traer datos de la BD
+            string query =
+                "SELECT a.cod_servicio, nombre_s, num_actividad, descripcion_a, monto " +
+                "FROM actividades a " +
+                "INNER JOIN servicios s ON (s.cod_servicio = a.cod_servicio) " +
+                "ORDER BY nombre_s, num_actividad";
+            PostgreOp op = new PostgreOp(query);
+
+            //Colocar resultados en memoria
+            DataTable result = QueryFromDataBase(op);
+
+            //Pasar datos a una lista
+            IEnumerable<ServiceActivity> services =
+                from DataRow dr in result.Rows
+                select BuildServiceFromDr(dr);
+
+            return services.ToList();
+        }
+
+
+        private static ServiceActivity BuildServiceFromDr(dynamic dr)
+        {
+            var s = new ServiceActivity()
+            {
+                ServiceCode = dr["cod_servicio"].ToString(),
+                Number = Convert.ToInt32(dr["num_actividad"]),
+                Description = dr["descripcion_a"].ToString(),
+                Cost = Tools.Tools.Object2Decimal(dr["monto"]),
+            };
+
+            try
+            {
+                s.Servicio = dr["nombre_s"].ToString();
+            }
+            catch { }
+
+            return s;
+        }
         public static void ClearTuplesFromDB(string serviceCode)
         {
             string query =

@@ -35,12 +35,13 @@
                 <sf:SfDataGrid
                     x:Name="Datagrid"
                     Grid.Row="1"
+                    sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
                     AllowDraggingColumns="True"
                     AllowResizingColumns="True"
                     AllowResizingHiddenColumns="True"
                     AllowRowHoverHighlighting="True"
                     AutoGenerateColumns="False"
-                    ColumnSizer="Star"
+                    ColumnSizer="AutoWithLastColumnFill"
                     CurrentCellBorderBrush="Transparent"
                     IsReadOnly="True"
                     Language="es-ES"
@@ -52,7 +53,7 @@
                                 <sf:GridSummaryColumn
                                     Name="Total"
                                     Format="'Total: {Count:d}'"
-                                    MappingName="Code"
+                                    MappingName="Number"
                                     SummaryType="CountAggregate" />
                             </sf:GridTableSummaryRow.SummaryColumns>
                         </sf:GridTableSummaryRow>
@@ -63,6 +64,7 @@
                             HeaderText="Número"
                             MappingName="Number" />
                         <sf:GridTextColumn
+                            Width="100"
                             AllowFiltering="True"
                             HeaderText="Vehículo"
                             MappingName="VehicleId" />

@@ -58,6 +58,7 @@
                 <sf:SfDataGrid
                     x:Name="Datagrid"
                     Grid.Row="1"
+                    sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
                     AllowDraggingColumns="True"
                     AllowResizingColumns="True"
                     AllowResizingHiddenColumns="True"
@@ -194,6 +195,7 @@
                     <sf:SfDataGrid
                         x:Name="DgActivities"
                         Margin="16,8,16,16"
+                        sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
                         AddNewRowInitiating="DgActividades_AddNewRowInitiating"
                         AddNewRowPosition="Bottom"
                         AddNewRowText="Click para añadir nueva actividad."

@@ -55,6 +55,7 @@ namespace MyM_CRUD.View
             pageN = new PageNotebook();
             pageI = new PageInventory();
             pageS = new PageServicesTab();
+            pageS.Owner = this;
 
             DrawerList.SelectedIndex = 0;
             HamburguerButton.IsChecked = true;

@@ -45,7 +45,7 @@
                 </TabItem.Header>
                 <Frame>
                     <Frame.Content>
-                        <local:PageRegistrations />
+                        <local:PageRegistrations x:Name="PageRegistrations" />
                     </Frame.Content>
                 </Frame>
             </TabItem>
