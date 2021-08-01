@@ -49,6 +49,7 @@ namespace MyM_CRUD.Model
 
             return clients.ToList();
         }
+        public static List<Client> GetAllFromDB() => SearchClients("");
 
         public override void InsertTupleDatabase()
         {
