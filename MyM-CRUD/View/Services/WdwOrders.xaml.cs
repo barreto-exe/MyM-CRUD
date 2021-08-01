@@ -25,7 +25,35 @@ namespace MyM_CRUD.View
         //Propiedades de la orden
         private decimal manPowerCost;
         private int productQuantity;
-        private decimal ProductPrice;
+        private decimal productPrice;
+        
+        public decimal ManPowerCost
+        {
+            get { return manPowerCost; }
+            set 
+            { 
+                TxtManPowerCost.Text = "$" + value;
+                manPowerCost = value; 
+            }
+        }
+        public int ProductQuantity
+        {
+            get { return productQuantity; }
+            set 
+            { 
+                productQuantity = value; 
+                TxtProductPrice.Text = $"{ProductQuantity} * ${ProductPrice}";
+            }
+        }
+        public decimal ProductPrice
+        {
+            get { return ProductPrice; }
+            set 
+            { 
+                ProductPrice = value; 
+                TxtProductPrice.Text = $"{ProductQuantity} * ${ProductPrice}";
+            }
+        }
 
         public WdwOrders(ServiceOrder order)
         {
@@ -36,8 +64,9 @@ namespace MyM_CRUD.View
 
             TxtServiceName.Text = Order.AsociatedActivity.Servicio;
             TxtActivityName.Text = Order.AsociatedActivity.Description;
-            TxtManPowerCost.Text = "$" + 0;
-            TxtProductPrice.Text = "$" + 0;
+            ManPowerCost = 0;
+            ProductQuantity = 0;
+            ProductPrice = 0;
             TxtOrderNumber.Text = Order.OrderNumber;
         }
 
