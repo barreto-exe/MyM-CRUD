@@ -11,10 +11,55 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
     <Grid Background="White">
-        <Frame>
-            <Frame.Content>
-                <local:PageProducts />
-            </Frame.Content>
-        </Frame>
+        <TabControl Style="{StaticResource MaterialDesignNavigatilRailTabControl}" TabStripPlacement="Top">
+            <!--  Productos  -->
+            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="BoxCheck" />
+                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Productos" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame>
+                    <Frame.Content>
+                        <local:PageProducts />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+
+            <!--  Fabricantes  -->
+            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="Industrial" />
+                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Fabricantes" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame />
+            </TabItem>
+
+            <!--  Líneas  -->
+            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="Category" />
+                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Líneas de Prod." />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Page>

@@ -24,6 +24,11 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
             <!--  Search and rows  -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
@@ -33,7 +38,7 @@
 
                 <TextBox
                     x:Name="TxtSearch"
-                    Margin="16,24,16,16"
+                    Margin="16"
                     md:HintAssist.Hint="Buscar"
                     md:TextFieldAssist.HasClearButton="True"
                     md:TextFieldAssist.HasLeadingIcon="True"
@@ -109,109 +114,59 @@
 
         <!--  Rigth panel  -->
         <ScrollViewer Grid.Column="1">
-            <StackPanel MaxWidth="512">
-
-                <TextBox
-                    x:Name="TxtCode"
-                    Margin="16,24,16,16"
-                    md:HintAssist.Hint="Código"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
-                    md:TextFieldAssist.LeadingIcon="BarcodeScan"
-                    md:TextFieldAssist.TrailingIcon="Recycle"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <TextBox
-                    x:Name="TxtName"
-                    Margin="16"
-                    md:HintAssist.Hint="Nombre"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Tag"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <TextBox
-                    x:Name="TxtDescription"
-                    Height="100"
-                    Margin="16"
-                    md:HintAssist.Hint="Descripción"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="TagAdd"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                    TextWrapping="Wrap" />
-
-
-                <TextBox
-                    x:Name="TxtPrice"
-                    Margin="16"
-                    md:HintAssist.Hint="Precio"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Dollar"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
-                <Grid Margin="16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
-                    <TextBox
-                        x:Name="TxtManufacturerCode"
-                        Margin="0,0,16,0"
-                        md:HintAssist.Hint="Código del Fabricante"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="Industrial"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-                    <Button
-                        x:Name="BtnFindManufacturer"
-                        Grid.Column="1"
-                        Click="BtnFindManufacturer_Click"
-                        Content="..." />
-                </Grid>
-
+            <Grid>
 
                 <!--  Divider  -->
                 <Rectangle
                     Height="1"
-                    Margin="16"
-                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Top"
                     Fill="LightGray" />
 
-                <ComboBox
-                    x:Name="CbTypeProduct"
-                    Margin="16"
-                    md:ComboBoxAssist.ShowSelectedItem="True"
-                    SelectionChanged="CbTypeProduct_SelectionChanged"
-                    Style="{StaticResource MaterialDesignOutlinedComboBox}">
-                    <ComboBoxItem Content="Servicio" DataContext="1" />
-                    <ComboBoxItem Content="Tienda" DataContext="2" />
-                </ComboBox>
+                <StackPanel MaxWidth="512">
 
-                <StackPanel Name="StackEcologic" Orientation="Vertical">
-                    <StackPanel Margin="32,0,0,0" Orientation="Horizontal">
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignBody1TextBlock}"
-                            Text="Es ecológico: " />
-                        <ToggleButton
-                            x:Name="CheckIsEcologic"
-                            Width="48"
-                            Height="48"
-                            Style="{StaticResource MaterialDesignSwitchToggleButton}">
-                            <md:PackIcon Kind="Cancel" />
-                            <md:ToggleButtonAssist.OnContent>
-                                <md:PackIcon Kind="Recycle" />
-                            </md:ToggleButtonAssist.OnContent>
-                        </ToggleButton>
-                    </StackPanel>
+                    <TextBox
+                        x:Name="TxtCode"
+                        Margin="16"
+                        md:HintAssist.Hint="Código"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
+                        md:TextFieldAssist.LeadingIcon="BarcodeScan"
+                        md:TextFieldAssist.TrailingIcon="Recycle"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtName"
+                        Margin="16"
+                        md:HintAssist.Hint="Nombre"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Tag"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtDescription"
+                        Height="100"
+                        Margin="16"
+                        md:HintAssist.Hint="Descripción"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="TagAdd"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap" />
+
+                    <TextBox
+                        x:Name="TxtPrice"
+                        Margin="16"
+                        md:HintAssist.Hint="Precio"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Dollar"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
                     <Grid Margin="16">
                         <Grid.ColumnDefinitions>
@@ -219,23 +174,81 @@
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
                         <TextBox
-                            x:Name="TxtLineCode"
+                            x:Name="TxtManufacturerCode"
                             Margin="0,0,16,0"
-                            md:HintAssist.Hint="Código de Línea"
+                            md:HintAssist.Hint="Código del Fabricante"
                             md:TextFieldAssist.HasLeadingIcon="True"
                             md:TextFieldAssist.LeadingIcon="Industrial"
                             Cursor="IBeam"
                             FontSize="16"
                             Style="{StaticResource MaterialDesignOutlinedTextBox}" />
                         <Button
-                            x:Name="BtnFindLine"
+                            x:Name="BtnFindManufacturer"
                             Grid.Column="1"
-                            Click="BtnFindLine_Click"
+                            Click="BtnFindManufacturer_Click"
                             Content="..." />
                     </Grid>
-                </StackPanel>
 
-            </StackPanel>
+
+                    <!--  Divider  -->
+                    <Rectangle
+                        Height="1"
+                        Margin="16"
+                        HorizontalAlignment="Stretch"
+                        Fill="LightGray" />
+
+                    <ComboBox
+                        x:Name="CbTypeProduct"
+                        Margin="16"
+                        md:ComboBoxAssist.ShowSelectedItem="True"
+                        SelectionChanged="CbTypeProduct_SelectionChanged"
+                        Style="{StaticResource MaterialDesignOutlinedComboBox}">
+                        <ComboBoxItem Content="Servicio" DataContext="1" />
+                        <ComboBoxItem Content="Tienda" DataContext="2" />
+                    </ComboBox>
+
+                    <StackPanel Name="StackEcologic" Orientation="Vertical">
+                        <StackPanel Margin="32,0,0,0" Orientation="Horizontal">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignBody1TextBlock}"
+                                Text="Es ecológico: " />
+                            <ToggleButton
+                                x:Name="CheckIsEcologic"
+                                Width="48"
+                                Height="48"
+                                Style="{StaticResource MaterialDesignSwitchToggleButton}">
+                                <md:PackIcon Kind="Cancel" />
+                                <md:ToggleButtonAssist.OnContent>
+                                    <md:PackIcon Kind="Recycle" />
+                                </md:ToggleButtonAssist.OnContent>
+                            </ToggleButton>
+                        </StackPanel>
+
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox
+                                x:Name="TxtLineCode"
+                                Margin="0,0,16,0"
+                                md:HintAssist.Hint="Código de Línea"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="Industrial"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <Button
+                                x:Name="BtnFindLine"
+                                Grid.Column="1"
+                                Click="BtnFindLine_Click"
+                                Content="..." />
+                        </Grid>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
 
         <!--  Floatingbutton panel  -->
