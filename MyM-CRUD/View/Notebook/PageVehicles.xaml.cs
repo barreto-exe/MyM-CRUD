@@ -110,6 +110,8 @@ namespace MyM_CRUD.View
             TxtMechanicPhone.IsEnabled = true;
             TxtModelName.IsEnabled = true;
             TxtOwnerId.IsEnabled = true;
+            BtnFindOwner.IsEnabled = true;
+            BtnFindModel.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -125,6 +127,8 @@ namespace MyM_CRUD.View
             TxtMechanicPhone.IsEnabled = false;
             TxtModelName.IsEnabled = false;
             TxtOwnerId.IsEnabled = false;
+            BtnFindOwner.IsEnabled = false;
+            BtnFindModel.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.Edit;
@@ -140,6 +144,8 @@ namespace MyM_CRUD.View
             TxtMechanicPhone.IsEnabled = true;
             TxtModelName.IsEnabled = true;
             TxtOwnerId.IsEnabled = true;
+            BtnFindOwner.IsEnabled = true;
+            BtnFindModel.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;

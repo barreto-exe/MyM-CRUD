@@ -156,15 +156,26 @@
                     FontSize="16"
                     Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
-                <TextBox
-                    x:Name="TxtManufacturerCode"
-                    Margin="16"
-                    md:HintAssist.Hint="Código del Fabricante"
-                    md:TextFieldAssist.HasLeadingIcon="True"
-                    md:TextFieldAssist.LeadingIcon="Industrial"
-                    Cursor="IBeam"
-                    FontSize="16"
-                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                <Grid Margin="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        x:Name="TxtManufacturerCode"
+                        Margin="0,0,16,0"
+                        md:HintAssist.Hint="Código del Fabricante"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Industrial"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <Button
+                        x:Name="BtnFindManufacturer"
+                        Grid.Column="1"
+                        Click="BtnFindManufacturer_Click"
+                        Content="..." />
+                </Grid>
 
 
                 <!--  Divider  -->
@@ -202,15 +213,26 @@
                         </ToggleButton>
                     </StackPanel>
 
-                    <TextBox
-                        x:Name="TxtLineCode"
-                        Margin="16"
-                        md:HintAssist.Hint="Código de Línea"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="Industrial"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="TxtLineCode"
+                            Margin="0,0,16,0"
+                            md:HintAssist.Hint="Código de Línea"
+                            md:TextFieldAssist.HasLeadingIcon="True"
+                            md:TextFieldAssist.LeadingIcon="Industrial"
+                            Cursor="IBeam"
+                            FontSize="16"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <Button
+                            x:Name="BtnFindLine"
+                            Grid.Column="1"
+                            Click="BtnFindLine_Click"
+                            Content="..." />
+                    </Grid>
                 </StackPanel>
 
             </StackPanel>

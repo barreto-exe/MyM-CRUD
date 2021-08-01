@@ -179,25 +179,46 @@
                                 Style="{StaticResource MaterialDesignOutlinedTimePicker}" />
                         </Grid>
 
-                        <TextBox
-                            x:Name="TxtAuthPersonId"
-                            Margin="16"
-                            md:HintAssist.Hint="Cédula del Autorizado"
-                            md:TextFieldAssist.HasLeadingIcon="True"
-                            md:TextFieldAssist.LeadingIcon="Person"
-                            Cursor="IBeam"
-                            FontSize="16"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <TextBox
-                            x:Name="TxtVehicleId"
-                            Margin="16"
-                            md:HintAssist.Hint="Placa del Vehículo"
-                            md:TextFieldAssist.HasLeadingIcon="True"
-                            md:TextFieldAssist.LeadingIcon="IdCard"
-                            Cursor="IBeam"
-                            FontSize="16"
-                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <TextBox
+                                x:Name="TxtAuthPersonId"
+                                Margin="0,0,16,0"
+                                md:HintAssist.Hint="Cédula del Autorizado"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="Person"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <Button
+                                x:Name="BtnFindPerson"
+                                Grid.Column="1"
+                                Content="..." />
+                        </Grid>
+
+                        <Grid Margin="16">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox
+                                x:Name="TxtVehicleId"
+                                Margin="0,0,16,0"
+                                md:HintAssist.Hint="Placa del Vehículo"
+                                md:TextFieldAssist.HasLeadingIcon="True"
+                                md:TextFieldAssist.LeadingIcon="IdCard"
+                                Cursor="IBeam"
+                                FontSize="16"
+                                Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                            <Button
+                                x:Name="BtnFindVehicle"
+                                Grid.Column="1"
+                                Content="..." />
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

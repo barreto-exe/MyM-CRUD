@@ -215,6 +215,8 @@ namespace MyM_CRUD.View
             TxtHourOut.IsEnabled = true;
             TxtAuthPersonId.IsEnabled = true;
             TxtVehicleId.IsEnabled = true;
+            BtnFindPerson.IsEnabled = true;
+            BtnFindVehicle.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -230,6 +232,8 @@ namespace MyM_CRUD.View
             TxtHourOut.IsEnabled = false;
             TxtAuthPersonId.IsEnabled = false;
             TxtVehicleId.IsEnabled = false;
+            BtnFindPerson.IsEnabled = false;
+            BtnFindVehicle.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Collapsed;
             IconEdit.Kind = PackIconKind.Edit;
@@ -245,6 +249,8 @@ namespace MyM_CRUD.View
             TxtHourOut.IsEnabled = true;
             TxtAuthPersonId.IsEnabled = true;
             TxtVehicleId.IsEnabled = true;
+            BtnFindPerson.IsEnabled = true;
+            BtnFindVehicle.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;

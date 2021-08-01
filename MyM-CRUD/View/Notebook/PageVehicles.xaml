@@ -163,25 +163,45 @@
                         Style="{StaticResource MaterialDesignOutlinedTextBox}" />
 
 
-                    <TextBox
-                        x:Name="TxtOwnerId"
-                        Margin="16"
-                        md:HintAssist.Hint="Cédula del Dueño"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="IdCardOutline"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="TxtOwnerId"
+                            Margin="0,0,16,0"
+                            md:HintAssist.Hint="Cédula del Dueño"
+                            md:TextFieldAssist.HasLeadingIcon="True"
+                            md:TextFieldAssist.LeadingIcon="IdCardOutline"
+                            Cursor="IBeam"
+                            FontSize="16"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <Button
+                            x:Name="BtnFindOwner"
+                            Grid.Column="1"
+                            Content="..." />
+                    </Grid>
 
-                    <TextBox
-                        x:Name="TxtModelName"
-                        Margin="16"
-                        md:HintAssist.Hint="Modelo"
-                        md:TextFieldAssist.HasLeadingIcon="True"
-                        md:TextFieldAssist.LeadingIcon="Car2Plus"
-                        Cursor="IBeam"
-                        FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                    <Grid Margin="16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="TxtModelName"
+                            Margin="0,0,16,0"
+                            md:HintAssist.Hint="Modelo"
+                            md:TextFieldAssist.HasLeadingIcon="True"
+                            md:TextFieldAssist.LeadingIcon="Car2Plus"
+                            Cursor="IBeam"
+                            FontSize="16"
+                            Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+                        <Button
+                            x:Name="BtnFindModel"
+                            Grid.Column="1"
+                            Content="..." />
+                    </Grid>
                 </StackPanel>
             </Grid>
 

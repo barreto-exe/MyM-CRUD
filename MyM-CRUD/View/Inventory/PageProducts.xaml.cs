@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using static MyM_CRUD.Model.Product;
 using static MyM_CRUD.View.ICrudPage<MyM_CRUD.Model.Product>;
+using Line = MyM_CRUD.Model.Line;
 
 namespace MyM_CRUD.View
 {
@@ -140,6 +141,7 @@ namespace MyM_CRUD.View
             CheckIsEcologic.IsEnabled = true;
             CbTypeProduct.IsEnabled = true;
             TxtLineCode.IsEnabled = true;
+            BtnFindManufacturer.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -156,6 +158,7 @@ namespace MyM_CRUD.View
             CheckIsEcologic.IsEnabled = false;
             CbTypeProduct.IsEnabled = false;
             TxtLineCode.IsEnabled = false;
+            BtnFindManufacturer.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.Edit;
@@ -172,6 +175,7 @@ namespace MyM_CRUD.View
             CheckIsEcologic.IsEnabled = true;
             CbTypeProduct.IsEnabled = true;
             TxtLineCode.IsEnabled = true;
+            BtnFindManufacturer.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -184,6 +188,27 @@ namespace MyM_CRUD.View
 
             LoadFields(selected);
             SetUpdating();
+        }
+
+        private void BtnFindManufacturer_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Manufacturer.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if(!objSel.Canceled)
+            {
+                TxtManufacturerCode.Text = ((Manufacturer)objSel.Selected).Code;
+            }
+        }
+        private void BtnFindLine_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Line.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtLineCode.Text = ((Line)objSel.Selected).Code;
+            }
         }
     }
 }
