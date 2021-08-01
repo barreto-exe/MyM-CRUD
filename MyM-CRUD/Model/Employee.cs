@@ -51,6 +51,7 @@ namespace MyM_CRUD.Model
 
             return employees.ToList();
         }
+        public static List<Employee> GetAllFromDB() => SearchEmployees("");
 
         public override void InsertTupleDatabase()
         {

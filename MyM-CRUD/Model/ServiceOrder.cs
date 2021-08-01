@@ -29,7 +29,22 @@ namespace MyM_CRUD.Model
 
         public override void InsertTupleDatabase()
         {
-            throw new NotImplementedException();
+            string query =
+                "INSERT INTO ordenes_servicio(num_ficha, cod_servicio, num_actividad, num_orden_s, " +
+                "ced_empleado, cod_producto, precio_mano_obra, cant_producto, precio_prod) " +
+                "VALUES (@num_ficha, @cod_servicio, @num_actividad, @num_orden_s, " +
+                "@ced_empleado, @cod_producto, @precio_mano_obra, @cant_producto, @precio_prod)";
+            PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("num_ficha", RegistrationNumber);
+            op.PasarParametros("cod_servicio", AsociatedActivity.ServiceCode);
+            op.PasarParametros("num_actividad", AsociatedActivity.Number);
+            op.PasarParametros("num_orden_s", OrderNumber);
+            op.PasarParametros("ced_empleado", EmployeeId);
+            op.PasarParametros("cod_producto", ProductId);
+            op.PasarParametros("precio_mano_obra", ManPowerCost);
+            op.PasarParametros("cant_producto", ProductQuantity);
+            op.PasarParametros("precio_prod", ProductPrice);
+            op.EjecutarComando();
         }
         public override void UpdateTupleDataBase()
         {

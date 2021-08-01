@@ -19,6 +19,7 @@ namespace MyM_CRUD.Model
         public bool IsEcologic { get; set; }
         public string? LineCode { get; set; }
 
+        public static List<Product> GetAllFromDB() => SearchProducts("");
         public static List<Product> SearchProducts(string search)
         {
             //Traer datos de la BD

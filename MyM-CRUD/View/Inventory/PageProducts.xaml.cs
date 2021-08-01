@@ -142,6 +142,7 @@ namespace MyM_CRUD.View
             CbTypeProduct.IsEnabled = true;
             TxtLineCode.IsEnabled = true;
             BtnFindManufacturer.IsEnabled = true;
+            BtnFindLine.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;
@@ -159,6 +160,7 @@ namespace MyM_CRUD.View
             CbTypeProduct.IsEnabled = false;
             TxtLineCode.IsEnabled = false;
             BtnFindManufacturer.IsEnabled = false;
+            BtnFindLine.IsEnabled = false;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.Edit;
@@ -176,6 +178,7 @@ namespace MyM_CRUD.View
             CbTypeProduct.IsEnabled = true;
             TxtLineCode.IsEnabled = true;
             BtnFindManufacturer.IsEnabled = true;
+            BtnFindLine.IsEnabled = true;
 
             BtnEditSave.Visibility = Visibility.Visible;
             IconEdit.Kind = PackIconKind.ContentSave;

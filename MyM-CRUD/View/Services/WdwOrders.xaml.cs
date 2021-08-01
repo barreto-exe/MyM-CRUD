@@ -47,7 +47,7 @@ namespace MyM_CRUD.View
         }
         public decimal ProductPrice
         {
-            get { return ProductPrice; }
+            get { return productPrice; }
             set 
             {
                 productPrice = value; 
@@ -64,7 +64,7 @@ namespace MyM_CRUD.View
 
             TxtServiceName.Text = Order.AsociatedActivity.Servicio;
             TxtActivityName.Text = Order.AsociatedActivity.Description;
-            ManPowerCost = 0;
+            ManPowerCost = Order.AsociatedActivity.Cost;
             ProductQuantity = 0;
             ProductPrice = 0;
             TxtOrderNumber.Text = Order.OrderNumber;
@@ -73,7 +73,7 @@ namespace MyM_CRUD.View
         private void FillObjectFromFields()
         {
             Order.EmployeeId = TxtEmployeeId.Text;
-            Order.ProductId = TxtProductId.Text;
+            Order.ProductId = TxtProductCode.Text;
             Order.ManPowerCost = manPowerCost;
             Order.ProductQuantity = productQuantity;
             Order.ProductPrice = ProductPrice;
@@ -88,6 +88,47 @@ namespace MyM_CRUD.View
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void BtnFindEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Employee.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                TxtEmployeeId.Text = ((Employee)objSel.Selected).Id;
+            }
+        }
+        private void BtnFindProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var objSel = new WdwObjSelector(Product.GetAllFromDB);
+            objSel.ShowDialog();
+
+            if (!objSel.Canceled)
+            {
+                var product = (Product)objSel.Selected;
+
+                TxtProductCode.Text = product.Code;
+                ProductPrice = product.Price;
+
+                //Preguntar por cantidad
+                TxtProductNameDialog.Text = product.Name;
+                TxtQuantityDialog.Text = "";
+                DialogHost.IsOpen = true;
+            }
+        }
+
+        private void BtnCancelDialog_Click(object sender, RoutedEventArgs e)
+        {
+            DialogHost.IsOpen = false;
+        }
+
+        private void BtnAcceptDialog_Click(object sender, RoutedEventArgs e)
+        {
+            DialogHost.IsOpen = false;
+            int.TryParse(TxtQuantityDialog.Text, out int q);
+            ProductQuantity = q;
         }
     }
 }
