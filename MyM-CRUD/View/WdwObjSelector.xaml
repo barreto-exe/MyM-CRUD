@@ -9,7 +9,7 @@
     xmlns:sf="http://schemas.syncfusion.com/wpf"
     Title="Seleccione"
     Width="700"
-    Height="450"
+    Height="500"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>

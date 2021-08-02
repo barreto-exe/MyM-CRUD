@@ -17,6 +17,7 @@ namespace MyM_CRUD.Model
         public DateTime? RealOut { get; set; }
         public string AuthPersonId { get; set; }
         public string VehicleId { get; set; }
+        public string VehicleDescription { get; set; }
 
         public static List<Registration> GetRegistrationsFromBD()
         {

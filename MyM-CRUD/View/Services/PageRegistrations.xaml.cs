@@ -28,6 +28,7 @@ namespace MyM_CRUD.View
         public State CurrentState { get; set; }
         public Window Owner { get; set; }
 
+        private string vehicleDescription;
 
         public PageRegistrations()
         {
@@ -154,6 +155,7 @@ namespace MyM_CRUD.View
                 order.InsertTupleDatabase();
             }
 
+            invoice.AssociatedRegistration = registration;
             invoice.Details = orders;
             return true;
         }
@@ -162,6 +164,10 @@ namespace MyM_CRUD.View
             invoice.Payments = new List<Payment>();
             var windowInvoice = new WdwInvoice(invoice);
             windowInvoice.ShowDialog();
+
+            if(windowInvoice.Canceled) return;
+
+            invoice.InsertTupleDatabase();
         }
 
 
@@ -205,6 +211,7 @@ namespace MyM_CRUD.View
             RealOut = null,
             AuthPersonId = TxtAuthPersonId.Text,
             VehicleId = TxtVehicleId.Text,
+            VehicleDescription = vehicleDescription,
         };
 
 
@@ -293,7 +300,9 @@ namespace MyM_CRUD.View
 
             if (!objSel.Canceled)
             {
-                TxtVehicleId.Text = ((Vehicle)objSel.Selected).Id;
+                var vehicle = (Vehicle)objSel.Selected;
+                TxtVehicleId.Text = vehicle.Id;
+                vehicleDescription = vehicle.ModelName + " " + vehicle.DateAcquired.ToString("yyyy");
             }
         }
     }

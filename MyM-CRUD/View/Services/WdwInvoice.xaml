@@ -16,8 +16,9 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="48" />
         </Grid.RowDefinitions>
 
@@ -70,20 +71,14 @@
                 Grid.Column="1"
                 Margin="16"
                 Orientation="Vertical">
-
                 <!--  Cliente  -->
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <Button
-                        x:Name="BtnFinClient"
-                        Margin="0,0,8,0"
-                        Click="BtnFinClient_Click"
-                        Content="..." />
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cliente: " />
                     <TextBlock
                         x:Name="TxtClientName"
                         FontWeight="Light"
                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="Luis Barreto" />
+                        Text="" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                     <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cédula: " />
@@ -91,45 +86,40 @@
                         x:Name="TxtClientId"
                         FontWeight="Light"
                         Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="27506801" />
+                        Text="" />
                 </StackPanel>
-                <!--  Descuento  -->
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Descuento: " />
-                    <TextBlock
-                        x:Name="TxtDiscount"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="50%" />
-                </StackPanel>
-                <!--  Total  -->
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Total: " />
-                    <TextBlock
-                        x:Name="TxtTotalAmount"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="$100" />
-                </StackPanel>
+                <Button
+                    x:Name="BtnFinClient"
+                    Margin="8,8,0,0"
+                    HorizontalAlignment="Right"
+                    Click="BtnFindClient_Click"
+                    Content="Buscar Cliente" />
             </StackPanel>
         </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Vertical">
-            <TextBlock
-                Margin="16,16,0,0"
-                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                Text="Detalles: " />
+        <StackPanel
+            Grid.Row="1"
+            Margin="16,0,16,16"
+            Orientation="Vertical">
+
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                Margin="0,8"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
+
+            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Detalles: " />
             <!--  Datagrid detalles  -->
             <sf:SfDataGrid
                 x:Name="DgDetails"
-                Margin="16"
+                Margin="0,16"
                 sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
                 AllowRowHoverHighlighting="True"
                 AutoGenerateColumns="False"
                 ColumnSizer="Star"
                 CurrentCellBorderBrush="Transparent"
                 Language="es-ES"
-                RowHeight="28"
                 SelectionMode="None">
                 <sf:SfDataGrid.TableSummaryRows>
                     <sf:GridTableSummaryRow ShowSummaryInRow="False">
@@ -181,25 +171,36 @@
             </sf:SfDataGrid>
         </StackPanel>
 
-        <StackPanel Grid.Row="2" Orientation="Vertical">
+        <StackPanel
+            Grid.Row="2"
+            Margin="16,0,16,0"
+            Orientation="Vertical">
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                Margin="0,8"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
             <TextBlock
-                Margin="16,16,0,0"
+                Margin="0,0,0,16"
                 Style="{StaticResource MaterialDesignHeadline6TextBlock}"
                 Text="Pagos: " />
             <!--  Datagrid pagos  -->
             <sf:SfDataGrid
                 x:Name="DgPaymets"
-                Margin="16"
+                Height="150"
                 sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
+                AllowDeleting="True"
+                AllowGrouping="False"
                 AllowRowHoverHighlighting="True"
                 AutoGenerateColumns="False"
                 ColumnSizer="Star"
                 CurrentCellBorderBrush="Transparent"
                 Language="es-ES"
-                RowHeight="28"
-                SelectionMode="None">
+                RecordDeleted="DgPaymets_RecordDeleted"
+                SelectionMode="Single">
                 <sf:SfDataGrid.TableSummaryRows>
-                    <sf:GridTableSummaryRow ShowSummaryInRow="True">
+                    <sf:GridTableSummaryRow ShowSummaryInRow="False">
                         <sf:GridTableSummaryRow.SummaryColumns>
                             <sf:GridSummaryColumn
                                 Name="Total"
@@ -210,6 +211,7 @@
                     </sf:GridTableSummaryRow>
                 </sf:SfDataGrid.TableSummaryRows>
                 <sf:SfDataGrid.Columns>
+                    <sf:GridTextColumn HeaderText="Nro. Pago" MappingName="Number" />
                     <sf:GridTextColumn HeaderText="Método" MappingName="Method" />
                     <sf:GridTextColumn HeaderText="Banco" MappingName="BankName" />
                     <sf:GridTextColumn HeaderText="Nro. de Tarjeta" MappingName="CardNumber" />
@@ -227,14 +229,52 @@
         </StackPanel>
 
 
+        <!--  Totales  -->
         <StackPanel
             Grid.Row="3"
+            Margin="16"
+            Orientation="Vertical">
+
+            <!--  Descuento  -->
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Descuento: " />
+                <TextBlock
+                    x:Name="TxtDiscount"
+                    FontWeight="Light"
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="0%" />
+            </StackPanel>
+
+            <!--  Total de la factura  -->
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Total: " />
+                <TextBlock
+                    x:Name="TxtTotalAmount"
+                    FontWeight="Light"
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="$0" />
+            </StackPanel>
+
+            <!--  Cambio  -->
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cambio: " />
+                <TextBlock
+                    x:Name="TxtTotalChange"
+                    FontWeight="Light"
+                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                    Text="$0" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel
+            Grid.Row="4"
             HorizontalAlignment="Right"
             Orientation="Horizontal">
             <Button
                 x:Name="BtnAddPayment"
                 Width="128"
                 HorizontalAlignment="Right"
+                Click="BtnAddPayment_Click"
                 Content="Agregar Pago"
                 Style="{StaticResource MaterialDesignFlatButton}" />
             <Button
