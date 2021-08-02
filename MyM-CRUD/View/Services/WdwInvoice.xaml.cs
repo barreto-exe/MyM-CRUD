@@ -25,19 +25,48 @@ namespace MyM_CRUD.View
         {
             InitializeComponent();
             Canceled = true;
-            this.invoice = invoice;
-            invoice.Date = DateTime.Now;
 
+            //Inicializar factura
+            this.invoice = invoice;
+            this.invoice.Date = DateTime.Now;
+
+            FillData();
+        }
+
+        public WdwInvoice(Registration registration)
+        {
+            InitializeComponent();
+            Canceled = true;
+
+            BtnFinClient.Visibility = Visibility.Collapsed;
+            BtnAddPayment.Visibility = Visibility.Collapsed;
+
+            invoice = new Invoice();
+            invoice.AssociatedRegistration = registration;
+            invoice.BuildByAssociatedRegistration();
+
+            FillData();
+        }
+
+        private void FillData()
+        {
             //Buscar franquicia
             var branch = new Branch();
             branch.SelectFromDatabase(new[] { App.Session.Branch });
 
+            //Llenar campos de texto
             TxtInvoiceNumber.Text = invoice.Number;
             TxtBranch.Text = branch.Name + ", " + branch.Address;
             TxtDateTime.Text = invoice.Date.ToString("dd/MM/yyyy hh:mm tt");
-            TxtVehicle.Text = invoice.AssociatedRegistration.VehicleDescription;
+            TxtVehicle.Text = 
+                invoice.AssociatedRegistration.VehicleId + " - " +
+                invoice.AssociatedRegistration.VehicleDescription;
+            TxtClientId.Text = invoice.ClientId;
+            TxtClientName.Text = invoice.ClientName;
             TxtTotalAmount.Text = $"${invoice.TotalAmount}";
+
             DgDetails.ItemsSource = invoice.Details;
+            DgPaymets.ItemsSource = invoice.Payments;
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

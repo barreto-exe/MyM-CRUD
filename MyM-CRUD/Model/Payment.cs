@@ -48,6 +48,16 @@ namespace MyM_CRUD.Model
 
             return m;
         }
+        public static Payment BuildPaymentFromDr(dynamic dr) => new Payment()
+        {
+            Number = int.Parse(dr["num_pago"]),
+            Amount = Tools.Tools.Object2Decimal(dr["monto"]),
+            Method = dr["modalidad_p"].ToString(),
+            BankCode = dr["cod_banco"].ToString(),
+            BankName = dr["nombre_b"].ToString(),
+            CardNumber = dr["num_tarjeta"].ToString(),
+        };
+
 
         public override void InsertTupleDatabase()
         {

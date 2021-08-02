@@ -64,9 +64,9 @@ namespace MyM_CRUD.View
 
             Order = order;
 
-            TxtServiceName.Text = Order.AsociatedActivity.Servicio;
-            TxtActivityName.Text = Order.AsociatedActivity.Description;
-            ManPowerCost = Order.AsociatedActivity.Cost;
+            TxtServiceName.Text = Order.AssociatedActivity.Servicio;
+            TxtActivityName.Text = Order.AssociatedActivity.Description;
+            ManPowerCost = Order.AssociatedActivity.Cost;
             ProductQuantity = 0;
             ProductPrice = 0;
             TxtOrderNumber.Text = Order.OrderNumber;

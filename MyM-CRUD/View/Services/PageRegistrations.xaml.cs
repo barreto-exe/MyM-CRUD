@@ -60,10 +60,14 @@ namespace MyM_CRUD.View
         {
             switch (CurrentState)
             {
-                //Click en editar
+                //Click en ver
                 case State.Reading:
                     {
-                        BeginUpdating();
+                        if(Datagrid.SelectedItem == null) return;
+
+                        WdwInvoice w = new WdwInvoice((Registration)Datagrid.SelectedItem);
+                        w.ShowDialog();
+
                         break;
                     }
 
@@ -72,9 +76,8 @@ namespace MyM_CRUD.View
                     {
                         var invoice = new Invoice();
 
-                        if(FillRegister(invoice))
+                        if(FillRegister(invoice) && FillInvoice(invoice))
                         {
-                            FillInvoice(invoice);
                             SetReading();
                             TxtSearch_TextChanged(null, null);
                         }
@@ -159,15 +162,21 @@ namespace MyM_CRUD.View
             invoice.Details = orders;
             return true;
         }
-        private void FillInvoice(Invoice invoice)
+        private bool FillInvoice(Invoice invoice)
         {
             invoice.Payments = new List<Payment>();
             var windowInvoice = new WdwInvoice(invoice);
             windowInvoice.ShowDialog();
 
-            if(windowInvoice.Canceled) return;
+            if(windowInvoice.Canceled)
+            {
+                //Borrar aquí la ficha de registro y ordenes de servicio
+                return false;
+            }
 
             invoice.InsertTupleDatabase();
+            
+            return true;
         }
 
 
@@ -246,8 +255,8 @@ namespace MyM_CRUD.View
             BtnFindPerson.IsEnabled = false;
             BtnFindVehicle.IsEnabled = false;
 
-            BtnEditSave.Visibility = Visibility.Collapsed;
-            IconEdit.Kind = PackIconKind.Edit;
+            BtnEditSave.Visibility = Visibility.Visible;
+            IconEdit.Kind = PackIconKind.Eye;
         }
         public void SetUpdating()
         {

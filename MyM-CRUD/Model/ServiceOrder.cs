@@ -8,11 +8,22 @@ namespace MyM_CRUD.Model
 {
     public class ServiceOrder : CrudObject<ServiceOrder>
     {
-        public ServiceActivity AsociatedActivity { get; set; }
+        private ServiceActivity associatedActivity;
+        public ServiceActivity AssociatedActivity
+        {
+            get { return associatedActivity; }
+            set
+            {
+                associatedActivity = value;
+                ServiceName = AssociatedActivity.Servicio;
+                ActivityName = AssociatedActivity.Description;
+            }
+        }
+
         public string RegistrationNumber { get; set; }
         public string OrderNumber
         {
-            get => $"ORD{RegistrationNumber}{AsociatedActivity.ServiceCode}{AsociatedActivity.Number}";
+            get => $"ORD{RegistrationNumber}{AssociatedActivity.ServiceCode}{AssociatedActivity.Number}";
         }
         public string EmployeeId { get; set; }
         public string ProductId { get; set; }
@@ -21,16 +32,32 @@ namespace MyM_CRUD.Model
         public decimal ProductPrice { get; set; }
 
         //Atributos para mostrar en facturas
-        public string ServiceName { get => AsociatedActivity.Servicio; }
-        public string ActivityName { get => AsociatedActivity.Description; }
+        public string ServiceName { get; set; }
+        public string ActivityName { get; set; }
         public string EmployeeName { get; set; }
         public string ProductName { get; set; }
         public decimal Subtotal { get => ManPowerCost + ProductQuantity * ProductPrice; }
 
         public ServiceOrder(ServiceActivity asociatedActivity)
         {
-            AsociatedActivity = asociatedActivity;
+            AssociatedActivity = asociatedActivity;
         }
+
+        public ServiceOrder()
+        {
+        }
+
+        public static ServiceOrder BuildOrderFromDr(dynamic dr) => new ServiceOrder()
+        {
+            ServiceName = dr["nombre_s"].ToString(),
+            ActivityName = dr["descripcion_a"].ToString(),
+            EmployeeName = dr["nombre_e"].ToString(),
+            ManPowerCost = Tools.Tools.Object2Decimal(dr["precio_mano_obra"]),
+            ProductName = dr["nombre_p"].ToString(),
+            ProductQuantity = (int)dr["cant_producto"],
+            ProductPrice = Tools.Tools.Object2Decimal(dr["precio_prod"]),
+        };
+
 
         public override void InsertTupleDatabase()
         {
@@ -41,8 +68,8 @@ namespace MyM_CRUD.Model
                 "@ced_empleado, @cod_producto, @precio_mano_obra, @cant_producto, @precio_prod)";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("num_ficha", RegistrationNumber);
-            op.PasarParametros("cod_servicio", AsociatedActivity.ServiceCode);
-            op.PasarParametros("num_actividad", AsociatedActivity.Number);
+            op.PasarParametros("cod_servicio", AssociatedActivity.ServiceCode);
+            op.PasarParametros("num_actividad", AssociatedActivity.Number);
             op.PasarParametros("num_orden_s", OrderNumber);
             op.PasarParametros("ced_empleado", EmployeeId);
             op.PasarParametros("precio_mano_obra", ManPowerCost);

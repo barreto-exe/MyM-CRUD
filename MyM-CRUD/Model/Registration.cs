@@ -38,7 +38,7 @@ namespace MyM_CRUD.Model
 
             return r.ToList();
         }
-        private static Registration BuildRegistrationFromDr(dynamic dr) => new Registration()
+        public static Registration BuildRegistrationFromDr(dynamic dr) => new Registration()
         {
             Number = dr["num_ficha"].ToString(),
             In = dr["fecha_ent"] as DateTime?,
