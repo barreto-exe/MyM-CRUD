@@ -37,7 +37,7 @@ namespace MyM_CRUD.Tools
             }
         }
 
-        public static (string,string) GetRandomPhraseAndAuth()
+        public static (string, string) GetRandomPhraseAndAuth()
         {
             string randomPhrase, auth;
             string query =
