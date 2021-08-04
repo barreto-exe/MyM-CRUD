@@ -70,8 +70,8 @@
                             MappingName="VehicleId" />
                         <sf:GridTextColumn
                             AllowFiltering="True"
-                            HeaderText="Fecha Entrada"
-                            MappingName="In" />
+                            HeaderText="Cliente Autorizado"
+                            MappingName="AuthPersonName" />
                     </sf:SfDataGrid.Columns>
                 </sf:SfDataGrid>
             </Grid>
