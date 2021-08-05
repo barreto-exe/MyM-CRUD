@@ -83,11 +83,5 @@ namespace MyM_CRUD.View
 
             };
         }
-
-        private void cartesianChart1_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
     }
 }

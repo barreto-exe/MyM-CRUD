@@ -11,169 +11,175 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
-    <Grid Background="White">
-        <StackPanel
-            Width="auto"
-            Height="auto"
-            Margin="0,0,32,32"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Bottom">
-            <Button
-                x:Name="BtnAdd"
-                Cursor="Hand"
-                Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
-                <md:PackIcon
-                        Width="24"
-                        Height="24"
-                        Kind="Plus" />
-            </Button>
-        </StackPanel>
-        <md:Card HorizontalAlignment="Left" Margin="10,308,0,0" VerticalAlignment="Top" Height="130" Width="200">
-            <lvc:CartesianChart
-            x:Name="cartesianChart1"
-            Loaded="cartesianChart1_Loaded"
-            Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="245,308,0,0" VerticalAlignment="Top" Height="130" Width="200">
-            <lvc:CartesianChart
-                x:Name="cartesianChart2"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="480,308,0,0" VerticalAlignment="Top" Height="130" Width="200">
-            <lvc:CartesianChart
-                x:Name="cartesianChart3"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="482,10,0,0" VerticalAlignment="Top" Height="284" Width="305">
-            <lvc:CartesianChart
-                x:Name="cartesianChart4"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,33,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="130" Width="200">
-            <lvc:CartesianChart
-                x:Name="cartesianChart5"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="245,10,0,0" VerticalAlignment="Top" Height="130" Width="200">
-            <lvc:CartesianChart
-                x:Name="cartesianChart6"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-        <md:Card HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Height="138" Width="435">
-            <lvc:CartesianChart
-                x:Name="cartesianChart7"
-                Loaded="cartesianChart1_Loaded"
-                Series="{Binding SeriesCollection}" Margin="10,20,10,10">
-                <lvc:CartesianChart.AxisX>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisX>
-                <lvc:CartesianChart.AxisY>
-                    <lvc:Axis ShowLabels="True">
-                        <lvc:Axis.Separator>
-                            <lvc:Separator IsEnabled="False" Step="1" />
-                        </lvc:Axis.Separator>
-                    </lvc:Axis>
-                </lvc:CartesianChart.AxisY>
-            </lvc:CartesianChart>
-        </md:Card>
-    </Grid>
+    <!--  Scrollviewer permite mostrar la barrita de deslizamiento  -->
+    <ScrollViewer Background="White">
+        <WrapPanel>
+
+            <!--  Pila vertical izquierda  -->
+            <StackPanel Orientation="Vertical">
+                <!--  Dos cards de arriba  -->
+                <StackPanel Orientation="Horizontal">
+                    <md:Card
+                        Width="200"
+                        Height="130"
+                        Margin="16">
+                        <lvc:CartesianChart x:Name="cartesianChart1" Margin="16">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </md:Card>
+                    <md:Card
+                        Width="200"
+                        Height="130"
+                        Margin="16">
+                        <lvc:CartesianChart x:Name="cartesianChart2" Margin="16">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </md:Card>
+                </StackPanel>
+
+
+                <!--  Card horizontal largo  -->
+                <md:Card
+                    Width="435"
+                    Height="138"
+                    Margin="16">
+                    <lvc:CartesianChart x:Name="cartesianChart7" Margin="16">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </md:Card>
+
+                <!--  Dos cards de abajo  -->
+                <StackPanel Orientation="Horizontal">
+                    <md:Card
+                        Width="200"
+                        Height="130"
+                        Margin="16">
+                        <lvc:CartesianChart x:Name="cartesianChart3" Margin="16">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </md:Card>
+                    <md:Card
+                        Width="200"
+                        Height="130"
+                        Margin="16">
+                        <lvc:CartesianChart x:Name="cartesianChart5" Margin="16">
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator IsEnabled="False" Step="1" />
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+                        </lvc:CartesianChart>
+                    </md:Card>
+                </StackPanel>
+            </StackPanel>
+
+            <!--  Pila vertical derecha  -->
+            <StackPanel Orientation="Vertical">
+                <md:Card
+                    Width="305"
+                    Height="284"
+                    Margin="16">
+                    <lvc:CartesianChart x:Name="cartesianChart4" Margin="16">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </md:Card>
+                <md:Card
+                    Width="200"
+                    Height="130"
+                    Margin="16">
+                    <lvc:CartesianChart x:Name="cartesianChart6" Margin="16">
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis ShowLabels="True">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator IsEnabled="False" Step="1" />
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+                    </lvc:CartesianChart>
+                </md:Card>
+            </StackPanel>
+
+        </WrapPanel>
+    </ScrollViewer>
 </Page>
