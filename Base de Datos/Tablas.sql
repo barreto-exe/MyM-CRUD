@@ -42,6 +42,7 @@ CREATE TABLE reservas(
  	fecha_emision  			dom_fecha  		NOT NULL,
 	abono					dom_monto		NOT NULL,
 	ced_cliente				dom_cedula		NOT NULL,
+	franquicia				dom_rif			NOT NULL,
  	PRIMARY KEY (num_reserva)
 );
 
@@ -168,9 +169,10 @@ CREATE TABLE ordenes_compra(
 
 CREATE TABLE facturas_proveedores(
 	num_factura  			dom_numero 		NOT NULL,
- 	fecha_pago  	    	dom_fecha		NOT NULL,
+ 	fecha_pago  	    	dom_fecha,
 	monto					dom_monto		NOT NULL,
  	cod_orden_compra  		dom_codigo		NOT NULL,
+	fecha_emision			dom_fecha		NOT NULL,
  	PRIMARY KEY (num_factura)
 );
 
@@ -202,6 +204,7 @@ CREATE TABLE facturas(
 	descuento_f	  		dom_monto 			NOT NULL,
 	tipo_fact			CHAR(1)				NOT NULL,
 	ced_cliente			dom_cedula			NOT NULL,
+	franquicia			dom_rif				NOT NULL,
  	PRIMARY KEY (num_factura)
 );
 
@@ -344,6 +347,9 @@ CREATE TABLE eco_mensajes(
 ALTER TABLE reservas 
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
 	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (franquicia) REFERENCES franquicias (rif_franquicia) 
+	ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
 ALTER TABLE registros
@@ -420,6 +426,9 @@ ALTER TABLE servicio_productos
 ALTER TABLE facturas
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
 	ON DELETE RESTRICT 
+	ON UPDATE CASCADE,
+  ADD FOREIGN KEY (franquicia) REFERENCES franquicias (rif_franquicia)
+    ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
 ALTER TABLE facturas_servicio
@@ -598,5 +607,13 @@ CREATE INDEX idx_ced_cliente_facturas
 CREATE INDEX idx_descripcion_a_actividades
     ON actividades (descripcion_a);
 
+-------------------- Constraints -------------------
 
+ALTER TABLE facturas
+ADD CONSTRAINT chk_tipo_fact
+CHECK (tipo_fact IN ('S','T'));
+
+ALTER TABLE productos
+ADD CONSTRAINT chk_tipo_p
+CHECK (tipo_p IN ('T','E'));
 
