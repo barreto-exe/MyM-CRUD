@@ -202,6 +202,7 @@ CREATE TABLE facturas(
 	descuento_f	  		dom_monto 			NOT NULL,
 	tipo_fact			CHAR(1)				NOT NULL,
 	ced_cliente			dom_cedula			NOT NULL,
+	franquicia			dom_rif				NOT NULL,
  	PRIMARY KEY (num_factura)
 );
 
@@ -420,6 +421,9 @@ ALTER TABLE servicio_productos
 ALTER TABLE facturas
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
 	ON DELETE RESTRICT 
+	ON UPDATE CASCADE
+  ADD FOREIGN KEY (franquicia) REFERENCES franquicias (rif_franquicia)
+    ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
 
 ALTER TABLE facturas_servicio
