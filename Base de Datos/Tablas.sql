@@ -336,7 +336,7 @@ CREATE TABLE mantenimientos_v(
 
 CREATE TABLE eco_mensajes(
 	cod_msj					SERIAL				NOT NULL,
-	msj						dom_descripcion		NOT NULL	UNIQUE,		
+	msj						TEXT				NOT NULL	UNIQUE,		
 	autor					dom_nombre			NOT NULL,			
 	PRIMARY KEY (cod_msj)
 );

@@ -10,6 +10,7 @@
     Title="Facturación"
     Width="840"
     Height="512"
+    Closing="Window_Closing"
     WindowStartupLocation="CenterScreen"
     WindowState="Maximized"
     mc:Ignorable="d">
@@ -18,256 +19,282 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="48" />
+            <RowDefinition Height="64" />
         </Grid.RowDefinitions>
 
-        <Grid>
+        <!--  Card fila 0: Datos de factura  -->
+        <md:Card>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--  Stack izquierdo  -->
+                <StackPanel Margin="16" Orientation="Vertical">
+                    <!--  Id  -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Factura: " />
+                        <TextBlock
+                            x:Name="TxtInvoiceNumber"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="Factura" />
+                    </StackPanel>
+                    <!--  Sucursal  -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Sucursal: " />
+                        <TextBlock
+                            x:Name="TxtBranch"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="Los Olivos MM" />
+                    </StackPanel>
+                    <!--  Fecha y hora  -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Fecha y hora: " />
+                        <TextBlock
+                            x:Name="TxtDateTime"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="01/01/2000 00:00 PM" />
+                    </StackPanel>
+                    <!--  Vehículo  -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Vehículo: " />
+                        <TextBlock
+                            x:Name="TxtVehicle"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="Chevrolet Optra 2007" />
+                    </StackPanel>
+                </StackPanel>
+
+                <!--  Stack derecho  -->
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="32,16"
+                    Orientation="Vertical">
+                    <!--  Cliente  -->
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cliente: " />
+                        <TextBlock
+                            x:Name="TxtClientName"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="" />
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cédula: " />
+                        <TextBlock
+                            x:Name="TxtClientId"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="" />
+                    </StackPanel>
+                    <Button
+                        x:Name="BtnFinClient"
+                        Margin="8,8,0,0"
+                        HorizontalAlignment="Right"
+                        Click="BtnFindClient_Click"
+                        Content="Buscar Cliente" />
+                </StackPanel>
+            </Grid>
+        </md:Card>
+
+        <!--  Card fila 1: Detalles y pagos  -->
+        <ScrollViewer Grid.Row="1" Background="{StaticResource MaterialDesignChipBackground}">
+            <StackPanel Orientation="Vertical">
+                <!--  Detalles  -->
+                <GroupBox
+                    Margin="16"
+                    Header="Detalles"
+                    Style="{StaticResource MaterialDesignCardGroupBox}">
+                    <sf:SfDataGrid
+                        x:Name="DgDetails"
+                        sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
+                        AllowRowHoverHighlighting="True"
+                        AutoGenerateColumns="False"
+                        ColumnSizer="Star"
+                        CurrentCellBorderBrush="Transparent"
+                        Language="es-ES"
+                        SelectionMode="None">
+                        <sf:SfDataGrid.TableSummaryRows>
+                            <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                                <sf:GridTableSummaryRow.SummaryColumns>
+                                    <sf:GridSummaryColumn
+                                        Name="Total"
+                                        Format="'Total: ${Sum}'"
+                                        MappingName="Subtotal"
+                                        SummaryType="DoubleAggregate" />
+                                </sf:GridTableSummaryRow.SummaryColumns>
+                            </sf:GridTableSummaryRow>
+                        </sf:SfDataGrid.TableSummaryRows>
+                        <sf:SfDataGrid.Columns>
+                            <sf:GridTextColumn HeaderText="Servicio" MappingName="ServiceName" />
+                            <sf:GridTextColumn HeaderText="Actividad" MappingName="ActivityName" />
+                            <sf:GridTextColumn HeaderText="Empleado" MappingName="EmployeeName" />
+                            <sf:GridCurrencyColumn
+                                Width="90"
+                                CurrencyDecimalDigits="2"
+                                CurrencyDecimalSeparator=","
+                                CurrencyGroupSeparator="."
+                                CurrencyGroupSizes="3"
+                                CurrencySymbol="$"
+                                HeaderText="Mano de Obra"
+                                MappingName="ManPowerCost" />
+                            <sf:GridTextColumn HeaderText="Producto" MappingName="ProductName" />
+                            <sf:GridTextColumn
+                                Width="55"
+                                HeaderText="Cant."
+                                MappingName="ProductQuantity" />
+                            <sf:GridCurrencyColumn
+                                Width="90"
+                                CurrencyDecimalDigits="2"
+                                CurrencyDecimalSeparator=","
+                                CurrencyGroupSeparator="."
+                                CurrencyGroupSizes="3"
+                                CurrencySymbol="$"
+                                HeaderText="Precio Prod."
+                                MappingName="ProductPrice" />
+                            <sf:GridCurrencyColumn
+                                Width="90"
+                                CurrencyDecimalDigits="2"
+                                CurrencyDecimalSeparator=","
+                                CurrencyGroupSeparator="."
+                                CurrencyGroupSizes="3"
+                                CurrencySymbol="$"
+                                MappingName="Subtotal" />
+                        </sf:SfDataGrid.Columns>
+                    </sf:SfDataGrid>
+                </GroupBox>
+
+                <!--  Pagos  -->
+                <GroupBox
+                    Margin="16"
+                    Header="Pagos"
+                    Style="{StaticResource MaterialDesignCardGroupBox}">
+                    <sf:SfDataGrid
+                        x:Name="DgPaymets"
+                        sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
+                        AllowDeleting="True"
+                        AllowGrouping="False"
+                        AllowRowHoverHighlighting="True"
+                        AutoGenerateColumns="False"
+                        ColumnSizer="Star"
+                        CurrentCellBorderBrush="Transparent"
+                        Language="es-ES"
+                        RecordDeleted="DgPaymets_RecordDeleted"
+                        SelectionMode="Single">
+                        <sf:SfDataGrid.TableSummaryRows>
+                            <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                                <sf:GridTableSummaryRow.SummaryColumns>
+                                    <sf:GridSummaryColumn
+                                        Name="Total"
+                                        Format="'Total: ${Sum}'"
+                                        MappingName="Amount"
+                                        SummaryType="DoubleAggregate" />
+                                </sf:GridTableSummaryRow.SummaryColumns>
+                            </sf:GridTableSummaryRow>
+                        </sf:SfDataGrid.TableSummaryRows>
+                        <sf:SfDataGrid.Columns>
+                            <sf:GridTextColumn HeaderText="Nro. Pago" MappingName="Number" />
+                            <sf:GridTextColumn HeaderText="Método" MappingName="Method" />
+                            <sf:GridTextColumn HeaderText="Banco" MappingName="BankName" />
+                            <sf:GridTextColumn HeaderText="Nro. de Tarjeta" MappingName="CardNumber" />
+                            <sf:GridCurrencyColumn
+                                Width="90"
+                                CurrencyDecimalDigits="2"
+                                CurrencyDecimalSeparator=","
+                                CurrencyGroupSeparator="."
+                                CurrencyGroupSizes="3"
+                                CurrencySymbol="$"
+                                HeaderText="Monto"
+                                MappingName="Amount" />
+                        </sf:SfDataGrid.Columns>
+                    </sf:SfDataGrid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!--  Card fila 2: Frases y totales de factura  -->
+        <Grid Grid.Row="2" Margin="16,8,16,0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="500" />
                 <ColumnDefinition />
-                <ColumnDefinition />
+                <ColumnDefinition MaxWidth="500" />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Margin="16" Orientation="Vertical">
-                <!--  Id y total  -->
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Factura: " />
-                    <TextBlock
-                        x:Name="TxtInvoiceNumber"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="Factura" />
+            <!--  Frases  -->
+            <GroupBox
+                Margin="0,0,32,0"
+                Header="Frase"
+                Style="{StaticResource MaterialDesignCardGroupBox}">
+                <StackPanel Orientation="Vertical">
+                    <Grid HorizontalAlignment="Left">
+                        <TextBlock
+                            x:Name="TxtPhrase"
+                            HorizontalAlignment="Stretch"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignBody1TextBlock}"
+                            Text="Pa lante es q salta el sapo, aunq le puyen losojo."
+                            TextWrapping="Wrap" />
+                    </Grid>
+                    <Grid HorizontalAlignment="Left">
+                        <TextBlock
+                            x:Name="TxtPhraseAuth"
+                            FontWeight="SemiBold"
+                            Style="{StaticResource MaterialDesignBody1TextBlock}"
+                            Text="-Franklin Bello." />
+                    </Grid>
                 </StackPanel>
-                <!--  Sucursal  -->
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Sucursal: " />
-                    <TextBlock
-                        x:Name="TxtBranch"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="Los Olivos MM" />
-                </StackPanel>
-                <!--  Fecha y hora  -->
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Fecha y hora: " />
-                    <TextBlock
-                        x:Name="TxtDateTime"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="01/01/2000 00:00 PM" />
-                </StackPanel>
-                <!--  Vehículo  -->
-                <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Vehículo: " />
-                    <TextBlock
-                        x:Name="TxtVehicle"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="Chevrolet Optra 2007" />
-                </StackPanel>
-            </StackPanel>
+            </GroupBox>
 
-            <StackPanel
-                Grid.Column="1"
-                Margin="16"
-                Orientation="Vertical">
-                <!--  Cliente  -->
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cliente: " />
-                    <TextBlock
-                        x:Name="TxtClientName"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="" />
+            <!--  Totales  -->
+            <GroupBox
+                Grid.Column="2"
+                Margin="32,0,16,0"
+                Header="Totales"
+                Style="{StaticResource MaterialDesignCardGroupBox}">
+                <!--  Totales  -->
+                <StackPanel Orientation="Vertical">
+                    <!--  Descuento  -->
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Descuento: " />
+                        <TextBlock
+                            x:Name="TxtDiscount"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="0%" />
+                    </StackPanel>
+
+                    <!--  Total de la factura  -->
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Total: " />
+                        <TextBlock
+                            x:Name="TxtTotalAmount"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="$0" />
+                    </StackPanel>
+
+                    <!--  Cambio  -->
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cambio: " />
+                        <TextBlock
+                            x:Name="TxtTotalChange"
+                            FontWeight="Light"
+                            Style="{StaticResource MaterialDesignHeadline6TextBlock}"
+                            Text="$0" />
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                    <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cédula: " />
-                    <TextBlock
-                        x:Name="TxtClientId"
-                        FontWeight="Light"
-                        Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                        Text="" />
-                </StackPanel>
-                <Button
-                    x:Name="BtnFinClient"
-                    Margin="8,8,0,0"
-                    HorizontalAlignment="Right"
-                    Click="BtnFindClient_Click"
-                    Content="Buscar Cliente" />
-            </StackPanel>
+            </GroupBox>
         </Grid>
 
-        <StackPanel
-            Grid.Row="1"
-            Margin="16,0,16,16"
-            Orientation="Vertical">
-
-            <!--  Divider  -->
-            <Rectangle
-                Height="1"
-                Margin="0,8"
-                VerticalAlignment="Top"
-                Fill="LightGray" />
-
-            <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Detalles: " />
-            <!--  Datagrid detalles  -->
-            <sf:SfDataGrid
-                x:Name="DgDetails"
-                Margin="0,16"
-                sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
-                AllowRowHoverHighlighting="True"
-                AutoGenerateColumns="False"
-                ColumnSizer="Star"
-                CurrentCellBorderBrush="Transparent"
-                Language="es-ES"
-                SelectionMode="None">
-                <sf:SfDataGrid.TableSummaryRows>
-                    <sf:GridTableSummaryRow ShowSummaryInRow="False">
-                        <sf:GridTableSummaryRow.SummaryColumns>
-                            <sf:GridSummaryColumn
-                                Name="Total"
-                                Format="'Total: ${Sum}'"
-                                MappingName="Subtotal"
-                                SummaryType="DoubleAggregate" />
-                        </sf:GridTableSummaryRow.SummaryColumns>
-                    </sf:GridTableSummaryRow>
-                </sf:SfDataGrid.TableSummaryRows>
-                <sf:SfDataGrid.Columns>
-                    <sf:GridTextColumn HeaderText="Servicio" MappingName="ServiceName" />
-                    <sf:GridTextColumn HeaderText="Actividad" MappingName="ActivityName" />
-                    <sf:GridTextColumn HeaderText="Empleado" MappingName="EmployeeName" />
-                    <sf:GridCurrencyColumn
-                        Width="90"
-                        CurrencyDecimalDigits="2"
-                        CurrencyDecimalSeparator=","
-                        CurrencyGroupSeparator="."
-                        CurrencyGroupSizes="3"
-                        CurrencySymbol="$"
-                        HeaderText="Mano de Obra"
-                        MappingName="ManPowerCost" />
-                    <sf:GridTextColumn HeaderText="Producto" MappingName="ProductName" />
-                    <sf:GridTextColumn
-                        Width="55"
-                        HeaderText="Cant."
-                        MappingName="ProductQuantity" />
-                    <sf:GridCurrencyColumn
-                        Width="90"
-                        CurrencyDecimalDigits="2"
-                        CurrencyDecimalSeparator=","
-                        CurrencyGroupSeparator="."
-                        CurrencyGroupSizes="3"
-                        CurrencySymbol="$"
-                        HeaderText="Precio Prod."
-                        MappingName="ProductPrice" />
-                    <sf:GridCurrencyColumn
-                        Width="90"
-                        CurrencyDecimalDigits="2"
-                        CurrencyDecimalSeparator=","
-                        CurrencyGroupSeparator="."
-                        CurrencyGroupSizes="3"
-                        CurrencySymbol="$"
-                        MappingName="Subtotal" />
-                </sf:SfDataGrid.Columns>
-            </sf:SfDataGrid>
-        </StackPanel>
-
-        <StackPanel
-            Grid.Row="2"
-            Margin="16,0,16,0"
-            Orientation="Vertical">
-            <!--  Divider  -->
-            <Rectangle
-                Height="1"
-                Margin="0,8"
-                VerticalAlignment="Top"
-                Fill="LightGray" />
-            <TextBlock
-                Margin="0,0,0,16"
-                Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                Text="Pagos: " />
-            <!--  Datagrid pagos  -->
-            <sf:SfDataGrid
-                x:Name="DgPaymets"
-                Height="150"
-                sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
-                AllowDeleting="True"
-                AllowGrouping="False"
-                AllowRowHoverHighlighting="True"
-                AutoGenerateColumns="False"
-                ColumnSizer="Star"
-                CurrentCellBorderBrush="Transparent"
-                Language="es-ES"
-                RecordDeleted="DgPaymets_RecordDeleted"
-                SelectionMode="Single">
-                <sf:SfDataGrid.TableSummaryRows>
-                    <sf:GridTableSummaryRow ShowSummaryInRow="False">
-                        <sf:GridTableSummaryRow.SummaryColumns>
-                            <sf:GridSummaryColumn
-                                Name="Total"
-                                Format="'Total: ${Sum}'"
-                                MappingName="Amount"
-                                SummaryType="DoubleAggregate" />
-                        </sf:GridTableSummaryRow.SummaryColumns>
-                    </sf:GridTableSummaryRow>
-                </sf:SfDataGrid.TableSummaryRows>
-                <sf:SfDataGrid.Columns>
-                    <sf:GridTextColumn HeaderText="Nro. Pago" MappingName="Number" />
-                    <sf:GridTextColumn HeaderText="Método" MappingName="Method" />
-                    <sf:GridTextColumn HeaderText="Banco" MappingName="BankName" />
-                    <sf:GridTextColumn HeaderText="Nro. de Tarjeta" MappingName="CardNumber" />
-                    <sf:GridCurrencyColumn
-                        Width="90"
-                        CurrencyDecimalDigits="2"
-                        CurrencyDecimalSeparator=","
-                        CurrencyGroupSeparator="."
-                        CurrencyGroupSizes="3"
-                        CurrencySymbol="$"
-                        HeaderText="Monto"
-                        MappingName="Amount" />
-                </sf:SfDataGrid.Columns>
-            </sf:SfDataGrid>
-        </StackPanel>
-
-
-        <!--  Totales  -->
+        <!--  Card fila 3: Botones  -->
         <StackPanel
             Grid.Row="3"
-            Margin="16"
-            Orientation="Vertical">
-
-            <!--  Descuento  -->
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Descuento: " />
-                <TextBlock
-                    x:Name="TxtDiscount"
-                    FontWeight="Light"
-                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                    Text="0%" />
-            </StackPanel>
-
-            <!--  Total de la factura  -->
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Total: " />
-                <TextBlock
-                    x:Name="TxtTotalAmount"
-                    FontWeight="Light"
-                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                    Text="$0" />
-            </StackPanel>
-
-            <!--  Cambio  -->
-            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock Style="{StaticResource MaterialDesignHeadline6TextBlock}" Text="Cambio: " />
-                <TextBlock
-                    x:Name="TxtTotalChange"
-                    FontWeight="Light"
-                    Style="{StaticResource MaterialDesignHeadline6TextBlock}"
-                    Text="$0" />
-            </StackPanel>
-        </StackPanel>
-
-        <StackPanel
-            Grid.Row="4"
+            Margin="16,0"
             HorizontalAlignment="Right"
             Orientation="Horizontal">
             <Button

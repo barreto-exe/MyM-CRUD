@@ -32,7 +32,7 @@
             </TabItem>
 
             <!--  Fabricantes  -->
-            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <!--<TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <md:PackIcon
@@ -44,10 +44,10 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Frame />
-            </TabItem>
+            </TabItem>-->
 
             <!--  Líneas  -->
-            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+            <!--<TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
                 <TabItem.Header>
                     <StackPanel Orientation="Vertical">
                         <md:PackIcon
@@ -59,7 +59,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <Frame />
-            </TabItem>
+            </TabItem>-->
         </TabControl>
     </Grid>
 </Page>

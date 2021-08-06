@@ -16,6 +16,7 @@ namespace MyM_CRUD.Model
         public DateTime? EstimatedOut { get; set; }
         public DateTime? RealOut { get; set; }
         public string AuthPersonId { get; set; }
+        public string AuthPersonName { get; set; }
         public string VehicleId { get; set; }
         public string VehicleDescription { get; set; }
 
@@ -23,7 +24,8 @@ namespace MyM_CRUD.Model
         {
             string query =
                 "SELECT * " +
-                "FROM registros " +
+                "FROM registros r " +
+                "INNER JOIN clientes c ON (r.ced_autorizado = c.cedula_c) " +
                 "WHERE rif_franquicia = @rif_franquicia";
             PostgreOp op = new PostgreOp(query);
             op.PasarParametros("rif_franquicia", App.Session.Branch);
@@ -45,6 +47,7 @@ namespace MyM_CRUD.Model
             EstimatedOut = dr["fecha_sal_est"] as DateTime?,
             RealOut = dr["fecha_sal_real"] as DateTime?,
             AuthPersonId = dr["ced_autorizado"].ToString(),
+            AuthPersonName = dr["nombre_c"].ToString(),
             VehicleId = dr["placa_vehiculo"].ToString(),
         };
 

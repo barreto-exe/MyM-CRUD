@@ -5,7 +5,7 @@ using Syncfusion.Windows.Shared;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Text;
+using System.Linq;
 
 namespace MyM_CRUD.Model
 {
@@ -46,6 +46,7 @@ namespace MyM_CRUD.Model
             }
             dr.Close();
 
+            m.Remove("Cambio");
             return m;
         }
         public static Payment BuildPaymentFromDr(dynamic dr) => new Payment()

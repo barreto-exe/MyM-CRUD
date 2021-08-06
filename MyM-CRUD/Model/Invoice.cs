@@ -89,13 +89,13 @@ namespace MyM_CRUD.Model
                 string query =
                     "SELECT * " +
                     "FROM ordenes_servicio o " +
-                    "INNER JOIN actividades a " +
+                    "LEFT JOIN actividades a " +
                     "ON (o.cod_servicio = a.cod_servicio AND o.num_actividad = a.num_actividad) " +
-                    "INNER JOIN servicios s " +
+                    "LEFT JOIN servicios s " +
                     "ON (o.cod_servicio = s.cod_servicio) " +
-                    "INNER JOIN empleados e " +
+                    "LEFT JOIN empleados e " +
                     "ON (o.ced_empleado = e.cedula_e) " +
-                    "INNER JOIN productos p " +
+                    "LEFT JOIN productos p " +
                     "ON (o.cod_producto = p.cod_producto) " +
                     "WHERE num_ficha = @num_ficha";
                 PostgreOp op = new PostgreOp(query);
@@ -157,7 +157,17 @@ namespace MyM_CRUD.Model
             op.PasarParametros("num_ficha", AssociatedRegistration.Number);
             op.EjecutarComando();
 
-            foreach(var payment in Payments)
+
+            if (PendingChange > 0)
+            {
+                Payments.Add(new Payment()
+                {
+                    Method = "Cambio",
+                    Amount = -PendingChange,
+                });
+            }
+
+            foreach (var payment in Payments)
             {
                 payment.AssociatedInvoice = this;
                 payment.InsertTupleDatabase();

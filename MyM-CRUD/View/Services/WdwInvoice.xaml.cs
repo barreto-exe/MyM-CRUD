@@ -40,6 +40,8 @@ namespace MyM_CRUD.View
 
             BtnFinClient.Visibility = Visibility.Collapsed;
             BtnAddPayment.Visibility = Visibility.Collapsed;
+            BtnAccept.IsEnabled = true;
+            DgPaymets.AllowDeleting = false;
 
             invoice = new Invoice();
             invoice.AssociatedRegistration = registration;
@@ -58,15 +60,23 @@ namespace MyM_CRUD.View
             TxtInvoiceNumber.Text = invoice.Number;
             TxtBranch.Text = branch.Name + ", " + branch.Address;
             TxtDateTime.Text = invoice.Date.ToString("dd/MM/yyyy hh:mm tt");
-            TxtVehicle.Text = 
-                invoice.AssociatedRegistration.VehicleId + " - " +
-                invoice.AssociatedRegistration.VehicleDescription;
+            TxtVehicle.Text = invoice.AssociatedRegistration.VehicleId;
+            if(invoice.AssociatedRegistration.VehicleDescription != null &&
+                    invoice.AssociatedRegistration.VehicleDescription != "")
+            {
+                TxtVehicle.Text += " - " + invoice.AssociatedRegistration.VehicleDescription;
+            }
             TxtClientId.Text = invoice.ClientId;
             TxtClientName.Text = invoice.ClientName;
             TxtTotalAmount.Text = $"${invoice.TotalAmount}";
+            TxtTotalChange.Text = $"${invoice.PendingChange}";
 
+            DgDetails.ItemsSource = null;
             DgDetails.ItemsSource = invoice.Details;
+            DgPaymets.ItemsSource = null;
             DgPaymets.ItemsSource = invoice.Payments;
+
+            (TxtPhrase.Text, TxtPhraseAuth.Text) = Tools.Tools.GetRandomPhraseAndAuth();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
@@ -119,6 +129,18 @@ namespace MyM_CRUD.View
 
             DgPaymets.ItemsSource = null;
             DgPaymets.ItemsSource = invoice.Payments;
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            bool cantClose =
+                invoice.ClientId == null ||
+                invoice.TotalAmount - invoice.TotalPayed > 0;
+            if(cantClose)
+            {
+                MessageBox.Show("Debe seleccionar un cliente y pagar la factura por completo.");
+                e.Cancel = true;
+            }
         }
     }
 }
