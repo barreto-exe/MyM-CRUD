@@ -143,8 +143,8 @@ namespace MyM_CRUD.Model
         public override void InsertTupleDatabase()
         {
             string query =
-                "INSERT INTO facturas(num_factura, fecha_emision, descuento_f, tipo_fact, ced_cliente) " +
-                "VALUES (@num_factura, @fecha_emision, @descuento_f, @tipo_fact, @ced_cliente); " +
+                "INSERT INTO facturas(num_factura, fecha_emision, descuento_f, tipo_fact, ced_cliente, franquicia) " +
+                "VALUES (@num_factura, @fecha_emision, @descuento_f, @tipo_fact, @ced_cliente, @franquicia); " +
 
                 "INSERT INTO facturas_servicio(num_factura, num_ficha) \n" +
                 "VALUES (@num_factura, @num_ficha);";
@@ -155,6 +155,7 @@ namespace MyM_CRUD.Model
             op.PasarParametros("tipo_fact", 'S');
             op.PasarParametros("ced_cliente", ClientId);
             op.PasarParametros("num_ficha", AssociatedRegistration.Number);
+            op.PasarParametros("franquicia", App.Session.Branch);
             op.EjecutarComando();
 
 
