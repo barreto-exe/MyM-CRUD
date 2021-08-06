@@ -607,5 +607,25 @@ CREATE INDEX idx_ced_cliente_facturas
 CREATE INDEX idx_descripcion_a_actividades
     ON actividades (descripcion_a);
 
+-------------------- Constraints -------------------
 
+ALTER TABLE facturas
+ADD CONSTRAINT chk_tipo_fact
+CHECK (tipo_fact IN ('S','T'));
+
+ALTER TABLE productos
+ADD CONSTRAINT chk_tipo_p
+CHECK (tipo_p IN ('T','E'));
+
+ALTER TABLE solicitan s
+ADD CONSTRAINT chk_mismo_proveedor
+CHECK ((SELECT o.rif_proveedor
+        FROM ordenes_compra o
+        WHERE o.cod_orden_c = s.cod_orden_compra)
+
+        IN
+    
+        (SELECT d.rif_proveedor
+        FROM distribuyen d
+        WHERE d.cod_producto = s.cod_producto));
 
