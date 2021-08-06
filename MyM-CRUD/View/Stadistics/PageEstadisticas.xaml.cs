@@ -26,7 +26,7 @@ namespace MyM_CRUD.View
         {
             InitializeComponent();
             //Ventas de productos
-            cartesianChart1.Series = new SeriesCollection()
+            ChartProductSell.Series = new SeriesCollection()
             {
                 new LineSeries()
                 {
@@ -43,7 +43,7 @@ namespace MyM_CRUD.View
 
             };
             //Clientes mas frecuentes
-            cartesianChart2.Series = new SeriesCollection()
+            ChartFrequentClients.Series = new SeriesCollection()
             {
                 new RowSeries(){
                     Values = new ChartValues<double> {2,7,15,20,30},
@@ -55,7 +55,7 @@ namespace MyM_CRUD.View
             
             
             //Comparacion entre franquicias
-            cartesianChart4.Series = new SeriesCollection()
+            ChartBranches.Series = new SeriesCollection()
             {
                 new StackedAreaSeries(){
                     Values = new ChartValues<double> {25,15,20,2},
@@ -63,7 +63,7 @@ namespace MyM_CRUD.View
                 }
             };
             //Marcas de vehiculo mas atendidas por tipo de servicio
-            cartesianChart6.Series = new SeriesCollection()
+            ChartVehicleBrands.Series = new SeriesCollection()
             {
                 new LineSeries(){
                     Values = new ChartValues<double> {25,15,20,23,7},
@@ -97,7 +97,7 @@ namespace MyM_CRUD.View
             PostgreOp op = new PostgreOp(query);*/
 
             //Servicios mas solcitado
-            cartesianChart7.Series = new SeriesCollection()
+            ChartHighService.Series = new SeriesCollection()
             {
                 new RowSeries(){
 
@@ -111,7 +111,7 @@ namespace MyM_CRUD.View
             };
 
             //Personal que realiza mas servicios
-            cartesianChart3.Series = new SeriesCollection()
+            ChartHighWorker.Series = new SeriesCollection()
             {
                 new LineSeries()
                 {
@@ -124,7 +124,7 @@ namespace MyM_CRUD.View
             };
 
             //Proveedores que suminstran
-            cartesianChart5.Series = new SeriesCollection()
+            ChartHighSupplier.Series = new SeriesCollection()
             {
                 new StackedAreaSeries(){
                     Values = new ChartValues<double> {2, 13, 10, 25, 6, 19},

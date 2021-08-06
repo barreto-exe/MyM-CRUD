@@ -25,7 +25,7 @@ namespace MyM_CRUD.View
 
 #if DEBUG
             App.Session.Branch = "J1234";
-            App.Session.PassMd5 = "1234";
+            App.Session.PassMd5 = Tools.Tools.CreateMD5("1234");
 
             Login();
 #endif
@@ -34,7 +34,7 @@ namespace MyM_CRUD.View
         private void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
             App.Session.Branch = TxtUser.Text.Trim();
-            App.Session.PassMd5 = TxtPass.Password.Trim();
+            App.Session.PassMd5 = Tools.Tools.CreateMD5(TxtPass.Password.Trim());
 
             Login();
         }
