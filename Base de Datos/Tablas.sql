@@ -426,7 +426,7 @@ ALTER TABLE servicio_productos
 ALTER TABLE facturas
   ADD FOREIGN KEY (ced_cliente) REFERENCES clientes (cedula_c) 
 	ON DELETE RESTRICT 
-	ON UPDATE CASCADE
+	ON UPDATE CASCADE,
   ADD FOREIGN KEY (franquicia) REFERENCES franquicias (rif_franquicia)
     ON DELETE RESTRICT 
 	ON UPDATE CASCADE;
@@ -616,16 +616,4 @@ CHECK (tipo_fact IN ('S','T'));
 ALTER TABLE productos
 ADD CONSTRAINT chk_tipo_p
 CHECK (tipo_p IN ('T','E'));
-
-ALTER TABLE solicitan s
-ADD CONSTRAINT chk_mismo_proveedor
-CHECK ((SELECT o.rif_proveedor
-        FROM ordenes_compra o
-        WHERE o.cod_orden_c = s.cod_orden_compra)
-
-        IN
-    
-        (SELECT d.rif_proveedor
-        FROM distribuyen d
-        WHERE d.cod_producto = s.cod_producto));
 

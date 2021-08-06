@@ -2,7 +2,7 @@
 
 SELECT os.num_Ficha, s.nombre_S
 INTO TEMP R1
-FROM ordenes_servicio os, servicios s, registro r
+FROM ordenes_servicio os, servicios s, registros r
 WHERE os.cod_Servicio = s.cod_Servicio
 AND os.num_Ficha = r.num_Ficha
 AND r.franquicia = ?

@@ -1,7 +1,7 @@
 --Comparación entre los distintos M&M: cual factura más/menos por ventas
 
-SELECT fr.rif_franquicia, fr.nombre_f, r.factTienda, 
-        SUM ( fa.descuento_f * p.precio * r.cant_comprada) AS total_factura
+SELECT fr.rif_franquicia, fr.nombre_f, r.num_fact_tienda, 
+        SUM ( fa.descuento_f * p.precio_p * r.cant_comprada) AS total_factura
 INTO TEMP R1
 FROM registran r, franquicias fr, facturas fa, productos p
 WHERE r.num_fact_tienda = fa.num_factura

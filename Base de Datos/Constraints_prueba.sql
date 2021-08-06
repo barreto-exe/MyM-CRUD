@@ -16,4 +16,16 @@ CHECK ((tipo_p='T' AND EXIST (tienda_productos)
         (tipo_p='E' AND EXIST (eco_productos)
                     AND NOT EXIST (tienda_productos)));
 
+ALTER TABLE solicitan
+ADD CONSTRAINT chk_mismo_proveedor
+CHECK ((SELECT o.rif_proveedor
+        FROM ordenes_compra o
+        WHERE o.cod_orden_c = s.cod_orden_compra)
+
+        IN
+    
+        (SELECT d.rif_proveedor
+        FROM distribuyen d
+        WHERE d.cod_producto = s.cod_producto));
+
                     

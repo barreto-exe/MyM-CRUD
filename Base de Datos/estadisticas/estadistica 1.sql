@@ -1,12 +1,12 @@
 -- Marca de vehículos que más atendemos por tipo de servicio
 
-SELECT s.nombre_S, ma.nombre_Marca, COUNT(r.*) AS cantidad
+SELECT s.nombre_S, ma.nom_marca, COUNT(r.*) AS cantidad
 INTO TEMP R1
-FROM registro r, ordenes_servicio os, servicios s
-     vehiculos v, modelo mo, marca ma
-WHERE r.placa_Vehiculo = v.placa_Vehiculo
-AND v.modelo = mo.nombre_Mo
-AND mo.marca = ma.cod_Marca
+FROM registros r, ordenes_servicio os, servicios s,
+     vehiculos v, modelos mo, marcas ma
+WHERE r.placa_Vehiculo = v.placa
+AND v.nom_modelo = mo.nom_modelo
+AND mo.cod_marca = ma.cod_Marca
 AND r.num_Ficha = os.num_Ficha
 AND os.cod_Servicio = s.cod_Servicio
 AND r.franquicia = ?

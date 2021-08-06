@@ -2,9 +2,9 @@
 
 SELECT c.cedula_C, c.nombre_C, COUNT(r.*) AS cantidad
 INTO TEMP R1
-FROM registro r, vehiculos v, clientes c
+FROM registros r, vehiculos v, clientes c
 WHERE r.placa_Vehiculo = v.placa
-AND v.dueno = c.cedula_C
+AND v.ced_dueno = c.cedula_C
 AND r.franquicia = ?
 GROUP BY 1, 2;
 
