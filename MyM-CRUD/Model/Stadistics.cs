@@ -86,9 +86,55 @@ namespace MyM_CRUD.Model
         {
             SeriesCollection result = new SeriesCollection();
         }
-        public static void ChartHighWorkerCollection()
+        public static (List<string>, ChartValues<double>) ChartHighWorkerCollection()
         {
-            SeriesCollection result = new SeriesCollection();
+            PostgreOp op = null;
+
+            //Eliminar tablas en memoria
+            try
+            {
+                string query =
+                    "DROP TABLE R1; " +
+                    "DROP TABLE R2; ";
+                op = new PostgreOp(query);
+                op.EjecutarComando();
+            }
+            catch { }
+
+            var labels = new List<string>();
+            var values = new ChartValues<double>();
+            //Traer datos
+            try
+            {
+                #region query
+                op.Query = "SELECT os.num_ficha, os.cod_Servicio, os.ced_empleado" +
+                "INTO TEMP R1" +
+                "FROM ordenes_servicio os, registros r" +
+                "WHERE os.num_Ficha = r.num_Ficha" +
+                "AND r.franquicia = @rif_franquicia" +
+                //"AND to_char(r.fecha_Ent, 'yyyy') = @anio" +
+                //"AND to_char(r.fecha_Ent, 'mm') = @mes" +
+                "GROUP BY 1, 2, 3;" +
+
+                "SELECT R1.ced_empleado, COUNT(R1.cod_Servicio) AS cantidad" +
+                "FROM R1" +
+                "GROUP BY 1;";
+                #endregion
+
+                op.PasarParametros("rif_franquicia", App.Session.Branch);
+                //op.PasarParametros("mes", 8);
+                //op.PasarParametros("anio", 2021);
+                NpgsqlDataReader dr = op.EjecutarReader();
+                while (dr.Read())
+                {
+                    labels.Add($"{dr["ced_empleado"]}");
+                    values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+                }
+                dr.Close();
+            }
+            catch { }
+
+            return (labels, values);  
         }
         public static void ChartHighSupplierCollection()
         {

@@ -38,16 +38,16 @@
         <ScrollViewer Background="White">
             <WrapPanel>
                 <!--  Pila vertical izquierda  -->
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Width="500">
                     <!--  Dos cards de arriba  -->
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Height="176">
                         <md:Card
-                            Width="200"
-                            Height="130"
-                            Margin="16">
+                            Width="220"
+                            Height="145"
+                            Margin="10">
                             <StackPanel>
                                 <TextBox
-                                    Width="201"
+                                    Width="221"
                                     Background="#43a047"
                                     Cursor="IBeam"
                                     Foreground="White"
@@ -56,7 +56,7 @@
                                 <lvc:CartesianChart
                                     x:Name="ChartProductSell"
                                     Width="190"
-                                    Height="98"
+                                    Height="110"
                                     Margin="5">
                                     <lvc:CartesianChart.AxisX>
                                         <lvc:Axis ShowLabels="True">
@@ -76,12 +76,12 @@
                             </StackPanel>
                         </md:Card>
                         <md:Card
-                            Width="200"
-                            Height="130"
-                            Margin="16">
+                            Width="220"
+                            Height="145"
+                            Margin="10">
                             <StackPanel>
                                 <TextBox
-                                    Width="201"
+                                    Width="221"
                                     Background="#43a047"
                                     Cursor="IBeam"
                                     Foreground="White"
@@ -90,7 +90,7 @@
                                 <lvc:CartesianChart
                                     x:Name="ChartFrequentClients"
                                     Width="190"
-                                    Height="90"
+                                    Height="100"
                                     Margin="5">
                                     <lvc:CartesianChart.AxisX>
                                         <lvc:Axis ShowLabels="True">
@@ -113,12 +113,12 @@
 
                     <!--  Card horizontal largo  -->
                     <md:Card
-                        Width="435"
-                        Height="138"
-                        Margin="16">
-                        <StackPanel>
+                        Width="450"
+                        Height="150"
+                        Margin="10">
+                        <StackPanel Margin="0,0,0,0">
                             <TextBox
-                                Width="435"
+                                Width="451"
                                 Background="#43a047"
                                 Cursor="IBeam"
                                 Foreground="White"
@@ -127,7 +127,7 @@
                             <lvc:CartesianChart
                                 x:Name="ChartHighService"
                                 Width="415"
-                                Height="105"
+                                Height="115"
                                 Margin="5">
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis ShowLabels="True">
@@ -148,14 +148,14 @@
                     </md:Card>
 
                     <!--  Dos cards de abajo  -->
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Height="177">
                         <md:Card
-                            Width="200"
-                            Height="130"
-                            Margin="16">
+                            Width="220"
+                            Height="145"
+                            Margin="10">
                             <StackPanel>
                                 <TextBox
-                                    Width="201"
+                                    Width="221"
                                     Background="#43a047"
                                     Cursor="IBeam"
                                     Foreground="White"
@@ -163,8 +163,8 @@
                                     TextWrapping="Wrap" />
                                 <lvc:CartesianChart
                                     x:Name="ChartHighWorker"
-                                    Width="190"
-                                    Height="98"
+                                    Width="220"
+                                    Height="110"
                                     Margin="5">
                                     <lvc:CartesianChart.AxisX>
                                         <lvc:Axis ShowLabels="True">
@@ -176,7 +176,7 @@
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis ShowLabels="True">
                                             <lvc:Axis.Separator>
-                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                                <lvc:Separator IsEnabled="False" Step="1" />
                                             </lvc:Axis.Separator>
                                         </lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
@@ -184,12 +184,12 @@
                             </StackPanel>
                         </md:Card>
                         <md:Card
-                            Width="200"
-                            Height="130"
-                            Margin="16">
+                            Width="220"
+                            Height="145"
+                            Margin="10">
                             <StackPanel>
                                 <TextBox
-                                    Width="201"
+                                    Width="221"
                                     Background="#43a047"
                                     Cursor="IBeam"
                                     Foreground="White"
@@ -197,8 +197,8 @@
                                     TextWrapping="Wrap" />
                                 <lvc:CartesianChart
                                     x:Name="ChartHighSupplier"
-                                    Width="190"
-                                    Height="98"
+                                    Width="220"
+                                    Height="110"
                                     Margin="5">
                                     <lvc:CartesianChart.AxisX>
                                         <lvc:Axis ShowLabels="True">
@@ -221,14 +221,14 @@
                 </StackPanel>
 
                 <!--  Pila vertical derecha  -->
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical" Width="448" Height="552">
                     <md:Card
-                        Width="305"
+                        Width="345"
                         Height="284"
                         Margin="16">
                         <StackPanel>
                             <TextBox
-                                Width="305"
+                                Width="346"
                                 Background="#43a047"
                                 Cursor="IBeam"
                                 Foreground="White"
@@ -236,7 +236,7 @@
                                 TextWrapping="Wrap" />
                             <lvc:CartesianChart
                                 x:Name="ChartBranches"
-                                Width="285"
+                                Width="320"
                                 Height="250"
                                 Margin="5">
                                 <lvc:CartesianChart.AxisX>
@@ -257,12 +257,14 @@
                         </StackPanel>
                     </md:Card>
                     <md:Card
-                        Width="305"
-                        Height="146"
+                        Width="345"
+                        Height="180"
                         Margin="16">
-                        <StackPanel>
+                        <StackPanel
+                            Width="345"
+                            Height="180">
                             <TextBox
-                                Width="305"
+                                Width="348"
                                 Background="#43a047"
                                 Cursor="IBeam"
                                 Foreground="White"
@@ -270,11 +272,11 @@
                                 TextWrapping="Wrap" />
                             <lvc:CartesianChart
                                 x:Name="ChartVehicleBrands"
-                                Width="285"
-                                Height="110"
-                                Margin="5">
+                                Width="320"
+                                Height="150"
+                                Margin="10">
                                 <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis ShowLabels="True">
+                                    <lvc:Axis ShowLabels="True" LabelsRotation="10">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator IsEnabled="False" Step="1" />
                                         </lvc:Axis.Separator>

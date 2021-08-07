@@ -95,12 +95,13 @@ namespace MyM_CRUD.View
             };
 
             //Personal que realiza mas servicios
+            (labels, values) = Stadistics.ChartHighWorkerCollection();
+            ChartHighWorker.AxisY[0].Labels = labels.ToArray();
             ChartHighWorker.Series = new SeriesCollection()
             {
-                new LineSeries()
+                new RowSeries()
                 {
-                    Values = new ChartValues<decimal> { 8, 10, 5, 25, 30 },
-                    Stroke = Brushes.Green,
+                    Values = values,
                     Fill = Brushes.PaleGreen
                 },
 
