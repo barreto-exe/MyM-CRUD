@@ -49,6 +49,27 @@
                     </Frame.Content>
                 </Frame>
             </TabItem>
+
+            <!--  Reservas pendientes  -->
+            <TabItem Width="200" Style="{StaticResource MaterialDesignNavigationRailTabItem}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <md:PackIcon
+                            Width="24"
+                            Height="24"
+                            HorizontalAlignment="Center"
+                            Kind="ClockAlert" />
+                        <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Reservas Pendientes" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Frame>
+                    <Frame.Content>
+                        <local:PagePending x:Name="PageReserves" />
+                    </Frame.Content>
+                </Frame>
+            </TabItem>
+
+
         </TabControl>
     </Grid>
 </Page>

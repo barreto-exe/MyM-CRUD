@@ -1,0 +1,260 @@
+﻿<Window
+    x:Class="MyM_CRUD.View.PagePending"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:MyM_CRUD.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:sf="http://schemas.syncfusion.com/wpf"
+    Title="PagePending"
+    mc:Ignorable="d">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left panel  -->
+        <Grid Grid.Column="0" Background="{DynamicResource MaterialDesignToolBarBackground}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <!--  Divider  -->
+            <Rectangle
+                Height="1"
+                VerticalAlignment="Top"
+                Fill="LightGray" />
+
+            <!--  Search and rows  -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBox
+                    x:Name="TxtSearch"
+                    Margin="16"
+                    md:HintAssist.Hint="Buscar"
+                    md:TextFieldAssist.HasClearButton="True"
+                    md:TextFieldAssist.HasLeadingIcon="True"
+                    md:TextFieldAssist.LeadingIcon="Search"
+                    Cursor="IBeam"
+                    FontSize="16"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                <ListBox
+                    Margin="16,6"
+                    Style="{StaticResource MaterialDesignFilterChipPrimaryOutlineListBox}"
+                    Visibility="Collapsed">
+                    <ListBoxItem Content="Para venta" />
+                    <ListBoxItem Content="Para servicios" IsSelected="True" />
+                </ListBox>
+
+                <sf:SfDataGrid
+                    x:Name="Datagrid"
+                    Grid.Row="1"
+                    sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
+                    AllowDraggingColumns="True"
+                    AllowResizingColumns="True"
+                    AllowResizingHiddenColumns="True"
+                    AllowRowHoverHighlighting="True"
+                    AutoGenerateColumns="False"
+                    ColumnSizer="Star"
+                    CurrentCellBorderBrush="Transparent"
+                    IsReadOnly="True"
+                    Language="es-ES"
+                    RowHeight="28"
+                    SelectionMode="Single">
+                    <sf:SfDataGrid.TableSummaryRows>
+                        <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                            <sf:GridTableSummaryRow.SummaryColumns>
+                                <sf:GridSummaryColumn
+                                    Name="Total"
+                                    Format="'Total: {Count:d}'"
+                                    MappingName="Code"
+                                    SummaryType="CountAggregate" />
+                            </sf:GridTableSummaryRow.SummaryColumns>
+                        </sf:GridTableSummaryRow>
+                    </sf:SfDataGrid.TableSummaryRows>
+                    <sf:SfDataGrid.Columns>
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Código"
+                            MappingName="Code" />
+                        <sf:GridTextColumn
+                            AllowFiltering="True"
+                            HeaderText="Nombre"
+                            MappingName="Name" />
+                    </sf:SfDataGrid.Columns>
+                </sf:SfDataGrid>
+            </Grid>
+
+            <!--  Divider  -->
+            <Rectangle
+                Grid.Column="1"
+                Width="1"
+                HorizontalAlignment="Right"
+                Fill="LightGray" />
+        </Grid>
+
+        <!--  Rigth panel  -->
+        <ScrollViewer Grid.Column="1">
+            <Grid>
+                <!--  Divider  -->
+                <Rectangle
+                    Height="1"
+                    VerticalAlignment="Top"
+                    Fill="LightGray" />
+
+                <StackPanel MaxWidth="512">
+                    <TextBox
+                        x:Name="TxtCode"
+                        Margin="16"
+                        md:HintAssist.Hint="Código"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.HasTrailingIcon="{Binding ElementName=CheckIsEcologic, Path=IsChecked}"
+                        md:TextFieldAssist.LeadingIcon="BarcodeScan"
+                        md:TextFieldAssist.TrailingIcon="Recycle"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        IsEnabled="false"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtName"
+                        Margin="16"
+                        md:HintAssist.Hint="Nombre"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="Tag"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        IsEnabled="false"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
+
+                    <TextBox
+                        x:Name="TxtDescription"
+                        Height="100"
+                        Margin="16"
+                        md:HintAssist.Hint="Descripción"
+                        md:TextFieldAssist.HasLeadingIcon="True"
+                        md:TextFieldAssist.LeadingIcon="TagAdd"
+                        Cursor="IBeam"
+                        FontSize="16"
+                        IsEnabled="false"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        TextWrapping="Wrap" />
+
+                    <!--  Divider  -->
+                    <Rectangle
+                        Height="1"
+                        Margin="16"
+                        HorizontalAlignment="Stretch"
+                        Fill="LightGray" />
+
+                    <TextBlock
+                        Margin="36,0"
+                        VerticalAlignment="Center"
+                        Style="{StaticResource MaterialDesignBody1TextBlock}"><Run Text="Actividades " /><Run Language="es-ve" Text="reservadas" /><Run Text=": " /></TextBlock>
+                    <sf:SfDataGrid
+                        x:Name="DgActivities"
+                        Margin="16,8,16,16"
+                        sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
+                        AddNewRowInitiating="DgActividades_AddNewRowInitiating"
+                        AddNewRowPosition="Bottom"
+                        AddNewRowText="Click para añadir nueva actividad."
+                        AllowDraggingColumns="True"
+                        AllowResizingColumns="True"
+                        AllowResizingHiddenColumns="True"
+                        AllowRowHoverHighlighting="True"
+                        AutoGenerateColumns="False"
+                        ColumnSizer="Star"
+                        CurrentCellBorderBrush="Green"
+                        CurrentCellBorderThickness="0.5"
+                        IsEnabled="false"
+                        Language="es-ES"
+                        RowHeight="28"
+                        RowValidating="DgActivities_RowValidating"
+                        SelectionMode="Single">
+                        <sf:SfDataGrid.TableSummaryRows>
+                            <sf:GridTableSummaryRow ShowSummaryInRow="False">
+                                <sf:GridTableSummaryRow.SummaryColumns>
+                                    <sf:GridSummaryColumn
+                                        Name="Total"
+                                        Format="'Total: {Count:d}'"
+                                        MappingName="Number"
+                                        SummaryType="CountAggregate" />
+                                    <sf:GridSummaryColumn
+                                        Name="Total2"
+                                        Format="'Suma: ${Sum}'"
+                                        MappingName="Cost"
+                                        SummaryType="DoubleAggregate" />
+                                </sf:GridTableSummaryRow.SummaryColumns>
+                            </sf:GridTableSummaryRow>
+                        </sf:SfDataGrid.TableSummaryRows>
+                        <sf:SfDataGrid.Columns>
+                            <sf:GridTextColumn
+                                AllowEditing="False"
+                                AllowFiltering="True"
+                                HeaderText="Número"
+                                MappingName="Number" />
+                            <sf:GridTextColumn
+                                AllowEditing="True"
+                                AllowFiltering="True"
+                                HeaderText="Descripción"
+                                MappingName="Description" />
+                            <sf:GridCurrencyColumn
+                                AllowEditing="True"
+                                AllowFiltering="True"
+                                AllowGrouping="True"
+                                CurrencyDecimalDigits="2"
+                                CurrencyDecimalSeparator=","
+                                CurrencyGroupSeparator="."
+                                CurrencyGroupSizes="3"
+                                CurrencySymbol="$"
+                                HeaderText="Costo"
+                                MappingName="Cost" />
+                        </sf:SfDataGrid.Columns>
+                    </sf:SfDataGrid>
+                </StackPanel>
+            </Grid>
+
+        </ScrollViewer>
+
+        <!--  Floatingbutton panel  -->
+        <StackPanel
+            Grid.Column="1"
+            Width="auto"
+            Height="auto"
+            Margin="0,0,32,32"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom">
+
+            <Button
+                x:Name="BtnRefresh"
+                Margin="8"
+                Cursor="Hand"
+                Style="{StaticResource MaterialDesignFloatingActionMiniButton}">
+                <Button.Content>
+                    <md:PackIcon
+                        Width="16"
+                        Height="16"
+                        Kind="Refresh" />
+                </Button.Content>
+            </Button>
+            <Button
+                x:Name="BtnCheck"
+                Cursor="Hand"
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                <Button.Content>
+                    <md:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="Check" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
