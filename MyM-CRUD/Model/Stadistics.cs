@@ -267,6 +267,8 @@ namespace MyM_CRUD.Model
 
             return (labels, values);
         }
+
+        //Lista
         public static (List<string>, ChartValues<double>) ChartHighWorkerCollection()
         {
             DeleteInmemoryTables(new string[] { "R1" });
@@ -283,14 +285,20 @@ namespace MyM_CRUD.Model
                 "INTO TEMP R1 " +
                 "FROM ordenes_servicio os, registros r " +
                 "WHERE os.num_Ficha = r.num_Ficha " +
-                "AND r.franquicia = @rif_franquicia " +
+                "AND r.rif_franquicia = @rif_franquicia " +
                 //"AND to_char(r.fecha_Ent, 'yyyy') = @anio " +
                 //"AND to_char(r.fecha_Ent, 'mm') = @mes " +
                 "GROUP BY 1, 2, 3; " +
 
-                "SELECT R1.ced_empleado, COUNT(R1.cod_Servicio) AS cantidad " +
-                "FROM R1 " +
-                "GROUP BY 1; ";
+                "SELECT  " +
+                "R1.ced_empleado,  " +
+                "e.nombre_e, " +
+                "COUNT(R1.cod_Servicio) AS cantidad  " +
+                "FROM R1  " +
+                "INNER JOIN empleados e ON (R1.ced_empleado = e.cedula_e) " +
+                "GROUP BY 1,2 " +
+                "ORDER BY cantidad ASC " +
+                "LIMIT 3; ";
                 #endregion
 
                 op.PasarParametros("rif_franquicia", App.Session.Branch);
@@ -299,7 +307,7 @@ namespace MyM_CRUD.Model
                 NpgsqlDataReader dr = op.EjecutarReader();
                 while (dr.Read())
                 {
-                    labels.Add($"{dr["ced_empleado"]}");
+                    labels.Add($"{dr["nombre_e"]}");
                     values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
                 }
                 dr.Close();
@@ -308,6 +316,7 @@ namespace MyM_CRUD.Model
 
             return (labels, values);  
         }
+
         public static void ChartHighSupplierCollection()
         {
             SeriesCollection result = new SeriesCollection();

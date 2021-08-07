@@ -34,32 +34,32 @@ namespace MyM_CRUD.View
             var labels = new List<string>();
             IChartValues values;
 
-            ////Ventas de productos
-            //(labels, values) = Stadistics.ChartProductSellCollection();
-            //ChartProductSell.AxisX[0].Labels = labels.ToArray();
-            //ChartProductSell.Series = new SeriesCollection()
-            //{
-            //    new ColumnSeries()
-            //    {
-            //        Values = values,
-            //        DataLabels = true,
-            //        Stroke=Brushes.GreenYellow,
-            //        Fill=Brushes.Green
-            //    },
+            //Ventas de productos
+            (labels, values) = Stadistics.ChartProductSellCollection();
+            ChartProductSell.AxisX[0].Labels = labels.ToArray();
+            ChartProductSell.Series = new SeriesCollection()
+            {
+                new ColumnSeries()
+                {
+                    Values = values,
+                    DataLabels = true,
+                    Stroke=Brushes.GreenYellow,
+                    Fill=Brushes.Green
+                },
 
-            //};
+            };
 
-            ////Clientes mas frecuentes
-            //(labels, values) = Stadistics.ChartFrequentClientsCollection();
-            //ChartFrequentClients.AxisY[0].Labels = labels.ToArray();
-            //ChartFrequentClients.Series = new SeriesCollection()
-            //{
-            //    new RowSeries(){
-            //        Values = values,
-            //        DataLabels = true,
-            //        Fill = Brushes.Green
-            //    },
-            //};
+            //Clientes mas frecuentes
+            (labels, values) = Stadistics.ChartFrequentClientsCollection();
+            ChartFrequentClients.AxisY[0].Labels = labels.ToArray();
+            ChartFrequentClients.Series = new SeriesCollection()
+            {
+                new RowSeries(){
+                    Values = values,
+                    DataLabels = true,
+                    Fill = Brushes.Green
+                },
+            };
 
             //Comparacion entre franquicias
             ChartBranches.Series = new SeriesCollection()
@@ -70,21 +70,21 @@ namespace MyM_CRUD.View
                 }
             };
 
-            ////Marcas de vehiculo mas atendidas por tipo de servicio
-            //(labels, values) = Stadistics.ChartVehicleBrandsCollection();
-            //ChartVehicleBrands.AxisX[0].Labels = labels.ToArray();
-            //ChartVehicleBrands.Series = new SeriesCollection()
-            //{
-            //    new ColumnSeries()
-            //    {
-            //        Values = values,
-            //        DataLabels = true,
-            //        Fill = Brushes.LimeGreen
-            //    },
+            //Marcas de vehiculo mas atendidas por tipo de servicio
+            (labels, values) = Stadistics.ChartVehicleBrandsCollection();
+            ChartVehicleBrands.AxisX[0].Labels = labels.ToArray();
+            ChartVehicleBrands.Series = new SeriesCollection()
+            {
+                new ColumnSeries()
+                {
+                    Values = values,
+                    DataLabels = true,
+                    Fill = Brushes.LimeGreen
+                },
 
-            //};
+            };
 
-            //Servicios mas solcitado
+            //Servicios mas solicitado
             (labels, values) = Stadistics.ChartHighServiceCollection();
             ChartHighService.AxisY[0].Labels = labels.ToArray();
             ChartHighService.Series = new SeriesCollection()
