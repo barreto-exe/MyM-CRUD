@@ -31,29 +31,31 @@ namespace MyM_CRUD.View
 
         private void BuildCharts()
         {
+            var labels = new List<string>();
+            var values = new ChartValues<double>();
             //Ventas de productos
+            (labels, values) = Stadistics.ChartProductSellCollection();
+            ChartProductSell.AxisY[0].Labels = labels.ToArray();
             ChartProductSell.Series = new SeriesCollection()
             {
                 new LineSeries()
                 {
-                    Values = new ChartValues<decimal> { 5, 6, 2, 20 },
+                    Values = values,
+                    DataLabels = true,
                     Stroke=Brushes.GreenYellow,
                     Fill=Brushes.Transparent
                 },
-                new LineSeries()
-                {
-                    Values = new ChartValues<double> { 3, 5, 7, 4, 15 },
-                    Stroke=Brushes.Green,
-                    Fill=Brushes.Transparent
-                }
 
             };
 
             //Clientes mas frecuentes
+            (labels, values) = Stadistics.ChartFrequentClientsCollection();
+            ChartFrequentClients.AxisY[0].Labels = labels.ToArray();
             ChartFrequentClients.Series = new SeriesCollection()
             {
                 new RowSeries(){
-                    Values = new ChartValues<double> {2,7,15,20,30},
+                    Values = values,
+                    DataLabels = true,
                     Fill = Brushes.Green
                 },
             };
@@ -68,7 +70,7 @@ namespace MyM_CRUD.View
             };
 
             //Marcas de vehiculo mas atendidas por tipo de servicio
-            (var labels, var values) = Stadistics.ChartVehicleBrandsCollection();
+            (labels, values) = Stadistics.ChartVehicleBrandsCollection();
             ChartVehicleBrands.AxisX[0].Labels = labels.ToArray();
             ChartVehicleBrands.Series = new SeriesCollection()
             {
@@ -82,12 +84,13 @@ namespace MyM_CRUD.View
             };
 
             //Servicios mas solcitado
+            (labels, values) = Stadistics.ChartHighServiceCollection();
+            ChartHighService.AxisX[0].Labels = labels.ToArray();
             ChartHighService.Series = new SeriesCollection()
             {
                 new RowSeries(){
 
-                    Values = new ChartValues<double> {21,8,15,20,2,19},
-                    LabelPoint = point => point.Y + " Nombre",
+                    Values = values,
                     DataLabels = true,
                     Fill = Brushes.LimeGreen
                 },
@@ -102,6 +105,7 @@ namespace MyM_CRUD.View
                 new RowSeries()
                 {
                     Values = values,
+                    DataLabels = true,
                     Fill = Brushes.PaleGreen
                 },
 
