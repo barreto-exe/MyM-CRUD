@@ -58,8 +58,8 @@ namespace MyM_CRUD.Model
                     labels.Add($"Más vendido: {dr["pmasv"]}");
                     labels.Add($"Menos vendido: {dr["pmenosv"]}");
 
-                    values.Add(Tools.Tools.Object2Double(dr["pmasv"]));
-                    values.Add(Tools.Tools.Object2Double(dr["pmenosv"]));
+                    values.Add(Tools.Tools.Object2Double(dr["smasv"]));
+                    values.Add(Tools.Tools.Object2Double(dr["smenosv"]));
                 }
                 else
                 {
@@ -89,34 +89,45 @@ namespace MyM_CRUD.Model
             try
             {
                 #region query
-                op.Query = "SELECT c.cedula_C, c.nombre_C, COUNT(r.*) AS cantidad "+
-                            "INTO TEMP R1 "+
-                            "FROM registros r, vehiculos v, clientes c "+
-                            "WHERE r.placa_Vehiculo = v.placa "+
-                            "AND v.ced_dueno = c.cedula_C "+
-                            "AND r.franquicia = @rif_franquicia " +
-                            "GROUP BY 1, 2; "+
+                op.Query = "SELECT c.cedula_C, c.nombre_C, COUNT(r.*) AS cantidad " +
+                            "INTO TEMP R1 " +
+                            "FROM registros r, vehiculos v, clientes c " +
+                            "WHERE r.placa_Vehiculo = v.placa " +
+                            "AND v.ced_dueno = c.cedula_C " +
+                            "AND r.rif_franquicia = @rif_franquicia " +
+                            "GROUP BY 1, 2; " +
 
-                            "SELECT cedula_C, nombre_C "+
-                            "INTO TEMP menos_frecuente_T "+
-                            "FROM R1 "+
-                            "WHERE cantidad = (SELECT MIN(cantidad) FROM R1); "+
+                            "SELECT cedula_C, nombre_C " +
+                            "INTO TEMP menos_frecuente_T " +
+                            "FROM R1 " +
+                            "WHERE cantidad = (SELECT MIN(cantidad) FROM R1); " +
 
-                            "SELECT cedula_C, nombre_C "+
-                            "INTO TEMP mas_frecuente_T "+
-                            "FROM R1 "+
-                            "WHERE cantidad = (SELECT MAX(cantidad) FROM R1); "+
+                            "SELECT cedula_C, nombre_C " +
+                            "INTO TEMP mas_frecuente_T " +
+                            "FROM R1 " +
+                            "WHERE cantidad = (SELECT MAX(cantidad) FROM R1); " +
 
-                            "SELECT menosf.cedula_C AS cedula_cliente_menos_frecuente,  menosf.nombre_C AS nombre_cliente_menos_frecuente, "+
-                            "masf.cedula_C AS cedula_cliente_mas_frecuente, masf.nombre_C AS nombre_cliente_mas_frecuente "+
-                            "FROM menos_frecuente_T menosf, mas_frecuente_T masf; ";
+                            "SELECT * FROM R1;";
                 #endregion
                 op.PasarParametros("rif_franquicia", App.Session.Branch);
                 NpgsqlDataReader dr = op.EjecutarReader();
-                while (dr.Read())
+                if (dr.Read())
                 {
-                    labels.Add($"{dr["nombre_C"]}");
+                    labels.Add($"Más frenq.: {dr["nombre_c"]}");
                     values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+
+                    dr.Read();
+
+                    labels.Add($"Menos frenq.: {dr["nombre_c"]}");
+                    values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+                }
+                else
+                {
+                    labels.Add($"Más frenq.: -");
+                    labels.Add($"Menos frenq.: -");
+
+                    values.Add(0);
+                    values.Add(0);
                 }
                 dr.Close();
             }
@@ -171,7 +182,7 @@ namespace MyM_CRUD.Model
                 NpgsqlDataReader dr = op.EjecutarReader();
                 while(dr.Read())
                 {
-                    labels.Add($"{dr["nom_marca"]}: {dr["nombre_s"]}");
+                    labels.Add($"{dr["nombre_s"]}: {dr["nom_marca"]}");
                     values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
                 }
                 dr.Close();

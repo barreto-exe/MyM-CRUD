@@ -44,7 +44,7 @@ namespace MyM_CRUD.View
                     Values = values,
                     DataLabels = true,
                     Stroke=Brushes.GreenYellow,
-                    Fill=Brushes.Transparent
+                    Fill=Brushes.Green
                 },
 
             };
