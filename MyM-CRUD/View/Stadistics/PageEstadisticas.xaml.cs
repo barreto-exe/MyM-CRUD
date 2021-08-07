@@ -33,6 +33,7 @@ namespace MyM_CRUD.View
         {
             var labels = new List<string>();
             var values = new ChartValues<double>();
+
             //Ventas de productos
             (labels, values) = Stadistics.ChartProductSellCollection();
             ChartProductSell.AxisY[0].Labels = labels.ToArray();

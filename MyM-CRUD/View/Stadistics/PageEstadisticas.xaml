@@ -8,8 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="Estadísticas"
-    Width="971"
-    Height="562"
     mc:Ignorable="d">
     <Grid>
         <!--  Floatingbutton panel  -->
@@ -36,11 +34,11 @@
 
         <!--  Scrollviewer permite mostrar la barrita de deslizamiento  -->
         <ScrollViewer Background="White">
-            <WrapPanel>
+            <WrapPanel Margin="96,8">
                 <!--  Pila vertical izquierda  -->
-                <StackPanel Orientation="Vertical" Width="500">
+                <StackPanel Width="500" Orientation="Vertical">
                     <!--  Dos cards de arriba  -->
-                    <StackPanel Orientation="Horizontal" Height="176">
+                    <StackPanel Height="176" Orientation="Horizontal">
                         <md:Card
                             Width="220"
                             Height="145"
@@ -148,7 +146,7 @@
                     </md:Card>
 
                     <!--  Dos cards de abajo  -->
-                    <StackPanel Orientation="Horizontal" Height="177">
+                    <StackPanel Height="177" Orientation="Horizontal">
                         <md:Card
                             Width="220"
                             Height="145"
@@ -221,7 +219,10 @@
                 </StackPanel>
 
                 <!--  Pila vertical derecha  -->
-                <StackPanel Orientation="Vertical" Width="448" Height="552">
+                <StackPanel
+                    Width="448"
+                    Height="552"
+                    Orientation="Vertical">
                     <md:Card
                         Width="345"
                         Height="284"
@@ -260,9 +261,7 @@
                         Width="345"
                         Height="180"
                         Margin="16">
-                        <StackPanel
-                            Width="345"
-                            Height="180">
+                        <StackPanel Width="345" Height="180">
                             <TextBox
                                 Width="348"
                                 Background="#43a047"
@@ -276,7 +275,7 @@
                                 Height="150"
                                 Margin="10">
                                 <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis ShowLabels="True" LabelsRotation="10">
+                                    <lvc:Axis LabelsRotation="10" ShowLabels="True">
                                         <lvc:Axis.Separator>
                                             <lvc:Separator IsEnabled="False" Step="1" />
                                         </lvc:Axis.Separator>
