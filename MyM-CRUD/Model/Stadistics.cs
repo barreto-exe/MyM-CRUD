@@ -238,7 +238,9 @@ namespace MyM_CRUD.Model
                     "FROM R2 " +
                     "WHERE cantidad = (SELECT MAX(cantidad) FROM R2); " +
 
-                    "SELECT * FROM R2";
+                    "(SELECT nombre_s, cantidad FROM R2 ORDER BY cantidad ASC LIMIT 1)\n" +
+                    "UNION ALL\n" +
+                    "(SELECT nombre_s, cantidad FROM R2 ORDER BY cantidad DESC LIMIT 1)";
                 #endregion
                 op.PasarParametros("rif_franquicia", App.Session.Branch);
                 NpgsqlDataReader dr = op.EjecutarReader();
@@ -317,9 +319,49 @@ namespace MyM_CRUD.Model
             return (labels, values);  
         }
 
-        public static void ChartHighSupplierCollection()
+        //Lista
+        public static (List<string>, ChartValues<double>) ChartHighSupplierCollection()
         {
-            SeriesCollection result = new SeriesCollection();
+            DeleteInmemoryTables(new string[] { "R1" });
+
+            PostgreOp op = new PostgreOp();
+
+            var labels = new List<string>();
+            var values = new ChartValues<double>();
+            //Traer datos
+            try
+            {
+                #region query
+                op.Query =
+                    "SELECT p.rif_proveedor, p.razon_Social, COUNT(d.cod_producto) AS cantidad\n" +
+                    "INTO TEMP R1\n" +
+                    "FROM distribuyen d, proveedores p\n" +
+                    "WHERE d.rif_proveedor = p.rif_proveedor\n" +
+                    "AND d.rif_proveedor IN (SELECT DISTINCT rif_proveedor FROM ordenes_compra WHERE rif_franquicia = @rif_franquicia)\n" +
+                    "GROUP BY 1, 2;\n" +
+                    " \n" +
+                    "(SELECT * FROM R1 ORDER BY cantidad ASC LIMIT 1)\n" +
+                    "UNION\n" +
+                    "(SELECT * FROM R1 ORDER BY cantidad DESC LIMIT 1)";
+                #endregion
+
+                op.PasarParametros("rif_franquicia", App.Session.Branch);
+                NpgsqlDataReader dr = op.EjecutarReader();
+                if (dr.Read())
+                {
+                    labels.Add($"Menos sol.: {dr["razon_social"]}");
+                    values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+                }
+                if(dr.Read())
+                {
+                    labels.Add($"Más sol.: {dr["razon_social"]}");
+                    values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+                }
+                dr.Close();
+            }
+            catch { }
+
+            return (labels, values);
         }
 
         //Lista

@@ -95,7 +95,6 @@ namespace MyM_CRUD.View
                     DataLabels = true,
                     Fill = Brushes.LimeGreen
                 },
-
             };
 
             //Personal que realiza mas servicios
@@ -109,17 +108,19 @@ namespace MyM_CRUD.View
                     DataLabels = true,
                     Fill = Brushes.PaleGreen
                 },
-
-
             };
 
             //Proveedores que suminstran
+            (labels, values) = Stadistics.ChartHighSupplierCollection();
+            ChartHighSupplier.AxisY[0].Labels = labels.ToArray();
             ChartHighSupplier.Series = new SeriesCollection()
             {
-                new StackedAreaSeries(){
-                    Values = new ChartValues<double> {2, 13, 10, 25, 6, 19},
-                    Fill = Brushes.GreenYellow
-                }
+                new RowSeries()
+                {
+                    Values = values,
+                    DataLabels = true,
+                    Fill = Brushes.PaleGreen
+                },
             };
         }
 
