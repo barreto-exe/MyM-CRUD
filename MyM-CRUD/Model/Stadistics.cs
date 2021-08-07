@@ -13,25 +13,15 @@ namespace MyM_CRUD.Model
     {
         public static (List<string>, ChartValues<double>) ChartProductSellCollection()
         {
-            PostgreOp op = null;
+            DeleteInmemoryTables();
 
-            //Eliminar tablas en memoria
-            try
-            {
-                string query =
-                    "DROP TABLE R1; " +
-                    "DROP TABLE R2; ";
-                op = new PostgreOp(query);
-                op.EjecutarComando();
-            }
-            catch { }
+            PostgreOp op = null;
 
             var labels = new List<string>();
             var values = new ChartValues<double>();
             //Traer datos
             try
             {
-
                 #region query
                 op.Query =
                     "SELECT p.nombre_p, SUM(r.cant_Comprada) AS suma"+
@@ -71,25 +61,15 @@ namespace MyM_CRUD.Model
         }
         public static (List<string>, ChartValues<double>) ChartFrequentClientsCollection()
         {
-            PostgreOp op = null;
+            DeleteInmemoryTables();
 
-            //Eliminar tablas en memoria
-            try
-            {
-                string query =
-                    "DROP TABLE R1; " +
-                    "DROP TABLE R2; ";
-                op = new PostgreOp(query);
-                op.EjecutarComando();
-            }
-            catch { }
+            PostgreOp op = null;
 
             var labels = new List<string>();
             var values = new ChartValues<double>();
             //Traer datos
             try
             {
-
                 #region query
                 op.Query = "SELECT c.cedula_C, c.nombre_C, COUNT(r.*) AS cantidad"+
                             "INTO TEMP R1"+
@@ -132,18 +112,9 @@ namespace MyM_CRUD.Model
         }
         public static (List<string>, ChartValues<double>) ChartVehicleBrandsCollection()
         {
-            PostgreOp op = null;
+            DeleteInmemoryTables();
 
-            //Eliminar tablas en memoria
-            try
-            {
-                string query =
-                    "DROP TABLE R1; " +
-                    "DROP TABLE R2; ";
-                op = new PostgreOp(query);
-                op.EjecutarComando();
-            }
-            catch { }
+            PostgreOp op = null;
 
             var labels = new List<string>();
             var values = new ChartValues<double>();
@@ -191,18 +162,9 @@ namespace MyM_CRUD.Model
         }
         public static (List<string>, ChartValues<double>) ChartHighServiceCollection()
         {
-            PostgreOp op = null;
+            DeleteInmemoryTables();
 
-            //Eliminar tablas en memoria
-            try
-            {
-                string query =
-                    "DROP TABLE R1; " +
-                    "DROP TABLE R2; ";
-                op = new PostgreOp(query);
-                op.EjecutarComando();
-            }
-            catch { }
+            PostgreOp op = null;
 
             var labels = new List<string>();
             var values = new ChartValues<double>();
@@ -254,18 +216,9 @@ namespace MyM_CRUD.Model
         }
         public static (List<string>, ChartValues<double>) ChartHighWorkerCollection()
         {
-            PostgreOp op = null;
+            DeleteInmemoryTables();
 
-            //Eliminar tablas en memoria
-            try
-            {
-                string query =
-                    "DROP TABLE R1; " +
-                    "DROP TABLE R2; ";
-                op = new PostgreOp(query);
-                op.EjecutarComando();
-            }
-            catch { }
+            PostgreOp op = null;
 
             var labels = new List<string>();
             var values = new ChartValues<double>();
@@ -305,6 +258,20 @@ namespace MyM_CRUD.Model
         public static void ChartHighSupplierCollection()
         {
             SeriesCollection result = new SeriesCollection();
+        }
+
+        private static void DeleteInmemoryTables()
+        {
+            //Eliminar tablas en memoria
+            try
+            {
+                string query =
+                    "DROP TABLE R1; " +
+                    "DROP TABLE R2; ";
+                PostgreOp op = new PostgreOp(query);
+                op.EjecutarComando();
+            }
+            catch { }
         }
     }
 }
