@@ -14,6 +14,10 @@ namespace MyM_CRUD.Tools
         {
             return o == null || o is DBNull ? 0m : Convert.ToDecimal(o);
         }
+        public static double Object2Double(object o)
+        {
+            return o == null || o is DBNull ? 0 : Convert.ToDouble(o);
+        }
 
         public static string ValidEmail(string email)
         {

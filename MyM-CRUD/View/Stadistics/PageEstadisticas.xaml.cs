@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using MyM_CRUD.DataBase;
+using MyM_CRUD.Model;
 
 namespace MyM_CRUD.View
 {
@@ -25,6 +26,11 @@ namespace MyM_CRUD.View
         public PageEstadisticas()
         {
             InitializeComponent();
+            BuildCharts();
+        }
+
+        private void BuildCharts()
+        {
             //Ventas de productos
             ChartProductSell.Series = new SeriesCollection()
             {
@@ -42,18 +48,16 @@ namespace MyM_CRUD.View
                 }
 
             };
+
             //Clientes mas frecuentes
             ChartFrequentClients.Series = new SeriesCollection()
             {
                 new RowSeries(){
                     Values = new ChartValues<double> {2,7,15,20,30},
-                    Fill = Brushes.Green                   
+                    Fill = Brushes.Green
                 },
-                               
             };
 
-            
-            
             //Comparacion entre franquicias
             ChartBranches.Series = new SeriesCollection()
             {
@@ -62,39 +66,20 @@ namespace MyM_CRUD.View
                     Fill = Brushes.GreenYellow
                 }
             };
+
             //Marcas de vehiculo mas atendidas por tipo de servicio
+            (var labels, var values) = Stadistics.ChartVehicleBrandsCollection();
+            ChartVehicleBrands.AxisX[0].Labels = labels.ToArray();
             ChartVehicleBrands.Series = new SeriesCollection()
             {
-                new LineSeries(){
-                    Values = new ChartValues<double> {25,15,20,23,7},
-                    Stroke = Brushes.LimeGreen,
-                    Fill = Brushes.Transparent
+                new ColumnSeries()
+                {
+                    Values = values,
+                    DataLabels = true,
+                    Fill = Brushes.LimeGreen
                 },
 
             };
-
-
-            /*string query =
-                "SELECT s.nombreS, ma.nombreMarca, COUNT(r.*) AS cantidad " +
-                "INTO TEMP R1  " +
-                "FROM registro r, ordenes_servicio os, servicios s, vehiculos v, modelo mo, marca ma " +
-                "WHERE r.placaVehiculo=v.placaVehiculo " +
-                "AND v.modelo = mo.nombreMo " +
-                "AND r.numFicha = os.numFicha " +
-                "AND r.franquicia = ?" +
-                "GROUP BY 1,2;" +
-
-                "SELECT R1.nombreS, MAX(R1.cantidad) AS maximo" +
-                "INTO TEMP R2" +
-                "FROM R1" +
-                "GROUP BY 1;" +
-
-                "SELECT R1.*" +
-                "FROM R1, R2" +
-                "WHERE R1.nombreS=R2.nombreS"+
-                "AND R1.cantidad=R2.maximo;";
-
-            PostgreOp op = new PostgreOp(query);*/
 
             //Servicios mas solcitado
             ChartHighService.Series = new SeriesCollection()
@@ -102,10 +87,9 @@ namespace MyM_CRUD.View
                 new RowSeries(){
 
                     Values = new ChartValues<double> {21,8,15,20,2,19},
-                    DataLabels = true,
                     LabelPoint = point => point.Y + " Nombre",
+                    DataLabels = true,
                     Fill = Brushes.LimeGreen
-
                 },
 
             };
@@ -131,7 +115,11 @@ namespace MyM_CRUD.View
                     Fill = Brushes.GreenYellow
                 }
             };
+        }
 
+        private void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            BuildCharts();
         }
     }
 }

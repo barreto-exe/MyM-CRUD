@@ -8,33 +8,236 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
     Title="Estadísticas"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    Width="971"
+    Height="562"
     mc:Ignorable="d">
-    <!--  Scrollviewer permite mostrar la barrita de deslizamiento  -->
-    <ScrollViewer Background="White">
-        <WrapPanel>
+    <Grid>
+        <!--  Floatingbutton panel  -->
+        <StackPanel
+            Width="auto"
+            Height="auto"
+            Margin="0,0,32,32"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Panel.ZIndex="1">
+            <Button
+                x:Name="BtnRefresh"
+                Click="BtnRefresh_Click"
+                Cursor="Hand"
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}">
+                <Button.Content>
+                    <md:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="Refresh" />
+                </Button.Content>
+            </Button>
+        </StackPanel>
 
-            <!--  Pila vertical izquierda  -->
-            <StackPanel Orientation="Vertical">
-                <!--  Dos cards de arriba  -->
-                <StackPanel Orientation="Horizontal">
+        <!--  Scrollviewer permite mostrar la barrita de deslizamiento  -->
+        <ScrollViewer Background="White">
+            <WrapPanel>
+                <!--  Pila vertical izquierda  -->
+                <StackPanel Orientation="Vertical">
+                    <!--  Dos cards de arriba  -->
+                    <StackPanel Orientation="Horizontal">
+                        <md:Card
+                            Width="200"
+                            Height="130"
+                            Margin="16">
+                            <StackPanel>
+                                <TextBox
+                                    Width="201"
+                                    Background="#43a047"
+                                    Cursor="IBeam"
+                                    Foreground="White"
+                                    Text="  Ventas de productos"
+                                    TextWrapping="Wrap" />
+                                <lvc:CartesianChart
+                                    x:Name="ChartProductSell"
+                                    Width="190"
+                                    Height="98"
+                                    Margin="5">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                        </md:Card>
+                        <md:Card
+                            Width="200"
+                            Height="130"
+                            Margin="16">
+                            <StackPanel>
+                                <TextBox
+                                    Width="201"
+                                    Background="#43a047"
+                                    Cursor="IBeam"
+                                    Foreground="White"
+                                    Text="  Clientes más frecuentes"
+                                    TextWrapping="Wrap" />
+                                <lvc:CartesianChart
+                                    x:Name="ChartFrequentClients"
+                                    Width="190"
+                                    Height="90"
+                                    Margin="5">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                        </md:Card>
+                    </StackPanel>
+
+                    <!--  Card horizontal largo  -->
                     <md:Card
-                        Width="200"
-                        Height="130"
+                        Width="435"
+                        Height="138"
                         Margin="16">
                         <StackPanel>
                             <TextBox
-                                Width="201"
+                                Width="435"
                                 Background="#43a047"
                                 Cursor="IBeam"
                                 Foreground="White"
-                                Text="  Ventas de productos"
+                                Text="  Servicios más solicitado"
                                 TextWrapping="Wrap" />
                             <lvc:CartesianChart
-                                x:Name="ChartProductSell"
-                                Width="190"
-                                Height="98"
+                                x:Name="ChartHighService"
+                                Width="415"
+                                Height="105"
+                                Margin="5">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis ShowLabels="True">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="False" Step="5" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis ShowLabels="True">
+                                        <lvc:Axis.Separator>
+                                            <lvc:Separator IsEnabled="False" Step="2" />
+                                        </lvc:Axis.Separator>
+                                    </lvc:Axis>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
+                        </StackPanel>
+                    </md:Card>
+
+                    <!--  Dos cards de abajo  -->
+                    <StackPanel Orientation="Horizontal">
+                        <md:Card
+                            Width="200"
+                            Height="130"
+                            Margin="16">
+                            <StackPanel>
+                                <TextBox
+                                    Width="201"
+                                    Background="#43a047"
+                                    Cursor="IBeam"
+                                    Foreground="White"
+                                    Text="  Personal que realiza más servicios"
+                                    TextWrapping="Wrap" />
+                                <lvc:CartesianChart
+                                    x:Name="ChartHighWorker"
+                                    Width="190"
+                                    Height="98"
+                                    Margin="5">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                        </md:Card>
+                        <md:Card
+                            Width="200"
+                            Height="130"
+                            Margin="16">
+                            <StackPanel>
+                                <TextBox
+                                    Width="201"
+                                    Background="#43a047"
+                                    Cursor="IBeam"
+                                    Foreground="White"
+                                    Text="  Proveedores que más suministran"
+                                    TextWrapping="Wrap" />
+                                <lvc:CartesianChart
+                                    x:Name="ChartHighSupplier"
+                                    Width="190"
+                                    Height="98"
+                                    Margin="5">
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="1" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis ShowLabels="True">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                </lvc:CartesianChart>
+                            </StackPanel>
+                        </md:Card>
+                    </StackPanel>
+                </StackPanel>
+
+                <!--  Pila vertical derecha  -->
+                <StackPanel Orientation="Vertical">
+                    <md:Card
+                        Width="305"
+                        Height="284"
+                        Margin="16">
+                        <StackPanel>
+                            <TextBox
+                                Width="305"
+                                Background="#43a047"
+                                Cursor="IBeam"
+                                Foreground="White"
+                                Text="  Comparación de ventas entre franquicias"
+                                TextWrapping="Wrap" />
+                            <lvc:CartesianChart
+                                x:Name="ChartBranches"
+                                Width="285"
+                                Height="250"
                                 Margin="5">
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis ShowLabels="True">
@@ -54,33 +257,33 @@
                         </StackPanel>
                     </md:Card>
                     <md:Card
-                        Width="200"
-                        Height="130"
+                        Width="305"
+                        Height="146"
                         Margin="16">
                         <StackPanel>
                             <TextBox
-                                Width="201"
+                                Width="305"
                                 Background="#43a047"
                                 Cursor="IBeam"
                                 Foreground="White"
-                                Text="  Clientes más frecuentes"
+                                Text="  Marcas de vehiculos atendidas por tipo de servicio"
                                 TextWrapping="Wrap" />
                             <lvc:CartesianChart
-                                x:Name="ChartFrequentClients"
-                                Width="190"
-                                Height="90"
+                                x:Name="ChartVehicleBrands"
+                                Width="285"
+                                Height="110"
                                 Margin="5">
                                 <lvc:CartesianChart.AxisX>
                                     <lvc:Axis ShowLabels="True">
                                         <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="5" />
+                                            <lvc:Separator IsEnabled="False" Step="1" />
                                         </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisX>
                                 <lvc:CartesianChart.AxisY>
                                     <lvc:Axis ShowLabels="True">
                                         <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="1" />
+                                            <lvc:Separator IsEnabled="False" Step="5" />
                                         </lvc:Axis.Separator>
                                     </lvc:Axis>
                                 </lvc:CartesianChart.AxisY>
@@ -88,190 +291,7 @@
                         </StackPanel>
                     </md:Card>
                 </StackPanel>
-
-
-                <!--  Card horizontal largo  -->
-                <md:Card
-                    Width="435"
-                    Height="138"
-                    Margin="16">
-                    <StackPanel>
-                        <TextBox
-                            Width="435"
-                            Background="#43a047"
-                            Cursor="IBeam"
-                            Foreground="White"
-                            Text="  Servicios más solicitado"
-                            TextWrapping="Wrap" />
-                        <lvc:CartesianChart
-                            x:Name="ChartHighService"
-                            Width="415"
-                            Height="105"
-                            Margin="5">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="5" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="2" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </StackPanel>
-                </md:Card>
-
-                <!--  Dos cards de abajo  -->
-                <StackPanel Orientation="Horizontal">
-                    <md:Card
-                        Width="200"
-                        Height="130"
-                        Margin="16">
-                        <StackPanel>
-                            <TextBox
-                                Width="201"
-                                Background="#43a047"
-                                Cursor="IBeam"
-                                Foreground="White"
-                                Text="  Personal que realiza más servicios"
-                                TextWrapping="Wrap" />
-                            <lvc:CartesianChart
-                                x:Name="ChartHighWorker"
-                                Width="190"
-                                Height="98"
-                                Margin="5">
-                                <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis ShowLabels="True">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="1" />
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
-                                </lvc:CartesianChart.AxisX>
-                                <lvc:CartesianChart.AxisY>
-                                    <lvc:Axis ShowLabels="True">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="5" />
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
-                                </lvc:CartesianChart.AxisY>
-                            </lvc:CartesianChart>
-                        </StackPanel>
-                    </md:Card>
-                    <md:Card
-                        Width="200"
-                        Height="130"
-                        Margin="16">
-                        <StackPanel>
-                            <TextBox
-                                Width="201"
-                                Background="#43a047"
-                                Cursor="IBeam"
-                                Foreground="White"
-                                Text="  Proveedores que más suministran"
-                                TextWrapping="Wrap" />
-                            <lvc:CartesianChart
-                                x:Name="ChartHighSupplier"
-                                Width="190"
-                                Height="98"
-                                Margin="5">
-                                <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis ShowLabels="True">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="1" />
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
-                                </lvc:CartesianChart.AxisX>
-                                <lvc:CartesianChart.AxisY>
-                                    <lvc:Axis ShowLabels="True">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator IsEnabled="False" Step="5" />
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
-                                </lvc:CartesianChart.AxisY>
-                            </lvc:CartesianChart>
-                        </StackPanel>
-                    </md:Card>
-                </StackPanel>
-            </StackPanel>
-
-            <!--  Pila vertical derecha  -->
-            <StackPanel Orientation="Vertical">
-                <md:Card
-                    Width="305"
-                    Height="284"
-                    Margin="16">
-                    <StackPanel>
-                        <TextBox
-                            Width="305"
-                            Background="#43a047"
-                            Cursor="IBeam"
-                            Foreground="White"
-                            Text="  Comparación de ventas entre franquicias"
-                            TextWrapping="Wrap" />
-                        <lvc:CartesianChart
-                            x:Name="ChartBranches"
-                            Width="285"
-                            Height="250"
-                            Margin="5">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="1" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="5" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </StackPanel>
-                </md:Card>
-                <md:Card
-                    Width="305"
-                    Height="146"
-                    Margin="16">
-                    <StackPanel>
-                        <TextBox
-                            Width="305"
-                            Background="#43a047"
-                            Cursor="IBeam"
-                            Foreground="White"
-                            Text="  Marcas de vehiculos atendidas por tipo de servicio"
-                            TextWrapping="Wrap" />
-                        <lvc:CartesianChart
-                            x:Name="ChartVehicleBrands"
-                            Width="285"
-                            Height="110"
-                            Margin="5">
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="1" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis ShowLabels="True">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator IsEnabled="False" Step="5" />
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-                        </lvc:CartesianChart>
-                    </StackPanel>
-                </md:Card>
-            </StackPanel>
-            <StackPanel />
-
-        </WrapPanel>
-    </ScrollViewer>
+            </WrapPanel>
+        </ScrollViewer>
+    </Grid>
 </Page>
