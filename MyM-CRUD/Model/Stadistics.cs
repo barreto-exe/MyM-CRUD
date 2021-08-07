@@ -11,6 +11,7 @@ namespace MyM_CRUD.Model
 {
     public static class Stadistics
     {
+        //Lista
         public static (List<string>, ChartValues<double>) ChartProductSellCollection()
         {
             DeleteInmemoryTables(new string[] { 
@@ -75,6 +76,8 @@ namespace MyM_CRUD.Model
 
             return (labels, values);
         }
+        
+        //Lista
         public static (List<string>, ChartValues<double>) ChartFrequentClientsCollection()
         {
             DeleteInmemoryTables(new string[] {
@@ -135,10 +138,13 @@ namespace MyM_CRUD.Model
 
             return (labels, values);
         }
+       
         public static void ChartBranchesCollection()
         {
             SeriesCollection result = new SeriesCollection();
         }
+        
+        //Lista
         public static (List<string>, ChartValues<double>) ChartVehicleBrandsCollection()
         {
             DeleteInmemoryTables(new string[] {
@@ -191,6 +197,8 @@ namespace MyM_CRUD.Model
 
             return (labels, values);
         }
+        
+        //Lista
         public static (List<string>, ChartValues<double>) ChartHighServiceCollection()
         {
             DeleteInmemoryTables(new string[] {
@@ -207,39 +215,51 @@ namespace MyM_CRUD.Model
 
                 #region query
                 op.Query =
-                    "SELECT os.num_Ficha, s.nombre_S "+
-                    "INTO TEMP R1 "+
-                    "FROM ordenes_servicio os, servicios s, registros r "+
-                    "WHERE os.cod_Servicio = s.cod_Servicio "+
-                    "AND os.num_Ficha = r.num_Ficha "+
-                    "AND r.franquicia = @rif_franquicia "+
-                    "GROUP BY 1, 2; "+
+                    "SELECT os.num_Ficha, s.nombre_S " +
+                    "INTO TEMP R1 " +
+                    "FROM ordenes_servicio os, servicios s, registros r " +
+                    "WHERE os.cod_Servicio = s.cod_Servicio " +
+                    "AND os.num_Ficha = r.num_Ficha " +
+                    "AND r.rif_franquicia = @rif_franquicia " +
+                    "GROUP BY 1, 2; " +
 
-                    "SELECT nombre_S, COUNT(*) AS cantidad "+
-                    "INTO TEMP R2 "+
-                    "FROM R1 "+
-                    "GROUP BY 1; "+
-                    
-                    "SELECT nombre_S "+
-                    "INTO TEMP servicio_menos_solicitado_T "+
-                    "FROM R2 "+
-                    "WHERE cantidad = (SELECT MIN(cantidad) FROM R2); "+
+                    "SELECT nombre_S, COUNT(*) AS cantidad " +
+                    "INTO TEMP R2 " +
+                    "FROM R1 " +
+                    "GROUP BY 1; " +
 
-                    "SELECT nombre_S "+
-                    "INTO TEMP servicio_mas_solicitado_T"  +
-                    "FROM R2 "+
-                    "WHERE cantidad = (SELECT MAX(cantidad) FROM R2); "+
+                    "SELECT nombre_S " +
+                    "INTO TEMP servicio_menos_solicitado_T " +
+                    "FROM R2 " +
+                    "WHERE cantidad = (SELECT MIN(cantidad) FROM R2); " +
 
-                    "SELECT menos.nombre_S AS  servicio_menos_solicitado, "+
-                    "mas.nombre_S AS  servicio_mas_solicitado "+
-                    "FROM servicio_menos_solicitado_T menos, servicio_mas_solicitado_T mas; ";
+                    "SELECT nombre_S " +
+                    "INTO TEMP servicio_mas_solicitado_T " +
+                    "FROM R2 " +
+                    "WHERE cantidad = (SELECT MAX(cantidad) FROM R2); " +
+
+                    "SELECT * FROM R2";
                 #endregion
                 op.PasarParametros("rif_franquicia", App.Session.Branch);
                 NpgsqlDataReader dr = op.EjecutarReader();
-                while (dr.Read())
+
+                if (dr.Read())
                 {
-                    labels.Add($"{dr["nombre_S"]}");
+                    labels.Add($"Menos sol.: {dr["nombre_s"]}");
                     values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+
+                    dr.Read();
+
+                    labels.Add($"Más sol.: {dr["nombre_s"]}");
+                    values.Add(Tools.Tools.Object2Double(dr["cantidad"]));
+                }
+                else
+                {
+                    labels.Add($"Más sol.: -");
+                    labels.Add($"Menos sol.: -");
+
+                    values.Add(0);
+                    values.Add(0);
                 }
                 dr.Close();
             }
@@ -293,6 +313,7 @@ namespace MyM_CRUD.Model
             SeriesCollection result = new SeriesCollection();
         }
 
+        //Lista
         private static void DeleteInmemoryTables(string[] tempTables)
         {
             //Eliminar tablas en memoria
