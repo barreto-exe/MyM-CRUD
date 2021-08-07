@@ -208,7 +208,7 @@
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis ShowLabels="True">
                                             <lvc:Axis.Separator>
-                                                <lvc:Separator IsEnabled="False" Step="5" />
+                                                <lvc:Separator IsEnabled="False" Step="1" />
                                             </lvc:Axis.Separator>
                                         </lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
