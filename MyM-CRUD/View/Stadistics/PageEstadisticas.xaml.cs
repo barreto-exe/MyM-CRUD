@@ -43,8 +43,7 @@ namespace MyM_CRUD.View
                 {
                     Values = values,
                     DataLabels = true,
-                    Stroke=Brushes.GreenYellow,
-                    Fill=Brushes.Green
+                    Fill=Brushes.LimeGreen
                 },
 
             };
@@ -61,14 +60,6 @@ namespace MyM_CRUD.View
                 },
             };
 
-            //Comparacion entre franquicias
-            ChartBranches.Series = new SeriesCollection()
-            {
-                new StackedAreaSeries(){
-                    Values = new ChartValues<double> {25,15,20,2},
-                    Fill = Brushes.GreenYellow
-                }
-            };
 
             //Marcas de vehiculo mas atendidas por tipo de servicio
             (labels, values) = Stadistics.ChartVehicleBrandsCollection();
@@ -79,7 +70,7 @@ namespace MyM_CRUD.View
                 {
                     Values = values,
                     DataLabels = true,
-                    Fill = Brushes.LimeGreen
+                    Fill = Brushes.Green
                 },
 
             };
@@ -93,7 +84,7 @@ namespace MyM_CRUD.View
 
                     Values = values,
                     DataLabels = true,
-                    Fill = Brushes.LimeGreen
+                    Fill = Brushes.GreenYellow
                 },
             };
 
@@ -106,7 +97,7 @@ namespace MyM_CRUD.View
                 {
                     Values = values,
                     DataLabels = true,
-                    Fill = Brushes.PaleGreen
+                    Fill = Brushes.GreenYellow
                 },
             };
 
@@ -119,7 +110,7 @@ namespace MyM_CRUD.View
                 {
                     Values = values,
                     DataLabels = true,
-                    Fill = Brushes.PaleGreen
+                    Fill = Brushes.LimeGreen
                 },
             };
         }

@@ -138,11 +138,6 @@ namespace MyM_CRUD.Model
 
             return (labels, values);
         }
-       
-        public static void ChartBranchesCollection()
-        {
-            SeriesCollection result = new SeriesCollection();
-        }
         
         //Lista
         public static (List<string>, ChartValues<double>) ChartVehicleBrandsCollection()
