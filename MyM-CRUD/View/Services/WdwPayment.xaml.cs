@@ -22,6 +22,7 @@ namespace MyM_CRUD.View
     /// </summary>
     public partial class WdwPayment : Window
     {
+        private string bankName;
         public Payment Payment { get; set; }
         public bool Canceled { get; set; }
         public WdwPayment()
@@ -42,6 +43,7 @@ namespace MyM_CRUD.View
             Payment.Method = CbPayMethod.SelectedItem.ToString();
             Payment.Amount = Convert.ToDecimal(TxtAmout.Text);
             Payment.BankCode = TxtBankCode.Text;
+            Payment.BankName = bankName;
             Payment.CardNumber = TxtCardCode.Text;
 
             Canceled = false;
@@ -57,6 +59,7 @@ namespace MyM_CRUD.View
             {
                 Bank bank = (Bank)objSel.Selected;
                 TxtBankCode.Text = bank.Code;
+                bankName = bank.Name;
             }
         }
     }

@@ -48,8 +48,9 @@ namespace MyM_CRUD.Model
                 "SELECT p.*, s.es_ecologico, s.cod_linea " +
                 "FROM productos p " +
                 "LEFT JOIN servicio_productos s ON (p.cod_producto = s.cod_producto) " +
-                "WHERE tipo_p = 'S'";
+                "WHERE tipo_p = @type";
             PostgreOp op = new PostgreOp(query);
+            op.PasarParametros("type", (char)ProductType.ForService);
 
             //Colocar resultados en memoria
             DataTable result = QueryFromDataBase(op);
@@ -165,7 +166,7 @@ namespace MyM_CRUD.Model
 
         public enum ProductType
         {
-            ForService = 'S',
+            ForService = 'E',
             ForSell = 'T',
         }
     }

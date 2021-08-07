@@ -47,9 +47,9 @@ namespace MyM_CRUD.View
             //Eventos
             ICrudPage<Service> page = this;
             TxtSearch.TextChanged += page.TxtSearch_TextChanged;
-            BtnEditSave.Click += page.BtnEditSave_Click;
             Datagrid.SelectionChanged += Datagrid_SelectionChangedAsync;
             BtnAdd.Click += page.BtnAdd_Click;
+            BtnEditSave.Click += page.BtnEditSave_Click;
             BtnEditSave.Click += BtnEditSavePlus_Click;
 
             //Inicializar datagrid
