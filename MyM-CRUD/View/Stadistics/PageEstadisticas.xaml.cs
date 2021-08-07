@@ -32,14 +32,14 @@ namespace MyM_CRUD.View
         private void BuildCharts()
         {
             var labels = new List<string>();
-            var values = new ChartValues<double>();
+            IChartValues values;
 
             //Ventas de productos
             (labels, values) = Stadistics.ChartProductSellCollection();
-            ChartProductSell.AxisY[0].Labels = labels.ToArray();
+            ChartProductSell.AxisX[0].Labels = labels.ToArray();
             ChartProductSell.Series = new SeriesCollection()
             {
-                new LineSeries()
+                new ColumnSeries()
                 {
                     Values = values,
                     DataLabels = true,

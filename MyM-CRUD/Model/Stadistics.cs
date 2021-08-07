@@ -30,30 +30,44 @@ namespace MyM_CRUD.Model
                     "INTO TEMP R1 "+
                     "FROM registran r, productos p, facturas fa "+
                     "WHERE fa.franquicia = @rif_franquicia "+
-                    "WHERE fa.num_Factura = r.num_fact_tienda "+
+                    "AND fa.num_factura = r.num_fact_tienda "+
                     "AND r.cod_tienda_prod = p.cod_Producto "+
                     "GROUP BY 1;"+
 
-                    "SELECT nombre_p "+
+                    "SELECT * "+
                     "INTO TEMP producto_menos_vendido_T "+
                     "FROM R1 "+
                     "WHERE suma = (SELECT MIN(suma) FROM R1); "+
 
-                    "SELECT nombre_p "+
+                    "SELECT * "+
                     "INTO TEMP producto_mas_vendido_T "+
                     "FROM R1 "+
                     "WHERE suma = (SELECT MAX(suma) FROM R1); "+
 
-                    "SELECT menosv.nombre_p AS producto_menos_vendido, "+
-                    "masv.nombre_p AS producto_mas_vendido "+
+                    "SELECT menosv.nombre_p AS pmenosv, "+
+                    "menosv.suma AS smenosv, " +
+                    "masv.nombre_p AS pmasv, "+
+                    "masv.suma AS smasv "+
                     "FROM producto_menos_vendido_T menosv, producto_mas_vendido_T masv; ";
                 #endregion
                 op.PasarParametros("rif_franquicia", App.Session.Branch);
                 NpgsqlDataReader dr = op.EjecutarReader();
-                while (dr.Read())
+                
+                if (dr.Read())
                 {
-                    labels.Add($"{dr["nombre_p"]}");
-                    values.Add(Tools.Tools.Object2Double(dr["suma"]));
+                    labels.Add($"Más vendido: {dr["pmasv"]}");
+                    labels.Add($"Menos vendido: {dr["pmenosv"]}");
+
+                    values.Add(Tools.Tools.Object2Double(dr["pmasv"]));
+                    values.Add(Tools.Tools.Object2Double(dr["pmenosv"]));
+                }
+                else
+                {
+                    labels.Add($"Más vendido: -");
+                    labels.Add($"Menos vendido: -");
+
+                    values.Add(0);
+                    values.Add(0);
                 }
                 dr.Close();
             }
@@ -271,18 +285,17 @@ namespace MyM_CRUD.Model
         private static void DeleteInmemoryTables(string[] tempTables)
         {
             //Eliminar tablas en memoria
-            try
+            foreach(var table in tempTables)
             {
-                foreach(var table in tempTables)
+                string query =
+                    "DROP TABLE " + table;
+                PostgreOp op = new PostgreOp(query);
+                try
                 {
-                    string query =
-                        "DROP TABLE @table";
-                    PostgreOp op = new PostgreOp(query);
-                    op.PasarParametros("table", table);
                     op.EjecutarComando();
                 }
+                catch { }
             }
-            catch { }
         }
     }
 }
