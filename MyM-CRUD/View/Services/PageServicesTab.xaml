@@ -62,14 +62,12 @@
                         <TextBlock Style="{StaticResource MaterialDesignButtonTextBlock}" Text="Reservas Pendientes" />
                     </StackPanel>
                 </TabItem.Header>
-                <Frame>
+                <Frame NavigationUIVisibility="Hidden">
                     <Frame.Content>
-                        <local:PagePending x:Name="PageReserves" />
+                        <local:PagePending />
                     </Frame.Content>
                 </Frame>
             </TabItem>
-
-
         </TabControl>
     </Grid>
 </Page>

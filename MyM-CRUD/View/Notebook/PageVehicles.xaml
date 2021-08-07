@@ -129,8 +129,8 @@
                         md:TextFieldAssist.LeadingIcon="Oil"
                         Cursor="IBeam"
                         FontSize="16"
-                        Style="{StaticResource MaterialDesignOutlinedTextBox}" />
-
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        Visibility="Collapsed" />
 
                     <DatePicker
                         x:Name="TxtDateAcquired"

@@ -162,7 +162,6 @@
                         x:Name="DgActivities"
                         Margin="16,8,16,16"
                         sf:SfSkinManager.Theme="{sf:SkinManager ThemeName=MaterialLight}"
-                        AddNewRowInitiating="DgActividades_AddNewRowInitiating"
                         AddNewRowPosition="Bottom"
                         AddNewRowText="Click para añadir nueva actividad."
                         AllowDraggingColumns="True"
@@ -176,7 +175,6 @@
                         IsEnabled="false"
                         Language="es-ES"
                         RowHeight="28"
-                        RowValidating="DgActivities_RowValidating"
                         SelectionMode="Single">
                         <sf:SfDataGrid.TableSummaryRows>
                             <sf:GridTableSummaryRow ShowSummaryInRow="False">

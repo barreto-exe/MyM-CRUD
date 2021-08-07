@@ -12,6 +12,7 @@ namespace MyM_CRUD.Model
         public string Name { get; set; }
         public string Brand { get; set; }
         public string Type { get; set; }
+        public string OilType { get; set; }
 
         public static List<VehicleModel> GetAllFromDB()
         {
@@ -34,6 +35,7 @@ namespace MyM_CRUD.Model
                     Name = dr["nom_modelo"].ToString(),
                     Brand = dr["nom_marca"].ToString(),
                     Type = dr["descripcion_v"].ToString(),
+                    OilType = dr["aceite_motor"].ToString(),
                 };
 
             return models.ToList();

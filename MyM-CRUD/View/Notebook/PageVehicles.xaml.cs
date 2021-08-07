@@ -178,7 +178,9 @@ namespace MyM_CRUD.View
 
             if (!objSel.Canceled)
             {
-                TxtModelName.Text = ((VehicleModel)objSel.Selected).Name;
+                var v = (VehicleModel)objSel.Selected;
+                TxtModelName.Text = v.Name;
+                TxtOilType.Text = v.OilType;
             }
         }
     }
